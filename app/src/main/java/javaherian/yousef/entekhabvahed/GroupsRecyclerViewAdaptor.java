@@ -2,6 +2,7 @@ package javaherian.yousef.entekhabvahed;
 /**
  * created by yousef
  * adaptor class for handling recycler view in activity fill courses
+ *in constructor it receives a context and 3 arrays
  */
 
 import android.content.Context;

@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/fill_courses_id_edit_text"
+                android:inputType="number"
                 android:id="@+id/edit_text_course_id"/>
         </android.support.design.widget.TextInputLayout>
 
