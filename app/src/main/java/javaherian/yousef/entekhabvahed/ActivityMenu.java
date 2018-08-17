@@ -14,9 +14,9 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_menu);
         findViews();
         initListeners();
-        setContentView(R.layout.activity_menu);
     }
     private void findViews(){
         btnInputCourse=findViewById(R.id.btn_input_course);
@@ -37,10 +37,11 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        if (view == null)
+            return;
         if (view.getId()==R.id.btn_input_course){
             Intent intent=new Intent(this,ActivityFillCourses.class);
             startActivity(intent);
         }
-
     }
 }
