@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityFillCourses">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/fill_courses_name_edit_text"
+                android:id="@+id/edit_text_course_name"/>
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/fill_courses_id_edit_text"
+                android:id="@+id/edit_text_course_id"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fill_courses_add_groups_btn_text"
+                android:textSize="18sp"
+                android:id="@+id/btn_add_groups"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fill_courses_ok_btn_text"
+                android:textSize="18sp"
+                android:id="@+id/btn_fill_courses_ok"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
