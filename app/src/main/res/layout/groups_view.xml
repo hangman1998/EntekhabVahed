@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
-
-</android.support.constraint.LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:id="@+id/groups_view_layout">
+       <android.support.v7.widget.AppCompatTextView
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:id="@+id/groups_view_id_text_view"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/groups_view_teacher_name_text_view"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/groups_view_timings_text_view"/>
+    </LinearLayout>
+</LinearLayout>

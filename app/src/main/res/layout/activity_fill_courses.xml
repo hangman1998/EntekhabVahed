@@ -52,6 +52,12 @@
                 android:text="@string/fill_courses_ok_btn_text"
                 android:textSize="18sp"
                 android:id="@+id/btn_fill_courses_ok"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fill_courses_cancel_btn_text"
+                android:textSize="18sp"
+                android:id="@+id/btn_fill_courses_cancel"/>
         </LinearLayout>
 
     </LinearLayout>

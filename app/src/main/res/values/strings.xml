@@ -8,4 +8,5 @@
     <string name="fill_courses_id_edit_text">کد گلستان درس</string>
     <string name="fill_courses_add_groups_btn_text">+</string>
     <string name="fill_courses_ok_btn_text">ok</string>
+    <string name="fill_courses_cancel_btn_text">cancel</string>
 </resources>
