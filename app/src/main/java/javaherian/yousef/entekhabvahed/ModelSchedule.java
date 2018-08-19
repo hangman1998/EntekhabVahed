@@ -10,23 +10,28 @@ import java.util.Set;
  */
 public class ModelSchedule {
 
-    ArrayList<MapCourseGroup> schedule;
+    private ArrayList<MapCourseGroup> schedule;
+    private int size;
 
     public ModelSchedule(ArrayList<MapCourseGroup> schedule) {
         this.schedule = schedule;
+        size=schedule.size();
     }
 
     public ModelSchedule(){
         this.schedule = new ArrayList<>();
+        size=0;
     }
 
     public void addMapCourseGroup(int numberOfCourses,int numberOfUnit){
         MapCourseGroup map = new MapCourseGroup(numberOfCourses,numberOfUnit);
         this.schedule.add(map);
+        size++;
     }
 
     public void addMapCourseGroup(MapCourseGroup map){
         this.schedule.add(map);
+        size++;
     }
 
     public MapCourseGroup putMapCourseGroup(int index){
@@ -39,6 +44,15 @@ public class ModelSchedule {
 
     public void setSchedule(ArrayList<MapCourseGroup> schedule) {
         this.schedule = schedule;
+        size=schedule.size();
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public static class MapCourseGroup{
