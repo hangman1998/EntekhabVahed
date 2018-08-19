@@ -5,6 +5,8 @@ package javaherian.yousef.entekhabvahed;
  *in constructor it receives a context and 3 arrays
  */
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -77,7 +79,9 @@ public class GroupsRecyclerViewAdaptor extends  RecyclerView.Adapter<GroupsRecyc
             /**
              * here we initialize a dialog for editing of the corresponding group details
              */
-
+            Intent intent=new Intent(mContext,ActivityEditGroups.class);
+            intent.putExtra("Position",position);
+            mContext.startActivity(intent);
         }
     }
     public  class onLongClickListener implements View.OnLongClickListener{

@@ -4,6 +4,7 @@ package javaherian.yousef.entekhabvahed;
  * the main form for creating a new course
  */
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ActivityFillCourses extends AppCompatActivity implements View.OnClickListener {
     EditText editTextCourseName,editTextCourseId;
@@ -22,6 +24,7 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_fill_courses);
         findViews();
         initRecycleView();
+        initListeners();
     }
     private void findViews(){
         editTextCourseId=findViewById(R.id.edit_text_course_id);
@@ -69,9 +72,11 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
 
         }
         else if (view.getId() == R.id.btn_add_groups){
-            /**
-             * need SQL to complete this part
-             */
+            Toast.makeText(this, "no problem3", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this,ActivityEditGroups.class);
+            intent.putExtra("Create a new group",true);
+            startActivity(intent);
+
         }
     }
 }
