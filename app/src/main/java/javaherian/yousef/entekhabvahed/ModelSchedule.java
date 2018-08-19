@@ -1,4 +1,5 @@
 package javaherian.yousef.entekhabvahed;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -9,26 +10,66 @@ import java.util.Set;
  */
 public class ModelSchedule {
 
-    /**
-     * relation between course id and group id
-     */
-    private Map  <Integer,Integer> schedule;
-    /**
-     * number of courses
-     */
-    private Integer numberOfCourses;
-    /**
-     * amount of each courses
-     */
-    private Integer numberOfUnit;
+    ArrayList<MapCourseGroup> schedule;
 
-    public ModelSchedule(Map<Integer, Integer> schedule, Integer numberOfCourses, Integer numberOfUnit) {
+    public ModelSchedule(ArrayList<MapCourseGroup> schedule) {
         this.schedule = schedule;
-        this.numberOfCourses = numberOfCourses;
-        this.numberOfUnit = numberOfUnit;
     }
 
-    public ModelSchedule() {
+    public ModelSchedule(){
+        this.schedule = new ArrayList<>();
+    }
+
+    public void addMapCourseGroup(int numberOfCourses,int numberOfUnit){
+        MapCourseGroup map = new MapCourseGroup(numberOfCourses,numberOfUnit);
+        this.schedule.add(map);
+    }
+
+    public void addMapCourseGroup(MapCourseGroup map){
+        this.schedule.add(map);
+    }
+
+    public MapCourseGroup putMapCourseGroup(int index){
+        return schedule.get(index);
+    }
+
+    public ArrayList<MapCourseGroup> getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(ArrayList<MapCourseGroup> schedule) {
+        this.schedule = schedule;
+    }
+
+    public static class MapCourseGroup{
+
+        private int numberOfCourses;
+        private int numberOfUnit;
+
+        public MapCourseGroup(int numberOfCourses, Integer numberOfUnit) {
+            this.numberOfCourses = numberOfCourses;
+            this.numberOfUnit = numberOfUnit;
+        }
+
+        public MapCourseGroup() {
+
+        }
+
+        public int getNumberOfCourses() {
+            return numberOfCourses;
+        }
+
+        public void setNumberOfCourses(int numberOfCourses) {
+            this.numberOfCourses = numberOfCourses;
+        }
+
+        public int getNumberOfUnit() {
+            return numberOfUnit;
+        }
+
+        public void setNumberOfUnit(int numberOfUnit) {
+            this.numberOfUnit = numberOfUnit;
+        }
     }
 
 }
