@@ -9,4 +9,9 @@
     <string name="fill_courses_add_groups_btn_text">+</string>
     <string name="fill_courses_ok_btn_text">ok</string>
     <string name="fill_courses_cancel_btn_text">cancel</string>
+    <string name="groups_edit_id_hint">کد گروه</string>
+    <string name="groups_edit_teacher_hint">نام استاد</string>
+    <string name="groups_edit_first_timing">زمان بندی اول</string>
+    <string name="groups_edit_second_timing">زمان بندی دوم</string>
+    <string name="groups_edit_third_timing">زمان بندی سوم</string>
 </resources>

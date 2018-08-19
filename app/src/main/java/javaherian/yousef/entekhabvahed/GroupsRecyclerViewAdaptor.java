@@ -77,6 +77,7 @@ public class GroupsRecyclerViewAdaptor extends  RecyclerView.Adapter<GroupsRecyc
             /**
              * here we initialize a dialog for editing of the corresponding group details
              */
+
         }
     }
     public  class onLongClickListener implements View.OnLongClickListener{
