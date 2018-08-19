@@ -16,12 +16,12 @@ public class ModelRule {
     public static final int MONDAY = 1;
     public static final int SUNDAY = 2;
     public static final int THURSDAY = 3;
-    public static final int WENSDAY= 4;
+    public static final int WEDNESDAY = 4;
 
 
     /**
      * can be 0 for SATURDAY  or 1 for MONDAY
-     * 2 SUNDAY or 3 THURSDAY  4 WENSDAY
+     * 2 SUNDAY or 3 THURSDAY  4 WEDNESDAY
      */
 
 
@@ -89,7 +89,7 @@ public class ModelRule {
     }
 
     public static int getWENSDAY() {
-        return WENSDAY;
+        return WEDNESDAY;
     }
 
     public int getDay() {
