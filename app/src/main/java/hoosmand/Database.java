@@ -1,8 +1,13 @@
 package hoosmand;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+
+import javaherian.yousef.entekhabvahed.ModelCourse;
 
 public class Database extends SQLiteOpenHelper {
 
@@ -48,6 +53,18 @@ public class Database extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    //test
+    public long insertCourses(ArrayList<ModelCourse> courses){
+        ContentValues values;
+        SQLiteDatabase db = getWritableDatabase();
+        long id = 0;
+        for (int i = 0 ; i<courses.size();i++){
+            values = new ContentValues();
+            values.put(TB_COURSE_KEY_NAME,courses.get(i).getName());
+            values.put(TB_COURSE_KEY_ID,courses.get(i).getId());
+            values.put(TB_COURSE_KEY_NUMBER_OF_GROUPS,courses.get(i).getNumberOfGroups());
+            id = db.insert(TB_COURSE_NAME,null,values);
+        }
+        return id;
+    }
 
 }
