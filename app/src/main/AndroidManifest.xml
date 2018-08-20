@@ -18,8 +18,7 @@
         </activity>
         <activity android:name=".ActivityFillCourses" />
         <activity
-            android:name=".ActivityEditGroups"
-            android:theme="@android:style/Theme.Holo.Dialog" >
+            android:name=".ActivityEditGroups">
         </activity>
     </application>
 
