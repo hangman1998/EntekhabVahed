@@ -11,27 +11,25 @@ import java.util.Set;
 public class ModelSchedule {
 
     private ArrayList<MapCourseGroup> schedule;
-    private int size;
+    private int uniqueId;
 
-    public ModelSchedule(ArrayList<MapCourseGroup> schedule) {
+    public ModelSchedule(ArrayList<MapCourseGroup> schedule, int uniqueId) {
         this.schedule = schedule;
-        size=schedule.size();
+        this.uniqueId=uniqueId;
     }
 
     public ModelSchedule(){
         this.schedule = new ArrayList<>();
-        size=0;
+        uniqueId=0;
     }
 
     public void addMapCourseGroup(int numberOfCourses,int numberOfUnit){
         MapCourseGroup map = new MapCourseGroup(numberOfCourses,numberOfUnit);
         this.schedule.add(map);
-        size++;
     }
 
     public void addMapCourseGroup(MapCourseGroup map){
         this.schedule.add(map);
-        size++;
     }
 
     public MapCourseGroup putMapCourseGroup(int index){
@@ -44,15 +42,14 @@ public class ModelSchedule {
 
     public void setSchedule(ArrayList<MapCourseGroup> schedule) {
         this.schedule = schedule;
-        size=schedule.size();
     }
 
-    public int getSize() {
-        return size;
+    public int getUniqueId() {
+        return uniqueId;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public void setUniqueId(int uniqueId) {
+        this.uniqueId = uniqueId;
     }
 
     public static class MapCourseGroup{
@@ -60,13 +57,14 @@ public class ModelSchedule {
         private int numberOfCourses;
         private int numberOfUnit;
 
-        public MapCourseGroup(int numberOfCourses, Integer numberOfUnit) {
+        public MapCourseGroup(int numberOfCourses, int numberOfUnit) {
             this.numberOfCourses = numberOfCourses;
             this.numberOfUnit = numberOfUnit;
         }
 
         public MapCourseGroup() {
-
+            numberOfCourses=0;
+            numberOfUnit=0;
         }
 
         public int getNumberOfCourses() {

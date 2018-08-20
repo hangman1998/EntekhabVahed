@@ -9,18 +9,16 @@ import java.util.ArrayList;
 public class ModelCourse {
     private String name; //name if class
     private int id;
-    private int numberOfGroups; // number groups that represent class
+
     private ArrayList<ModelGroup> groups;//a vector that holding all groups
 
-    public ModelCourse(String name,int id, int numberOfGroups, ArrayList<ModelGroup> groups) {
+    public ModelCourse(String name,int id, ArrayList<ModelGroup> groups) {
         this.name = name;
         this.id = id;
-        this.numberOfGroups = numberOfGroups;
         this.groups = groups;
     }
     public ModelCourse()
     {
-        numberOfGroups = 0;
         name = "";
         groups = new ArrayList<>();
     }
@@ -39,14 +37,6 @@ public class ModelCourse {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getNumberOfGroups() {
-        return numberOfGroups;
-    }
-
-    public void setNumberOfGroups(int numberOfGroups) {
-        this.numberOfGroups = numberOfGroups;
     }
 
     public ArrayList<ModelGroup> getGroups() {

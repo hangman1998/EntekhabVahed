@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
+import hoosmand.Database;
+
 public class ActivityMenu extends AppCompatActivity implements View.OnClickListener {
     private Button btnInputCourse;
     private Button btnInputRule;
