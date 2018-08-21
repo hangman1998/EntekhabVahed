@@ -14,10 +14,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class ActivityFillCourses extends AppCompatActivity implements View.OnClickListener {
     EditText editTextCourseName,editTextCourseId;
     Button okBtn,cancelBtn,addGroupsBtn;
     RecyclerView recyclerView;
+    Bundle extras;
+    ModelCourse mCourse;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +29,34 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
         findViews();
         initRecycleView();
         initListeners();
-    }
+        extras=getIntent().getExtras();
+
+        if (extras.getBoolean("Create a new course",false) == true){
+            /**
+             * here we don't do anything
+             * for now
+             */
+            mCourse = new ModelCourse();
+        }
+        else {
+            /**
+             * we are assuming here that we a have course id to work with
+             */
+            int courseId=extras.getInt("course id");
+            ArrayList<ModelCourse> courses=Global.db.readCourses();
+            /**
+             * here we obtain the mCourse
+             * need to change
+             */
+            for (int i=0 ;i <courses.size();i++)
+            {
+                if (courses.get(i).getId()==courseId) mCourse = courses.get(i);
+            }
+
+            editTextCourseId.setText(mCourse.getId());
+            editTextCourseName.setText(mCourse.getName());
+        }
+        }
     private void findViews(){
         editTextCourseId=findViewById(R.id.edit_text_course_id);
         editTextCourseName=findViewById(R.id.edit_text_course_name);
@@ -38,9 +69,21 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
     private void initRecycleView(){
         /**
          * for initializing the the recycler view
-         * need to have SQL database inorder to complete this part!!
+         * note that we have to do something about the timings
          */
-        // recyclerView.setAdapter(new GroupsRecyclerViewAdaptor(this,));
+        ArrayList<String> mIds = new ArrayList<>();
+        ArrayList<String> mTeacherNames = new ArrayList<>();
+        ArrayList<String> mTimings = new ArrayList<>();
+        for (int i=0 ;i<mCourse.getGroups().size();i++)
+        {
+            mIds.add(String.valueOf(mCourse.getGroups().get(i).getGroupId()));
+            mTeacherNames.add(mCourse.getGroups().get(i).getTeacherName());
+            /**
+             * timings
+             */
+            mTimings.add("test");
+        }
+         recyclerView.setAdapter(new GroupsRecyclerViewAdaptor(this,mIds,mTeacherNames,mTimings));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
     private void initListeners(){

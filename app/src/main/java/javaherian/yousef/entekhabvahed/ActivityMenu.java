@@ -21,6 +21,11 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_menu);
         findViews();
         initListeners();
+        /**
+         * creating the global database
+         * these lines may change in future
+         */
+        Global.db = new Database(this);
     }
     private void findViews(){
         btnInputCourse=findViewById(R.id.btn_input_course);
