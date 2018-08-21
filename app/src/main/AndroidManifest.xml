@@ -17,10 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivityFillCourses" />
-        <activity
-            android:name=".ActivityEditGroups"
-            android:theme="@android:style/Theme.Holo.Dialog" >
-        </activity>
+        <activity android:name=".ActivityEditGroups"></activity>
+        <activity android:name=".ActivityViewCourses"></activity>
     </application>
 
 </manifest>

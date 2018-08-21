@@ -28,4 +28,7 @@
     </string-array>
     <string name="custom_time_picker_edit_text1">ساعت شروع</string>
     <string name="custom_time_picker_edit_text2">ساعت پایان</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

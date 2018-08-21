@@ -38,7 +38,7 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
     private void initRecycleView(){
         /**
          * for initializing the the recycler view
-         * need to have SQL database in order to complete this part!!
+         * need to have SQL database inorder to complete this part!!
          */
         // recyclerView.setAdapter(new GroupsRecyclerViewAdaptor(this,));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
