@@ -5,14 +5,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class ActivityViewCourses extends AppCompatActivity {
-
+    /**
+     * request codes to send for the next activity
+     */
+    public static final int CREATE_USER=0;
+    public static final int EDIT_USER =1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_courses);
         // temporary code for test
         Intent intent = new Intent(this,ActivityFillCourses.class);
-        intent.putExtra("Create a new course",true);
-        startActivity(intent);
+        intent.setAction("CREATE_COURSE");
+        startActivityForResult(intent,CREATE_USER);
     }
 }
