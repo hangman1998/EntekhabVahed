@@ -8,8 +8,8 @@ public class ActivityViewCourses extends AppCompatActivity {
     /**
      * request codes to send for the next activity
      */
-    public static final int CREATE_USER=0;
-    public static final int EDIT_USER =1;
+    public static final int CREATE_COURSE=0;
+    public static final int EDIT_COURSE =1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +17,6 @@ public class ActivityViewCourses extends AppCompatActivity {
         // temporary code for test
         Intent intent = new Intent(this,ActivityFillCourses.class);
         intent.setAction("CREATE_COURSE");
-        startActivityForResult(intent,CREATE_USER);
+        startActivityForResult(intent,CREATE_COURSE);
     }
 }
