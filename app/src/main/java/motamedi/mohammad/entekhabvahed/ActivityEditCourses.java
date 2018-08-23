@@ -17,16 +17,19 @@ import javaherian.yousef.entekhabvahed.R;
 
 public class ActivityEditCourses extends AppCompatActivity implements View.OnClickListener{
 
-    FloatingActionButton fab = findViewById(R.id.fab);
-    public RecyclerView mListView;
-    public String courseName;
-    @SuppressLint("WrongViewCast")
+    /**
+     * FloatingActionButton fab = findViewById(R.id.fab);
+     public RecyclerView mListView;
+     public String courseName;
+     @SuppressLint("WrongViewCast")
+      */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_courses);
+ //       setContentView(R.layout.activity_edit_courses);
 
-        mListView = findViewById(R.id.list_view);
+  //      mListView = findViewById(R.id.list_view);
 
     }
     @Override
@@ -36,11 +39,11 @@ public class ActivityEditCourses extends AppCompatActivity implements View.OnCli
         if(view==null){
             return;
         }
-        else if(view==fab){
-            Intent intent=new Intent(this,ActivityViewCourses.class);
-            startActivity(intent);
+//        else if(view==fab){
+ //           Intent intent=new Intent(this,ActivityViewCourses.class);
+//            startActivity(intent);
 
-        }
+ //       }
     }
 
 

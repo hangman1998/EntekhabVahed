@@ -9,6 +9,7 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 import hoosmand.Database;
+import hoosmand.DatabaseModified;
 
 public class ActivityMenu extends AppCompatActivity implements View.OnClickListener {
     private Button btnInputCourse;
@@ -25,7 +26,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
          * creating the global database
          * these lines may change in future
          */
-        Global.db = new Database(this);
+        Global.db = new DatabaseModified(this);
     }
     private void findViews(){
         btnInputCourse=findViewById(R.id.btn_input_course);
