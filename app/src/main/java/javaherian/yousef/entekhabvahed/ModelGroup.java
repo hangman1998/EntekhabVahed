@@ -9,13 +9,13 @@ import java.io.Serializable;
  * created by : Heidari
  */
 public class ModelGroup implements Serializable {
-    public static final int SATURDAY = 0;
-    public static final int SUNDAY = 1;
-    public static final int MONDAY= 2;
-    public static final int TUESDAY= 3;
-    public static final int WEDNESDAY = 4;
-    public static final int THURSDAY = 5;
-    public static final int NULL = 6;
+    public static final int SATURDAY = 1;
+    public static final int SUNDAY = 2;
+    public static final int MONDAY= 3;
+    public static final int TUESDAY= 4;
+    public static final int WEDNESDAY =5;
+    public static final int THURSDAY = 6;
+    public static final int NULL = 0;
     private String teacherName;
     private int  groupId;
     private int day1;

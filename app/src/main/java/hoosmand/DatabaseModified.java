@@ -97,11 +97,11 @@ public class DatabaseModified extends SQLiteOpenHelper {
                 "('" + TB_GROUP_KEY_TEACHER_NAME + "' TEXT" +
                 ", '" + TB_GROUP_KEY_GROUP_ID + "' NUMERIC PRIMARY KEY NOT NULL"
                         +
-                        ", '" + TB_GROUP_KEY_DAY_1 + "' NUMERIC NOT NULL DEFAULT '6'"
+                        ", '" + TB_GROUP_KEY_DAY_1 + "' NUMERIC NOT NULL DEFAULT '0'"
                         +
-                        ", '" + TB_GROUP_KEY_DAY_2 + "' NUMERIC NOT NULL DEFAULT '6'"
+                        ", '" + TB_GROUP_KEY_DAY_2 + "' NUMERIC NOT NULL DEFAULT '0'"
                         +
-                        ", '" + TB_GROUP_KEY_DAY_3 + "' NUMERIC NOT NULL DEFAULT '6'"
+                        ", '" + TB_GROUP_KEY_DAY_3 + "' NUMERIC NOT NULL DEFAULT '0'"
                         +
                         ", '" + TB_GROUP_KEY_START_TIME_1 + "' NUMERIC NOT NULL DEFAULT '0'"
                         +

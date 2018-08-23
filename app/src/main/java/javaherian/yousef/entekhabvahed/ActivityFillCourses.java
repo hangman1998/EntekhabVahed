@@ -198,6 +198,13 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
              * we now need to extract the extras passed to us by intent and fill out the  group
              */
             ModelGroup group = (ModelGroup) data.getSerializableExtra("model group");
+            // check for duplicate id
+            for (int i=0 ;i <mCourse.getGroups().size() ;i++){
+                if(mCourse.getGroups().get(i).getGroupId() == group.getGroupId()){
+                    Toast.makeText(this, "Error:duplicate group id !", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
             mCourse.addGroup(group);
             mIds.add(String.valueOf(group.getGroupId()));
             mTeacherNames.add(String.valueOf(group.getTeacherName()));
@@ -215,14 +222,21 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
              */
             int position=data.getIntExtra("position",-1);
             if (position==-1){return;}
+            ModelGroup group = (ModelGroup) data.getSerializableExtra("model group");
             /**
              * for editing a group i simply delete the old group using the functions i had implemented earlier
              * and then i add the new group which its info was sent from ActivityEditGroups
              */
+            for (int i=0 ;i <mCourse.getGroups().size() ;i++){
+                if(mCourse.getGroups().get(i).getGroupId() == group.getGroupId() && i != position){
+                    Toast.makeText(this, "Error:duplicate group id !", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
             notifyGroupDeleted(position);
             adaptor.deleteItem(position);
 
-            ModelGroup group = (ModelGroup) data.getSerializableExtra("model group");
             mCourse.addGroup(group);
             mIds.add(String.valueOf(group.getGroupId()));
             mTeacherNames.add(String.valueOf(group.getTeacherName()));
