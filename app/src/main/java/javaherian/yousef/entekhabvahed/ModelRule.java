@@ -12,13 +12,16 @@ public class ModelRule {
     public static final int LESS_THAN = 3;
     public static final int MORE_THAN = 4;
 
+
     public static final int SATURDAY = 0;
     public static final int MONDAY = 1;
     public static final int SUNDAY = 2;
     public static final int THURSDAY = 3;
     public static final int WEDNESDAY = 4;
-
-
+    /**
+     * used for remember information of rule without checking all information of rule
+     */
+    private String name;
     /**
      * can be 0 for SATURDAY  or 1 for MONDAY
      * 2 SUNDAY or 3 THURSDAY  4 WEDNESDAY
@@ -56,6 +59,14 @@ public class ModelRule {
         score = 0;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public static int getStartTime() {
         return START_TIME;
     }
@@ -88,7 +99,7 @@ public class ModelRule {
         return THURSDAY;
     }
 
-    public static int getWENSDAY() {
+    public static int getWEDNESDAY() {
         return WEDNESDAY;
     }
 

@@ -17,6 +17,9 @@
     <string name="groups_edit_ok_btn">ok</string>
     <string name="groups_edit_cancel_btn">cancel</string>
     <string name="custom_time_picker_prompt">انتخاب روز</string>
+    <string name="fill_rule_name_edit_text">نام معیار امتیاز دهی</string>
+    <string name="fill_rule_teacher_edit_text">نام استاد</string>
+    <string name="fill_rule_course_edit_text">نام درس</string>
     <string-array name="custom_time_picker_days">
         <item>NULL</item>
         <item>شنبه</item>
@@ -31,4 +34,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="planets_array">
+        <item>SATURDAY </item>
+        <item>SUNDAY</item>
+        <item>MONDAY </item>
+        <item>THURSDAY </item>
+        <item>WENSDAY</item>
+    </string-array>
 </resources>

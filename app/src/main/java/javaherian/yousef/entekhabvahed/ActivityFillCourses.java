@@ -117,6 +117,7 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
             /**
              * we are assuming here that we a have course id to work with
              */
+            courseId=0;
             courseId=extras.getInt("course id");
             ArrayList<ModelCourse> courses= db.readCourses();
             /**

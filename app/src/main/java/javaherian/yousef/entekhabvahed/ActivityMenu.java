@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
+import heidari.mohammad.entekhabvahed.ActivityShowRule;
 import hoosmand.Database;
 
 public class ActivityMenu extends AppCompatActivity implements View.OnClickListener {
@@ -52,5 +53,10 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
             Intent intent=new Intent(this,ActivityFillCourses.class);
             startActivity(intent);
         }
+        else if (view.getId()==R.id.btn_input_rule){
+            Intent intent=new Intent(this, ActivityShowRule.class);
+            startActivity(intent);
+        }
+
     }
 }
