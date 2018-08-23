@@ -142,10 +142,9 @@ public class CoursesRecyclerViewAdaptor extends RecyclerView.Adapter<CoursesRecy
     }
     public void notifyItemEdited() {
         courses=db.readCourses();
-        /**
-         * to be completed
-         */
-
+        names.clear();
+        for (int i = 0; i < courses.size(); i++) names.add(courses.get(i).getName());
+        notifyDataSetChanged();
     }
 }
 
