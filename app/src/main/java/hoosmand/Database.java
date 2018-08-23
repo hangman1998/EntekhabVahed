@@ -407,5 +407,4 @@ public class Database extends SQLiteOpenHelper {
     public void editSchedule(ModelSchedule schedule){
         editSchedule(schedule.getUniqueId(),schedule.getSchedule());
     }
-
 }
