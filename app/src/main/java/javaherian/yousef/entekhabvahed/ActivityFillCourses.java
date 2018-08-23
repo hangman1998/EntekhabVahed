@@ -113,26 +113,33 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View view) {
         if (view == null) return;
-        ArrayList<ModelCourse> courses = db.readCourses();
-        String newName = editTextCourseName.getText().toString();
-        int newId = Integer.valueOf(editTextCourseId.getText().toString());
+
         //OK button
-
-
-
-
-
         if (view.getId() == R.id.btn_fill_courses_ok){
-
+            if (editTextCourseId.getText().toString().isEmpty()){
+                Toast.makeText(this, "id field can't be empty!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(editTextCourseName.getText().toString().isEmpty()){
+                Toast.makeText(this, "course name field can't be empty!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            ArrayList<ModelCourse> courses = db.readCourses();
+            String newName = editTextCourseName.getText().toString();
+            int newId = Integer.valueOf(editTextCourseId.getText().toString());
             if (Action == "CREATE_COURSE"){
                 /**
                  * need to add extra checks for the correct operation of db
                  */
                 for (int i=0;i<courses.size();i++){
-                    if (courses.get(i).getName() == newName)
+                    if (courses.get(i).getName() == newName){
                         Toast.makeText(this, "Error:Duplicate name", Toast.LENGTH_SHORT).show();
-                    if ( courses.get(i).getId() == newId)
+                        return;
+                    }
+                    if ( courses.get(i).getId() == newId) {
                         Toast.makeText(this, "Error:Duplicate id", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
                 mCourse.setId(newId);
                 mCourse.setName(newName);
@@ -143,10 +150,14 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
                  * need to add extra checks for the correct operation of db
                  */
                 for (int i=0;i<courses.size();i++){
-                    if (courses.get(i).getName() == newName && mCourse.getName() != newName)
+                    if (courses.get(i).getName() == newName && mCourse.getName() != newName) {
                         Toast.makeText(this, "Error:Duplicate name", Toast.LENGTH_SHORT).show();
-                    if ( courses.get(i).getId() == newId && mCourse.getId() != newId)
+                        return;
+                    }
+                    if ( courses.get(i).getId() == newId && mCourse.getId() != newId){
                         Toast.makeText(this, "Error:Duplicate id", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
                 mCourse.setId(newId);
                 mCourse.setName(newName);
@@ -158,24 +169,12 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
             finish();
         }
 
-
-
-
-
-
         //cancel Button
         else if (view.getId() == R.id.btn_fill_courses_cancel){
             Intent intent = new Intent(this,ActivityViewCourses.class);
             setResult(RESULTED_IN_CANCEL,intent);
             finish();
         }
-
-
-
-
-
-
-
 
         //add button
         else if (view.getId() == R.id.btn_add_groups){

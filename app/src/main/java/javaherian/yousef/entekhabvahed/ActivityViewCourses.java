@@ -17,6 +17,7 @@ public class ActivityViewCourses extends AppCompatActivity {
         // temporary code for test
         Intent intent = new Intent(this,ActivityFillCourses.class);
         intent.setAction("CREATE_COURSE");
+
         startActivityForResult(intent,CREATE_COURSE);
     }
 }
