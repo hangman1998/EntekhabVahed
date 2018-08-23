@@ -1,10 +1,14 @@
 package javaherian.yousef.entekhabvahed;
 
+import android.content.Intent;
+
+import java.io.Serializable;
+
 /**
  * this GroupsClass related to any Course like electronics
  * created by : Heidari
  */
-public class ModelGroup {
+public class ModelGroup implements Serializable {
     public static final int SATURDAY = 0;
     public static final int SUNDAY = 1;
     public static final int MONDAY= 2;
@@ -50,7 +54,6 @@ public class ModelGroup {
         this.finishTime2 = 0;
         this.finishTime3 = 0;
     }
-
     public String getTeacherName() {
         return teacherName;
     }
@@ -137,5 +140,8 @@ public class ModelGroup {
 
     public void setFinishTime3(int finishTime3) {
         this.finishTime3 = finishTime3;
+    }
+    public String timingsToString(){
+        return "test";
     }
 }

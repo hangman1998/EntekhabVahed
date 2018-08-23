@@ -4,19 +4,19 @@ package javaherian.yousef.entekhabvahed;
  * the main form for creating a new course
  */
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+        import android.content.Intent;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.support.v7.widget.LinearLayoutManager;
+        import android.support.v7.widget.RecyclerView;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.Toast;
 
-import java.util.ArrayList;
+        import java.util.ArrayList;
 
-import static javaherian.yousef.entekhabvahed.Global.db;
+        import static javaherian.yousef.entekhabvahed.Global.db;
 
 public class ActivityFillCourses extends AppCompatActivity implements View.OnClickListener {
     /**
@@ -46,7 +46,7 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
         initDatabase();
         initRecycleView();
         initListeners();
-        }
+    }
     private void findViews(){
         editTextCourseId=findViewById(R.id.edit_text_course_id);
         editTextCourseName=findViewById(R.id.edit_text_course_name);
@@ -88,10 +88,7 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
         {
             mIds.add(String.valueOf(mCourse.getGroups().get(i).getGroupId()));
             mTeacherNames.add(mCourse.getGroups().get(i).getTeacherName());
-            /**
-             * timings
-             */
-            mTimings.add("test");
+            mTimings.add(mCourse.getGroups().get(i).timingsToString());
         }
     }
 
@@ -198,19 +195,40 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
              */
         }
         else if (requestCode == CREATE_GROUP && resultCode == ActivityEditGroups.RESULTED_IN_OK){
-            ModelGroup group = new ModelGroup();
             /**
              * we now need to extract the extras passed to us by intent and fill out the  group
              */
+            ModelGroup group = (ModelGroup) data.getSerializableExtra("model group");
             mCourse.addGroup(group);
             mIds.add(String.valueOf(group.getGroupId()));
             mTeacherNames.add(String.valueOf(group.getTeacherName()));
+            mTimings.add(group.timingsToString());
+            adaptor.addItem( String.valueOf(group.getGroupId()),group.getTeacherName(),group.timingsToString());
+        }
+        else if (requestCode == EDIT_GROUP && resultCode == ActivityEditGroups.RESULTED_IN_CANCEL){
             /**
-             * need to change this part
-             * about timings
+             * do absolutely nothing
              */
-            mTimings.add("test");
-            adaptor.addItem( String.valueOf(group.getGroupId()),group.getTeacherName(),"test");
+        }
+        else if (requestCode == EDIT_GROUP && resultCode == ActivityEditGroups.RESULTED_IN_OK){
+            /**
+             * we now need to extract the extras passed to us by intent and edit corresponding group
+             */
+            int position=data.getIntExtra("position",-1);
+            if (position==-1){return;}
+            /**
+             * for editing a group i simply delete the old group using the functions i had implemented earlier
+             * and then i add the new group which its info was sent from ActivityEditGroups
+             */
+            notifyGroupDeleted(position);
+            adaptor.deleteItem(position);
+
+            ModelGroup group = (ModelGroup) data.getSerializableExtra("model group");
+            mCourse.addGroup(group);
+            mIds.add(String.valueOf(group.getGroupId()));
+            mTeacherNames.add(String.valueOf(group.getTeacherName()));
+            mTimings.add(group.timingsToString());
+            adaptor.addItem( String.valueOf(group.getGroupId()),group.getTeacherName(),group.timingsToString());
         }
     }
     public void notifyGroupDeleted(int position){
@@ -219,4 +237,5 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
         mTimings.remove(position);
         mTeacherNames.remove(position);
     }
+    public ModelGroup getGroupInfoAt(int position){ return mCourse.getGroups().get(position); }
 }

@@ -95,9 +95,9 @@ public class GroupsRecyclerViewAdaptor extends  RecyclerView.Adapter<GroupsRecyc
              * here we initialize a dialog for editing of the corresponding group details
              */
             Intent intent=new Intent(mContext,ActivityEditGroups.class);
-            /**
-             * we need to send information of the group to be edited in some form with intent
-             */
+            intent.putExtra("model group",((ActivityFillCourses)mContext).getGroupInfoAt(position));
+            intent.putExtra("position", position);
+            intent.setAction("EDIT_GROUP");
             ((Activity) mContext).startActivityForResult(intent,ActivityFillCourses.EDIT_GROUP);
         }
     }
