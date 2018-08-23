@@ -13,10 +13,12 @@ public class ModelRule {
     public static final int MORE_THAN = 4;
 
     public static final int SATURDAY = 0;
-    public static final int MONDAY = 1;
-    public static final int SUNDAY = 2;
-    public static final int THURSDAY = 3;
+    public static final int SUNDAY = 1;
+    public static final int MONDAY= 2;
+    public static final int TUESDAY= 3;
     public static final int WEDNESDAY = 4;
+    public static final int THURSDAY = 5;
+
 
 
     /**
@@ -48,50 +50,13 @@ public class ModelRule {
     }
 
     public ModelRule() {
-        day = day=0;
+        day =0;
         time =START_TIME;
         relation = LESS_THAN ;
         course = "";
         teacher = "";
         score = 0;
     }
-
-    public static int getStartTime() {
-        return START_TIME;
-    }
-
-    public static int getFinishTime() {
-        return FINISH_TIME;
-    }
-
-    public static int getLessThan() {
-        return LESS_THAN;
-    }
-
-    public static int getMoreThan() {
-        return MORE_THAN;
-    }
-
-    public static int getSATURDAY() {
-        return SATURDAY;
-    }
-
-    public static int getMONDAY() {
-        return MONDAY;
-    }
-
-    public static int getSUNDAY() {
-        return SUNDAY;
-    }
-
-    public static int getTHURSDAY() {
-        return THURSDAY;
-    }
-
-    public static int getWENSDAY() {
-        return WEDNESDAY;
-    }
-
     public int getDay() {
         return day;
     }
