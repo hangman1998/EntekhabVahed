@@ -69,7 +69,7 @@ public class ActivityEditGroups extends AppCompatActivity implements View.OnClic
             position = extras.getInt("position", -1);
             mGroup = (ModelGroup) extras.getSerializable("model group");
 
-            idEditText.setText(mGroup.getGroupId());
+            idEditText.setText(String.valueOf(mGroup.getGroupId()));
             teacherEditText.setText(mGroup.getTeacherName());
             /**
              * we now need to set the values of the three fragments

@@ -78,7 +78,7 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
             {
                 if (courses.get(i).getId()==courseId) mCourse = courses.get(i);
             }
-            editTextCourseId.setText(mCourse.getId());
+            editTextCourseId.setText(String.valueOf(mCourse.getId()));
             editTextCourseName.setText(mCourse.getName());
         }
         mIds = new ArrayList<>();
@@ -206,9 +206,9 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
                 }
             }
             mCourse.addGroup(group);
-            mIds.add(String.valueOf(group.getGroupId()));
-            mTeacherNames.add(String.valueOf(group.getTeacherName()));
-            mTimings.add(group.timingsToString());
+     //       mIds.add(String.valueOf(group.getGroupId()));
+     //       mTeacherNames.add(String.valueOf(group.getTeacherName()));
+     //       mTimings.add(group.timingsToString());
             adaptor.addItem( String.valueOf(group.getGroupId()),group.getTeacherName(),group.timingsToString());
         }
         else if (requestCode == EDIT_GROUP && resultCode == ActivityEditGroups.RESULTED_IN_CANCEL){
@@ -238,17 +238,17 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
             adaptor.deleteItem(position);
 
             mCourse.addGroup(group);
-            mIds.add(String.valueOf(group.getGroupId()));
-            mTeacherNames.add(String.valueOf(group.getTeacherName()));
-            mTimings.add(group.timingsToString());
+     //       mIds.add(String.valueOf(group.getGroupId()));
+     //       mTeacherNames.add(String.valueOf(group.getTeacherName()));
+     //       mTimings.add(group.timingsToString());
             adaptor.addItem( String.valueOf(group.getGroupId()),group.getTeacherName(),group.timingsToString());
         }
     }
     public void notifyGroupDeleted(int position){
         mCourse.deleteGroup(position);
-        mIds.remove(position);
-        mTimings.remove(position);
-        mTeacherNames.remove(position);
+    //    mIds.remove(position);
+    //    mTimings.remove(position);
+    //    mTeacherNames.remove(position);
     }
     public ModelGroup getGroupInfoAt(int position){ return mCourse.getGroups().get(position); }
 }

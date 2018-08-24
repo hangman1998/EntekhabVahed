@@ -134,9 +134,32 @@ public class DatabaseModified extends SQLiteOpenHelper {
 
     public ArrayList<ModelGroup> readGroups(int courseId){
         Log.i("hooshmand.Database","start read groups. courseId = "+courseId);
+        SQLiteDatabase db1 = getWritableDatabase();
+        db1.execSQL("CREATE TABLE IF NOT EXISTS '" + TB_GROUP_NAME+courseId + "' " +
+                "('" + TB_GROUP_KEY_TEACHER_NAME + "' TEXT" +
+                ", '" + TB_GROUP_KEY_GROUP_ID + "' NUMERIC PRIMARY KEY NOT NULL"
+                +
+                ", '" + TB_GROUP_KEY_DAY_1 + "' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_DAY_2 + "' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_DAY_3 + "' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_START_TIME_1 + "' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_START_TIME_2 + "' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_START_TIME_3 + "' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_FINISH_TIME_1 +"' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_FINISH_TIME_2 +"' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_FINISH_TIME_3 + "' NUMERIC NOT NULL DEFAULT '0'" +
+                ")");
+        if (db1.isOpen())db1.close();
         ArrayList<ModelGroup> groups = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-
         Cursor cursor = db.rawQuery("SELECT * FROM '"+TB_GROUP_NAME+courseId+"'",null);
         if(cursor.moveToFirst()){
             do{
@@ -270,6 +293,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
         Log.i("hooshmand.Database","start read courses.");
         ArrayList<ModelCourse> courses = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
+
         Cursor cursor = db.rawQuery("SELECT * FROM '"+TB_COURSE_NAME+"'",null);
         if(cursor.moveToFirst()){
             do{
