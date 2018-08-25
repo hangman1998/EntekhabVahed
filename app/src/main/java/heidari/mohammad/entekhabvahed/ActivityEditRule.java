@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import javaherian.yousef.entekhabvahed.R;
 
+import static javaherian.yousef.entekhabvahed.Global.db;
+
 public class ActivityEditRule extends AppCompatActivity implements View.OnClickListener  {
     Spinner spin1;
     TextView name;

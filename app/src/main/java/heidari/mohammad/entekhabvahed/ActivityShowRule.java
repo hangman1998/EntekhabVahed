@@ -36,7 +36,7 @@ public class ActivityShowRule extends AppCompatActivity {
                 intent.putExtra("activity_id","new_rule");
                 startActivity(intent);;
 
-                listRule.add(new ModelRule(1,1,3,"riazi","ali",39,"سلام"+i));
+                listRule.add(new ModelRule("سلام"+i,1,3,1,"ali","ffg",1));
                 i=i+1;
                 ruleAdapter ruleAdapter = new ruleAdapter(ActivityShowRule.this,listRule);
                 listR.setAdapter(ruleAdapter);

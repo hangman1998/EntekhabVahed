@@ -25,7 +25,7 @@ public class ModelRule {
      * can be 0 for SATURDAY  or 1 for MONDAY
      * 2 SUNDAY or 3 THURSDAY  4 WEDNESDAY
      */
-
+private String name;
 
     private int day;
     /**
@@ -40,7 +40,8 @@ public class ModelRule {
     private String teacher;
     int score;
 
-    public ModelRule(int day, int time, int relation, String course, String teacher, int score) {
+    public ModelRule(String name, int day, int time, int relation, String course, String teacher, int score) {
+        this.name = name;
         this.day = day;
         this.time = time;
         this.relation = relation;
@@ -56,6 +57,7 @@ public class ModelRule {
         course = "";
         teacher = "";
         score = 0;
+        name="";
     }
     public int getDay() {
         return day;
@@ -103,5 +105,13 @@ public class ModelRule {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
