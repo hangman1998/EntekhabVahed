@@ -9,6 +9,7 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 import heidari.mohammad.entekhabvahed.ActivityShowRule;
+import heidari.mohammad.entekhabvahed.MusicManager;
 import hoosmand.Database;
 
 public class ActivityMenu extends AppCompatActivity implements View.OnClickListener {
@@ -22,6 +23,8 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_menu);
         findViews();
         initListeners();
+        Intent svc=new Intent(this, MusicManager.class);
+        startService(svc);
         /**
          * creating the global database
          * these lines may change in future

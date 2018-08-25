@@ -37,10 +37,17 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="action_settings">Settings</string>
     <string-array name="planets_array">
-        <item>SATURDAY </item>
-        <item>SUNDAY</item>
-        <item>MONDAY </item>
-        <item>THURSDAY </item>
-        <item>WENSDAY</item>
+        <item>همه روز ها</item>
+        <item>شنبه</item>
+        <item>یک شنبه</item>
+        <item>دو شنبه</item>
+        <item>سه شنبه</item>
+        <item>چهار شنبه</item>
     </string-array>
+    <string-array name="relation_start">
+        <item>قبل از</item>
+        <item>بعد از</item>
+    </string-array>
+
+
 </resources>

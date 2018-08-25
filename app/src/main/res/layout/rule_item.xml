@@ -8,10 +8,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn"
-            android:textStyle="bold"/>
+            android:textDirection="ltr"
+            android:layout_gravity="end"
+            android:textAlignment="viewEnd"
+            android:backgroundTint="@color/colorPrimary"
+            android:textStyle="normal">
+
+        </Button>
     </LinearLayout>
 
 </LinearLayout>

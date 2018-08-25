@@ -41,13 +41,14 @@ public class ModelRule {
     private String teacher;
     int score;
 
-    public ModelRule(int day, int time, int relation, String course, String teacher, int score) {
+    public ModelRule(int day, int time, int relation, String course, String teacher, int score,String name) {
         this.day = day;
         this.time = time;
         this.relation = relation;
         this.course = course;
         this.teacher = teacher;
         this.score = score;
+        this.name = name;
     }
 
     public ModelRule() {
