@@ -19,9 +19,6 @@
         <activity android:name=".ActivityFillCourses" />
         <activity android:name=".ActivityEditGroups" />
         <activity android:name=".ActivityViewCourses" />
-        <activity android:name="heidari.mohammad.entekhabvahed.ActivityEditRule" />
-        <activity android:name="heidari.mohammad.entekhabvahed.ActivityShowRule" />
-        <service android:enabled="true" android:name="heidari.mohammad.entekhabvahed.MusicManager" />
     </application>
 
 </manifest>

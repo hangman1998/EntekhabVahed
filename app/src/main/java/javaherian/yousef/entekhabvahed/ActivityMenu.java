@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import heidari.mohammad.entekhabvahed.ActivityShowRule;
 import heidari.mohammad.entekhabvahed.MusicManager;
 import hoosmand.Database;
+import hoosmand.DatabaseModified;
 
 public class ActivityMenu extends AppCompatActivity implements View.OnClickListener {
     private Button btnInputCourse;
@@ -29,7 +30,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
          * creating the global database
          * these lines may change in future
          */
-        Global.db = new Database(this);
+        Global.db = new DatabaseModified(this);
     }
     private void findViews(){
         btnInputCourse=findViewById(R.id.btn_input_course);
@@ -53,7 +54,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         if (view == null)
             return;
         if (view.getId()==R.id.btn_input_course){
-            Intent intent=new Intent(this,ActivityFillCourses.class);
+            Intent intent=new Intent(this,ActivityViewCourses.class);
             startActivity(intent);
         }
         else if (view.getId()==R.id.btn_input_rule){

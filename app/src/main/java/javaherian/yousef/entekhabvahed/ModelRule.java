@@ -12,16 +12,15 @@ public class ModelRule {
     public static final int LESS_THAN = 3;
     public static final int MORE_THAN = 4;
 
-
     public static final int SATURDAY = 0;
-    public static final int MONDAY = 1;
-    public static final int SUNDAY = 2;
-    public static final int THURSDAY = 3;
+    public static final int SUNDAY = 1;
+    public static final int MONDAY= 2;
+    public static final int TUESDAY= 3;
     public static final int WEDNESDAY = 4;
-    /**
-     * used for remember information of rule without checking all information of rule
-     */
-    private String name;
+    public static final int THURSDAY = 5;
+
+
+
     /**
      * can be 0 for SATURDAY  or 1 for MONDAY
      * 2 SUNDAY or 3 THURSDAY  4 WEDNESDAY
@@ -41,69 +40,23 @@ public class ModelRule {
     private String teacher;
     int score;
 
-    public ModelRule(int day, int time, int relation, String course, String teacher, int score,String name) {
+    public ModelRule(int day, int time, int relation, String course, String teacher, int score) {
         this.day = day;
         this.time = time;
         this.relation = relation;
         this.course = course;
         this.teacher = teacher;
         this.score = score;
-        this.name = name;
     }
 
     public ModelRule() {
-        day = day=0;
+        day =0;
         time =START_TIME;
         relation = LESS_THAN ;
         course = "";
         teacher = "";
         score = 0;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public static int getStartTime() {
-        return START_TIME;
-    }
-
-    public static int getFinishTime() {
-        return FINISH_TIME;
-    }
-
-    public static int getLessThan() {
-        return LESS_THAN;
-    }
-
-    public static int getMoreThan() {
-        return MORE_THAN;
-    }
-
-    public static int getSATURDAY() {
-        return SATURDAY;
-    }
-
-    public static int getMONDAY() {
-        return MONDAY;
-    }
-
-    public static int getSUNDAY() {
-        return SUNDAY;
-    }
-
-    public static int getTHURSDAY() {
-        return THURSDAY;
-    }
-
-    public static int getWEDNESDAY() {
-        return WEDNESDAY;
-    }
-
     public int getDay() {
         return day;
     }

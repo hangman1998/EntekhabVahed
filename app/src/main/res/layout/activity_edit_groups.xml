@@ -9,79 +9,106 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="15dp">
-
-        <android.support.design.widget.TextInputLayout
+        android:padding="5dp">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/groups_edit_id_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/groups_edit_id_hint"
+                    android:inputType="number" />
+            </android.support.design.widget.TextInputLayout>
 
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/groups_edit_id_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/groups_edit_id_hint"
-                android:inputType="number" />
-        </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/groups_edit_teacher_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/groups_edit_teacher_hint"
-                android:inputType="textPersonName" />
-        </android.support.design.widget.TextInputLayout>
-
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/groups_edit_teacher_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/groups_edit_teacher_hint"
+                    android:inputType="textPersonName" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
+            android:gravity="center_horizontal"
             android:text="@string/groups_edit_first_timing" />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:paddingRight="25dp"
+           android:paddingVertical="5dp">
+           <android.support.v7.widget.AppCompatTextView
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:layout_height="match_parent"
+               android:text="@string/custom_time_picker_edit_text1"/>
+           <android.support.v7.widget.AppCompatTextView
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:layout_height="match_parent"
+               android:text="@string/custom_time_picker_edit_text2"/>
+       </LinearLayout>
         <fragment
             android:name="javaherian.yousef.entekhabvahed.CustomTimePicker"
             android:id="@+id/groups_edit_fragment1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
+            android:gravity="center_horizontal"
             android:text="@string/groups_edit_second_timing" />
         <fragment
             android:name="javaherian.yousef.entekhabvahed.CustomTimePicker"
             android:id="@+id/groups_edit_fragment2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
+            android:gravity="center_horizontal"
             android:text="@string/groups_edit_third_timing" />
         <fragment
             android:name="javaherian.yousef.entekhabvahed.CustomTimePicker"
             android:id="@+id/groups_edit_fragment3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp">
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/groups_edit_ok_btn"
-                android:id="@+id/groups_edit_ok_button"
-                android:layout_gravity="right"/>
-            <Button
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="@string/groups_edit_cancel_btn"
-                android:id="@+id/groups_edit_cancel_button"
-                android:layout_gravity="left"/>
+                android:id="@+id/groups_edit_cancel_button" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/groups_edit_ok_btn"
+                android:id="@+id/groups_edit_ok_button" />
+
         </LinearLayout>
 
     </LinearLayout>

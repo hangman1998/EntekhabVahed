@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,7 +14,7 @@ import javaherian.yousef.entekhabvahed.ModelGroup;
 import javaherian.yousef.entekhabvahed.ModelRule;
 import javaherian.yousef.entekhabvahed.ModelSchedule;
 
-public class Database extends SQLiteOpenHelper {
+public class DatabaseModified extends SQLiteOpenHelper {
 
     private final static int DATABASE_VERSION = 1;
     private final static String DATABASE_NAME = "info_db";
@@ -35,13 +34,22 @@ public class Database extends SQLiteOpenHelper {
     private final static String TB_GROUP_NAME = "tb_group_";
     private final static String TB_GROUP_KEY_TEACHER_NAME = "teacher_name";
     private final static String TB_GROUP_KEY_GROUP_ID = "group_id";
+    private final static String TB_GROUP_KEY_DAY_1 = "day_1";
+    private final static String TB_GROUP_KEY_DAY_2 = "day_2";
+    private final static String TB_GROUP_KEY_DAY_3 = "day_3";
+    private final static String TB_GROUP_KEY_START_TIME_1 = "start_time_1";
+    private final static String TB_GROUP_KEY_START_TIME_2 = "start_time_2";
+    private final static String TB_GROUP_KEY_START_TIME_3 = "start_time_3";
+    private final static String TB_GROUP_KEY_FINISH_TIME_1 = "finish_time_1";
+    private final static String TB_GROUP_KEY_FINISH_TIME_2 ="finish_time_2";
+    private final static String TB_GROUP_KEY_FINISH_TIME_3 = "finish_time_3";
 
     private final static String TB_SCHEDULE_NAME = "tb_schedule_";
     private final static String TB_SCHEDULE_KEY_UNIQUE_ID = "unique_id_";
     private final static String TB_SCHEDULE_KEY_NO_COURSES = "NO.courses";
     private final static String TB_SCHEDULE_KEY_NO_UNIT = "NO.unit";
 
-    public Database(Context context) {
+    public DatabaseModified(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -72,20 +80,52 @@ public class Database extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public long addGroup(ModelGroup group,int courseId){
-        return addGroup(group.getGroupId(),group.getTeacherName(),courseId);
+    public long addGroup(ModelGroup group, int courseId){
+        return addGroup(courseId,group.getTeacherName(),group.getGroupId()
+                ,group.getDay1(),group.getDay2(),group.getDay3(),group.getStartTime1(),
+                group.getStartTime2(),group.getStartTime3(),group.getFinishTime1(),
+                group.getFinishTime2(),group.getFinishTime3());
     }
 
-    public long addGroup(int groupId,String teacherName,int courseId){
+    public long addGroup(int courseId,String teacherName, int groupId
+            , int day1, int day2, int day3, int startTime1, int startTime2,
+                         int startTime3, int finishTime1, int finishTime2, int finishTime3){
         Log.i("hooshmand.Database","start add a group. groupId = " + groupId + " , teacherName = " + teacherName + " , courseId = "+courseId);
         ContentValues values = new ContentValues();
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("CREATE TABLE IF NOT EXISTS '" + TB_GROUP_NAME+courseId + "' " +
                 "('" + TB_GROUP_KEY_TEACHER_NAME + "' TEXT" +
-                ", '" + TB_GROUP_KEY_GROUP_ID + "' NUMERIC PRIMARY KEY NOT NULL" +
+                ", '" + TB_GROUP_KEY_GROUP_ID + "' NUMERIC PRIMARY KEY NOT NULL"
+                        +
+                        ", '" + TB_GROUP_KEY_DAY_1 + "' NUMERIC NOT NULL DEFAULT '0'"
+                        +
+                        ", '" + TB_GROUP_KEY_DAY_2 + "' NUMERIC NOT NULL DEFAULT '0'"
+                        +
+                        ", '" + TB_GROUP_KEY_DAY_3 + "' NUMERIC NOT NULL DEFAULT '0'"
+                        +
+                        ", '" + TB_GROUP_KEY_START_TIME_1 + "' NUMERIC NOT NULL DEFAULT '0'"
+                        +
+                        ", '" + TB_GROUP_KEY_START_TIME_2 + "' NUMERIC NOT NULL DEFAULT '0'"
+                        +
+                        ", '" + TB_GROUP_KEY_START_TIME_3 + "' NUMERIC NOT NULL DEFAULT '0'"
+                        +
+                        ", '" + TB_GROUP_KEY_FINISH_TIME_1 +"' NUMERIC NOT NULL DEFAULT '0'"
+                        +
+                        ", '" + TB_GROUP_KEY_FINISH_TIME_2 +"' NUMERIC NOT NULL DEFAULT '0'"
+                        +
+                        ", '" + TB_GROUP_KEY_FINISH_TIME_3 + "' NUMERIC NOT NULL DEFAULT '0'" +
                 ")");
         values.put(TB_GROUP_KEY_TEACHER_NAME,teacherName);
         values.put(TB_GROUP_KEY_GROUP_ID,groupId);
+        values.put(TB_GROUP_KEY_DAY_1,day1);
+        values.put(TB_GROUP_KEY_DAY_2,day2);
+        values.put(TB_GROUP_KEY_DAY_3,day3);
+        values.put(TB_GROUP_KEY_START_TIME_1,startTime1);
+        values.put(TB_GROUP_KEY_START_TIME_2,startTime2);
+        values.put(TB_GROUP_KEY_START_TIME_3,startTime3);
+        values.put(TB_GROUP_KEY_FINISH_TIME_1,finishTime1);
+        values.put(TB_GROUP_KEY_FINISH_TIME_2,finishTime2);
+        values.put(TB_GROUP_KEY_FINISH_TIME_3,finishTime3);
         long id =db.insert(TB_GROUP_NAME+courseId,null,values);
         if(db.isOpen()) db.close();
         Log.i("hooshmand.Database","add group finish. id = "+id);
@@ -94,15 +134,51 @@ public class Database extends SQLiteOpenHelper {
 
     public ArrayList<ModelGroup> readGroups(int courseId){
         Log.i("hooshmand.Database","start read groups. courseId = "+courseId);
+        SQLiteDatabase db1 = getWritableDatabase();
+        db1.execSQL("CREATE TABLE IF NOT EXISTS '" + TB_GROUP_NAME+courseId + "' " +
+                "('" + TB_GROUP_KEY_TEACHER_NAME + "' TEXT" +
+                ", '" + TB_GROUP_KEY_GROUP_ID + "' NUMERIC PRIMARY KEY NOT NULL"
+                +
+                ", '" + TB_GROUP_KEY_DAY_1 + "' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_DAY_2 + "' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_DAY_3 + "' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_START_TIME_1 + "' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_START_TIME_2 + "' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_START_TIME_3 + "' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_FINISH_TIME_1 +"' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_FINISH_TIME_2 +"' NUMERIC NOT NULL DEFAULT '0'"
+                +
+                ", '" + TB_GROUP_KEY_FINISH_TIME_3 + "' NUMERIC NOT NULL DEFAULT '0'" +
+                ")");
+        if (db1.isOpen())db1.close();
         ArrayList<ModelGroup> groups = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-
         Cursor cursor = db.rawQuery("SELECT * FROM '"+TB_GROUP_NAME+courseId+"'",null);
         if(cursor.moveToFirst()){
             do{
                 ModelGroup model = new ModelGroup();
                 model.setGroupId(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_GROUP_ID)));
                 model.setTeacherName(cursor.getString(cursor.getColumnIndex(TB_GROUP_KEY_TEACHER_NAME)));
+
+                model.setDay1(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_DAY_1)));
+                model.setDay2(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_DAY_2)));
+                model.setDay3(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_DAY_3)));
+
+                model.setStartTime1(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_START_TIME_1)));
+                model.setStartTime2(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_START_TIME_2)));
+                model.setStartTime3(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_START_TIME_3)));
+
+                model.setFinishTime1(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_FINISH_TIME_1)));
+                model.setFinishTime2(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_FINISH_TIME_2)));
+                model.setFinishTime3(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_FINISH_TIME_3)));
+
                 groups.add(model);
             }while (cursor.moveToNext());
         }
@@ -120,6 +196,18 @@ public class Database extends SQLiteOpenHelper {
             do{
                 group.setGroupId(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_GROUP_ID)));
                 group.setTeacherName(cursor.getString(cursor.getColumnIndex(TB_GROUP_KEY_TEACHER_NAME)));
+
+                group.setDay1(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_DAY_1)));
+                group.setDay2(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_DAY_2)));
+                group.setDay3(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_DAY_3)));
+
+                group.setStartTime1(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_START_TIME_1)));
+                group.setStartTime2(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_START_TIME_2)));
+                group.setStartTime3(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_START_TIME_3)));
+
+                group.setFinishTime1(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_FINISH_TIME_1)));
+                group.setFinishTime2(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_FINISH_TIME_2)));
+                group.setFinishTime3(cursor.getInt(cursor.getColumnIndex(TB_GROUP_KEY_FINISH_TIME_3)));
             }while (cursor.moveToNext());
         }
         Log.i("hooshmand.Database","group readied and return " + group.toString() + " objects");
@@ -145,12 +233,23 @@ public class Database extends SQLiteOpenHelper {
         return count;
     }
 
-    public int editGroup(int groupId,String newTeacherName,int courseId){
-        Log.i("hooshmand.Database","start edit a group. courseId = "+courseId+ " , groupId = "+groupId + " , new teacherName = "+newTeacherName);
+    public int editGroup(int courseId,String teacherName, int groupId
+            , int day1, int day2, int day3, int startTime1, int startTime2,
+                         int startTime3, int finishTime1, int finishTime2, int finishTime3){
+        Log.i("hooshmand.Database","start edit a group. courseId = "+courseId+ " , groupId = "+groupId + " , new teacherName = "+teacherName);
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(TB_GROUP_KEY_TEACHER_NAME,newTeacherName);
+        values.put(TB_GROUP_KEY_TEACHER_NAME,teacherName);
         values.put(TB_GROUP_KEY_GROUP_ID,groupId);
+        values.put(TB_GROUP_KEY_DAY_1,day1);
+        values.put(TB_GROUP_KEY_DAY_2,day2);
+        values.put(TB_GROUP_KEY_DAY_3,day3);
+        values.put(TB_GROUP_KEY_START_TIME_1,startTime1);
+        values.put(TB_GROUP_KEY_START_TIME_2,startTime2);
+        values.put(TB_GROUP_KEY_START_TIME_3,startTime3);
+        values.put(TB_GROUP_KEY_FINISH_TIME_1,finishTime1);
+        values.put(TB_GROUP_KEY_FINISH_TIME_2,finishTime2);
+        values.put(TB_GROUP_KEY_FINISH_TIME_3,finishTime3);
         int count = db.update(TB_GROUP_NAME+courseId,values,TB_GROUP_KEY_GROUP_ID + " = " + groupId,null);
         Log.i("hooshmand.Database","group edited. count = " + count + " objects");
         if(db.isOpen()) db.close();
@@ -158,7 +257,10 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public int editGroup(ModelGroup editedGroup,int courseId){
-        return editGroup(editedGroup.getGroupId(),editedGroup.getTeacherName(),courseId);
+        return editGroup(courseId,editedGroup.getTeacherName(),editedGroup.getGroupId()
+                ,editedGroup.getDay1(),editedGroup.getDay2(),editedGroup.getDay3(),editedGroup.getStartTime1(),
+                editedGroup.getStartTime2(),editedGroup.getStartTime3(),editedGroup.getFinishTime1(),
+                editedGroup.getFinishTime2(),editedGroup.getFinishTime3());
     }
 
     public long addCourse(ModelCourse course){
@@ -191,6 +293,7 @@ public class Database extends SQLiteOpenHelper {
         Log.i("hooshmand.Database","start read courses.");
         ArrayList<ModelCourse> courses = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
+
         Cursor cursor = db.rawQuery("SELECT * FROM '"+TB_COURSE_NAME+"'",null);
         if(cursor.moveToFirst()){
             do{

@@ -5,9 +5,11 @@ package javaherian.yousef.entekhabvahed;
  *in constructor it receives a context and 3 arrays
  */
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
@@ -55,6 +57,19 @@ public class GroupsRecyclerViewAdaptor extends  RecyclerView.Adapter<GroupsRecyc
         return mIds.size();
     }
 
+    public void addItem( String id, String teacherName , String timings){
+        mIds.add(id);
+        mTeacherNames.add(teacherName);
+        mTimings.add(timings);
+        notifyItemInserted(mIds.size() - 1);
+    }
+    public void deleteItem(int position){
+        mIds.remove(position);
+        mTeacherNames.remove(position);
+        mTimings.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position,mIds.size());
+    }
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView idTextView,teacherTextView,timingsTextView;
         private LinearLayout layout;
@@ -80,8 +95,10 @@ public class GroupsRecyclerViewAdaptor extends  RecyclerView.Adapter<GroupsRecyc
              * here we initialize a dialog for editing of the corresponding group details
              */
             Intent intent=new Intent(mContext,ActivityEditGroups.class);
-            intent.putExtra("Position",position);
-            mContext.startActivity(intent);
+            intent.putExtra("model group",((ActivityFillCourses)mContext).getGroupInfoAt(position));
+            intent.putExtra("position", position);
+            intent.setAction("EDIT_GROUP");
+            ((Activity) mContext).startActivityForResult(intent,ActivityFillCourses.EDIT_GROUP);
         }
     }
     public  class onLongClickListener implements View.OnLongClickListener{
@@ -96,7 +113,28 @@ public class GroupsRecyclerViewAdaptor extends  RecyclerView.Adapter<GroupsRecyc
             /**
              * here we initialize a dialog for deleting the corresponding group
              */
-            return false;
+            AlertDialog myQuittingDialogBox =new AlertDialog.Builder(mContext)
+                    //set message, title, and icon
+                    .setTitle("Delete")
+                    .setMessage("Do you want to Delete")
+                    .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            /**
+                             * here is the deleting code
+                             */
+                            deleteItem(position);
+                            ((ActivityFillCourses)mContext).notifyGroupDeleted(position);
+                            dialog.dismiss();
+                        }
+
+                    })
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) { dialog.dismiss(); }
+                    })
+                    .create();
+            myQuittingDialogBox.show();
+            return true;
         }
     }
 }

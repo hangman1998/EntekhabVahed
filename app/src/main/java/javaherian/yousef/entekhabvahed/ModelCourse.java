@@ -1,5 +1,7 @@
 package javaherian.yousef.entekhabvahed;
 
+import android.view.Display;
+
 import java.util.ArrayList;
 
 /**
@@ -46,4 +48,6 @@ public class ModelCourse {
     public void setGroups(ArrayList<ModelGroup> groups) {
         this.groups = groups;
     }
+    public void addGroup(ModelGroup group){this.groups.add(group);}
+    public void deleteGroup(int position){this.groups.remove(position);}
 }
