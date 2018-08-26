@@ -18,11 +18,13 @@ public class ActivityShowRule extends AppCompatActivity {
     private ListView listR;
     private List<ModelRule> listRule = new ArrayList<ModelRule>();
     private int i=0;
+    public static final int CREATE_RULE=0;
+    public static final int EDIT_RULE =1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activityshowrule);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         findView();
         //loadfunction for load information of rule and make them as button view in this activity and we should save y\the infprmation in onDestroy function

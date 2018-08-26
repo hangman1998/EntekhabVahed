@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
 import java.util.ArrayList;
 
 import heidari.mohammad.entekhabvahed.ActivityShowRule;
@@ -18,13 +19,15 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
     private Button btnInputRule;
     private Button btnScheduleViewer;
     private Button btnAboutUs;
+    public ActivityMenu activity;
+    private Intent svc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         findViews();
         initListeners();
-        Intent svc=new Intent(this, MusicManager.class);
+        svc=new Intent(this, MusicManager.class);
         startService(svc);
         /**
          * creating the global database
@@ -62,5 +65,20 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
 
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        //we should save the information in onDestroy function
+
+
+    }
+    @Override
+    protected void onPause(){
+        if (this.isFinishing()){ //basically BACK was pressed from this activity
+            stopService(svc);
+
+        }
+        super.onPause();
     }
 }
