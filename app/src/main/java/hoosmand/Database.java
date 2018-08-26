@@ -1,5 +1,5 @@
 package hoosmand;
-/**
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -14,7 +14,6 @@ import javaherian.yousef.entekhabvahed.ModelGroup;
 import javaherian.yousef.entekhabvahed.ModelRule;
 import javaherian.yousef.entekhabvahed.ModelSchedule;
 public class Database extends SQLiteOpenHelper {
-
     private final static int DATABASE_VERSION = 1;
     private final static String DATABASE_NAME = "info_db";
 
@@ -69,7 +68,7 @@ public class Database extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS '" + TB_RULE_NAME + "'");
         onCreate(sqLiteDatabase);
     }
-
+/**
     public long addGroup(ModelGroup group,int courseId){
         return addGroup(group.getGroupId(),group.getTeacherName(),courseId);
     }
@@ -405,5 +404,5 @@ public class Database extends SQLiteOpenHelper {
     public void editSchedule(ModelSchedule schedule){
         editSchedule(schedule.getUniqueId(),schedule.getSchedule());
     }
+    */
 }
- */
