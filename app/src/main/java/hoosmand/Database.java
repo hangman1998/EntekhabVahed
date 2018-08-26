@@ -13,7 +13,6 @@ import javaherian.yousef.entekhabvahed.ModelCourse;
 import javaherian.yousef.entekhabvahed.ModelGroup;
 import javaherian.yousef.entekhabvahed.ModelRule;
 import javaherian.yousef.entekhabvahed.ModelSchedule;
-
 public class Database extends SQLiteOpenHelper {
 
     private final static int DATABASE_VERSION = 1;
