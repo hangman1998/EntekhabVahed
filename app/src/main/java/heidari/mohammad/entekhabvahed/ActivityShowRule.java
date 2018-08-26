@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
 
@@ -37,8 +36,11 @@ public class ActivityShowRule extends AppCompatActivity {
                 Intent intent = new Intent(ActivityShowRule.this,ActivityEditRule.class);
                 intent.putExtra("activity_id","new_rule");
                 startActivity(intent);;
-
-                listRule.add(new ModelRule("سلام"+i,1,3,1,"ali","ffg",1));
+                /**
+                 * i edited just the below line to see if the database works
+                 */
+                listRule.add(new ModelRule());
+                //    listRule.add(new ModelRule("سلام"+i,1,3,1,"ali","ffg",1));
                 i=i+1;
                 ruleAdapter ruleAdapter = new ruleAdapter(ActivityShowRule.this,listRule);
                 listR.setAdapter(ruleAdapter);
