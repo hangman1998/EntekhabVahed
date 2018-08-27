@@ -49,5 +49,12 @@ public class ModelCourse {
         this.groups = groups;
     }
     public void addGroup(ModelGroup group){this.groups.add(group);}
+    public ModelGroup findInGroupsById(int groupId){
+        for (int i=0;i<groups.size();i++){
+            if (groups.get(i).getGroupId() == groupId)
+                return groups.get(i);
+        }
+        return null;
+    }
     public void deleteGroup(int position){this.groups.remove(position);}
 }

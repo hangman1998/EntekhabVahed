@@ -1,64 +1,87 @@
 package javaherian.yousef.entekhabvahed;
 
-/**
- * this class for modeling rule for scoring
- * created by : Heidari
- */
 public class ModelRule {
 
-    public static final int START_TIME = 1;
-    public static final int FINISH_TIME = 2;
+    /**
+     * this class for modeling rule for scoring
+     * created by : Heidari
+     * edited by : yousef
+     */
 
-    public static final int LESS_THAN = 3;
-    public static final int MORE_THAN = 4;
+    public static final int LESS_THAN = 0;
+    public static final int MORE_THAN = 1;
 
-    public static final int SATURDAY = 0;
-    public static final int SUNDAY = 1;
-    public static final int MONDAY= 2;
-    public static final int TUESDAY= 3;
-    public static final int WEDNESDAY = 4;
-    public static final int THURSDAY = 5;
+    public static final int ALL = 0;
+    public static final int SATURDAY = 1;
+    public static final int SUNDAY = 2;
+    public static final int MONDAY = 3;
+    public static final int TUESDAY = 4;
+    public static final int WEDNESDAY = 5;
+    public static final int THURSDAY = 6;
 
-
-
+    /**
+     * used for remember information of rule without checking all information of rule
+     */
+    private String name;
     /**
      * can be 0 for SATURDAY  or 1 for MONDAY
      * 2 SUNDAY or 3 THURSDAY  4 WEDNESDAY
      */
-private String name;
-
     private int day;
     /**
-     * can be 1 for START_TIME or 2 for FINISH_TIME
+     * a time for start_time
      */
-    private int time;
+    private int startTime;
     /**
-     * can be 1 for LESS_THAN or 2 for MORE_THAN
+     * a time for finish_time
      */
-    private int relation;
+    private int finishTime;
+    /**
+     * relation on start time
+     */
+    private int startTimeRelation;
+    /**
+     * relation on finish time
+     */
+    private int finishTimeRelation;
+
+
     private String course;
     private String teacher;
     int score;
 
-    public ModelRule(String name, int day, int time, int relation, String course, String teacher, int score) {
+    public ModelRule(String name, int day, int startTime, int finishTime, int startTimeRelation, int finishTimeRelation, String course, String teacher, int score) {
         this.name = name;
         this.day = day;
-        this.time = time;
-        this.relation = relation;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
+        this.startTimeRelation = startTimeRelation;
+        this.finishTimeRelation = finishTimeRelation;
         this.course = course;
         this.teacher = teacher;
         this.score = score;
     }
 
     public ModelRule() {
-        day =0;
-        time =START_TIME;
-        relation = LESS_THAN ;
+        name = "";
+        day = 0;
+        startTimeRelation = 0;
+        finishTime = 0;
+        startTime = 0;
+        finishTimeRelation = 0;
         course = "";
         teacher = "";
         score = 0;
-        name="";
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getDay() {
         return day;
     }
@@ -67,20 +90,36 @@ private String name;
         this.day = day;
     }
 
-    public int getTime() {
-        return time;
+    public int getStartTime() {
+        return startTime;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
     }
 
-    public int getRelation() {
-        return relation;
+    public int getFinishTime() {
+        return finishTime;
     }
 
-    public void setRelation(int relation) {
-        this.relation = relation;
+    public void setFinishTime(int finishTime) {
+        this.finishTime = finishTime;
+    }
+
+    public int getStartTimeRelation() {
+        return startTimeRelation;
+    }
+
+    public void setStartTimeRelation(int startTimeRelation) {
+        this.startTimeRelation = startTimeRelation;
+    }
+
+    public int getFinishTimeRelation() {
+        return finishTimeRelation;
+    }
+
+    public void setFinishTimeRelation(int finishTimeRelation) {
+        this.finishTimeRelation = finishTimeRelation;
     }
 
     public String getCourse() {
@@ -105,13 +144,5 @@ private String name;
 
     public void setScore(int score) {
         this.score = score;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

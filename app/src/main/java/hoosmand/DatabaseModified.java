@@ -25,8 +25,10 @@ public class DatabaseModified extends SQLiteOpenHelper {
 
     private final static String TB_RULE_NAME = "tb_rule";
     private final static String TB_RULE_KEY_DAY = "day";
-    private final static String TB_RULE_KEY_TIME = "time";
-    private final static String TB_RULE_KEY_RELATION = "relation";
+    private final static String TB_RULE_KEY_START_TIME = "start_time";
+    private final static String TB_RULE_KEY_START_TIME_RELATION = "start_time_relation";
+    private final static String TB_RULE_KEY_FINISH_TIME = "finish_time";
+    private final static String TB_RULE_KEY_FINISH_TIME_RELATION = "finish_time_relation";
     private final static String TB_RULE_KEY_COURSE = "course";
     private final static String TB_RULE_KEY_TEACHER = "teacher";
     private final static String TB_RULE_KEY_SCORE = "score";
@@ -61,8 +63,10 @@ public class DatabaseModified extends SQLiteOpenHelper {
                 ")");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS '" + TB_RULE_NAME + "' " +
                 "('" + TB_RULE_KEY_DAY + "' NUMERIC" +
-                ", '" + TB_RULE_KEY_TIME + "' NUMERIC" +
-                ", '" + TB_RULE_KEY_RELATION + "' NUMERIC" +
+                ", '" + TB_RULE_KEY_START_TIME + "' NUMERIC" +
+                ", '" + TB_RULE_KEY_START_TIME_RELATION + "' NUMERIC" +
+                ", '" + TB_RULE_KEY_FINISH_TIME + "' NUMERIC" +
+                ", '" + TB_RULE_KEY_FINISH_TIME_RELATION + "' NUMERIC" +
                 ", '" + TB_RULE_KEY_COURSE + "' TEXT" +
                 ", '" + TB_RULE_KEY_TEACHER + "' TEXT" +
                 ", '" + TB_RULE_KEY_SCORE + "' NUMERIC" +
@@ -345,13 +349,16 @@ public class DatabaseModified extends SQLiteOpenHelper {
         return editCourse(editedCourse.getId(),editedCourse.getName(),editedCourse.getGroups());
     }
 
-    public long addRule(int day,int time,int relation,String course,String teacher,int score){
-        Log.i("hooshmand.Database","start add a rule. day = "+day + " , time = "+time+" , relation = "+relation+" , course = "+course+" , teacher = "+teacher+" , score = "+score);
+    public long addRule(int day,int startTime,int startTimeRelation,int finishTime,int finishTimeRelation,String course,String teacher,int score){
+        Log.i("hooshmand.Database","start add a rule. day = "+day + " , start time = "+startTime+" , start time relation = "+startTimeRelation+"," +
+                " finish time = "+finishTime+",finish time relation = "+finishTimeRelation+" , course = "+course+" , teacher = "+teacher+" , score = "+score);
         ContentValues values = new ContentValues();
         SQLiteDatabase db = this.getWritableDatabase();
         values.put(TB_RULE_KEY_DAY,day);
-        values.put(TB_RULE_KEY_TIME,time);
-        values.put(TB_RULE_KEY_RELATION,relation);
+        values.put(TB_RULE_KEY_START_TIME,startTime);
+        values.put(TB_RULE_KEY_START_TIME_RELATION,startTimeRelation);
+        values.put(TB_RULE_KEY_FINISH_TIME,finishTime);
+        values.put(TB_RULE_KEY_FINISH_TIME_RELATION,finishTimeRelation);
         values.put(TB_RULE_KEY_COURSE,course);
         values.put(TB_RULE_KEY_TEACHER,teacher);
         values.put(TB_RULE_KEY_SCORE,score);
@@ -362,7 +369,8 @@ public class DatabaseModified extends SQLiteOpenHelper {
     }
 
     public long addRule(ModelRule rule){
-        return addRule(rule.getDay(),rule.getTime(),rule.getRelation(),rule.getCourse(),rule.getTeacher(),rule.getScore());
+        return addRule(rule.getDay(),rule.getStartTime(),rule.getStartTimeRelation(),
+                rule.getFinishTime(),rule.getFinishTimeRelation(),rule.getCourse(),rule.getTeacher(),rule.getScore());
     }
 
     public ArrayList<ModelRule> readRule(){
@@ -374,8 +382,10 @@ public class DatabaseModified extends SQLiteOpenHelper {
             do{
                 ModelRule model = new ModelRule();
                 model.setDay(cursor.getInt(cursor.getColumnIndex(TB_RULE_KEY_DAY)));
-                model.setTime(cursor.getInt(cursor.getColumnIndex(TB_RULE_KEY_TIME)));
-                model.setRelation(cursor.getInt(cursor.getColumnIndex(TB_RULE_KEY_RELATION)));
+                model.setStartTime(cursor.getInt(cursor.getColumnIndex(TB_RULE_KEY_START_TIME)));
+                model.setStartTimeRelation(cursor.getInt(cursor.getColumnIndex(TB_RULE_KEY_START_TIME_RELATION)));
+                model.setFinishTime(cursor.getInt(cursor.getColumnIndex(TB_RULE_KEY_FINISH_TIME)));
+                model.setFinishTimeRelation(cursor.getInt(cursor.getColumnIndex(TB_RULE_KEY_FINISH_TIME_RELATION)));
                 model.setCourse(cursor.getString(cursor.getColumnIndex(TB_RULE_KEY_COURSE)));
                 model.setTeacher(cursor.getString(cursor.getColumnIndex(TB_RULE_KEY_TEACHER)));
                 model.setScore(cursor.getInt(cursor.getColumnIndex(TB_RULE_KEY_SCORE)));
@@ -395,7 +405,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
         if(db.isOpen()) db.close();
         return count;
     }
-
+/**
     private void addScheduleMap(int uniqueId, ArrayList<ModelSchedule.MapCourseGroup> mapsCourseGroup){
         Log.i("hooshmand.Database","start add a schedule. uniqueId = " + uniqueId + " , mapsCourseGroup.size() = " + mapsCourseGroup.size());
         SQLiteDatabase db = this.getWritableDatabase();
@@ -510,4 +520,5 @@ public class DatabaseModified extends SQLiteOpenHelper {
     public void editSchedule(ModelSchedule schedule){
         editSchedule(schedule.getUniqueId(),schedule.getSchedule());
     }
+ */
 }

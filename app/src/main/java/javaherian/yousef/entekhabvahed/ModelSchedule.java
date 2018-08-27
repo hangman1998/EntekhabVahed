@@ -1,47 +1,48 @@
 package javaherian.yousef.entekhabvahed;
+import android.support.v4.util.ArrayMap;
+import android.support.v4.util.Pair;
+import android.support.v4.util.SimpleArrayMap;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedMap;
 
 /**
  * this class is for modeling courses
  * created by hasan
+ * edited by yousef
  */
 public class ModelSchedule {
 
-    private ArrayList<MapCourseGroup> schedule;
+    private ArrayMap<ModelCourse,ModelGroup> map;
     private int uniqueId;
+    private int totalScore;
 
-    public ModelSchedule(ArrayList<MapCourseGroup> schedule, int uniqueId) {
-        this.schedule = schedule;
-        this.uniqueId=uniqueId;
+    public ModelSchedule(ArrayMap<ModelCourse, ModelGroup> map, int uniqueId, int totalScore) {
+        this.map = map;
+        this.uniqueId = uniqueId;
+        this.totalScore = totalScore;
     }
 
     public ModelSchedule(){
-        this.schedule = new ArrayList<>();
-        uniqueId=0;
+        map = new ArrayMap<>();
+        this.uniqueId = 0;
+        this.totalScore = 0;
+    }
+    public void addToMap(ModelCourse course,ModelGroup group){
+        map.put(course,group);
+    }
+    public void deleteFromMap(ModelCourse course){
+        map.remove(course);
+    }
+    public ArrayMap<ModelCourse, ModelGroup> getMap() {
+        return map;
     }
 
-    public void addMapCourseGroup(int numberOfCourses,int numberOfUnit){
-        MapCourseGroup map = new MapCourseGroup(numberOfCourses,numberOfUnit);
-        this.schedule.add(map);
-    }
-
-    public void addMapCourseGroup(MapCourseGroup map){
-        this.schedule.add(map);
-    }
-
-    public MapCourseGroup putMapCourseGroup(int index){
-        return schedule.get(index);
-    }
-
-    public ArrayList<MapCourseGroup> getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(ArrayList<MapCourseGroup> schedule) {
-        this.schedule = schedule;
+    public void setMap(ArrayMap<ModelCourse, ModelGroup> map) {
+        this.map = map;
     }
 
     public int getUniqueId() {
@@ -52,36 +53,12 @@ public class ModelSchedule {
         this.uniqueId = uniqueId;
     }
 
-    public static class MapCourseGroup{
+    public int getTotalScore() {
+        return totalScore;
+    }
 
-        private int numberOfCourses;
-        private int numberOfUnit;
-
-        public MapCourseGroup(int numberOfCourses, int numberOfUnit) {
-            this.numberOfCourses = numberOfCourses;
-            this.numberOfUnit = numberOfUnit;
-        }
-
-        public MapCourseGroup() {
-            numberOfCourses=0;
-            numberOfUnit=0;
-        }
-
-        public int getNumberOfCourses() {
-            return numberOfCourses;
-        }
-
-        public void setNumberOfCourses(int numberOfCourses) {
-            this.numberOfCourses = numberOfCourses;
-        }
-
-        public int getNumberOfUnit() {
-            return numberOfUnit;
-        }
-
-        public void setNumberOfUnit(int numberOfUnit) {
-            this.numberOfUnit = numberOfUnit;
-        }
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
     }
 
 }
