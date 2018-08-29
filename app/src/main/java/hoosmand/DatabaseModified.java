@@ -24,6 +24,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
     private final static String TB_COURSE_KEY_ID = "id";
 
     private final static String TB_RULE_NAME = "tb_rule";
+    private final static String TB_RULE_KEY_NAME = "name";
     private final static String TB_RULE_KEY_DAY = "day";
     private final static String TB_RULE_KEY_START_TIME = "start_time";
     private final static String TB_RULE_KEY_START_TIME_RELATION = "start_time_relation";
@@ -69,6 +70,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
                 ", '" + TB_RULE_KEY_FINISH_TIME_RELATION + "' NUMERIC" +
                 ", '" + TB_RULE_KEY_COURSE + "' TEXT" +
                 ", '" + TB_RULE_KEY_TEACHER + "' TEXT" +
+                ", '" + TB_RULE_KEY_NAME + "' TEXT"+
                 ", '" + TB_RULE_KEY_SCORE + "' NUMERIC" +
                 ")");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS '" + TB_SCHEDULE_NAME+"main" + "' " +
@@ -322,7 +324,6 @@ public class DatabaseModified extends SQLiteOpenHelper {
         if(db.isOpen()) db.close();
         return count;
     }
-
     public int editCourse(int courseId , String newCourseName,ArrayList<ModelGroup> newGroups){
         Log.i("hooshmand.Database","start edit a course. courseId = "+courseId+ " , new courseName = "+newCourseName);
         if(newGroups==null){
@@ -349,11 +350,12 @@ public class DatabaseModified extends SQLiteOpenHelper {
         return editCourse(editedCourse.getId(),editedCourse.getName(),editedCourse.getGroups());
     }
 
-    public long addRule(int day,int startTime,int startTimeRelation,int finishTime,int finishTimeRelation,String course,String teacher,int score){
+    public long addRule(String name,int day,int startTime,int startTimeRelation,int finishTime,int finishTimeRelation,String course,String teacher,int score){
         Log.i("hooshmand.Database","start add a rule. day = "+day + " , start time = "+startTime+" , start time relation = "+startTimeRelation+"," +
                 " finish time = "+finishTime+",finish time relation = "+finishTimeRelation+" , course = "+course+" , teacher = "+teacher+" , score = "+score);
         ContentValues values = new ContentValues();
         SQLiteDatabase db = this.getWritableDatabase();
+        values.put(TB_RULE_KEY_NAME,name);
         values.put(TB_RULE_KEY_DAY,day);
         values.put(TB_RULE_KEY_START_TIME,startTime);
         values.put(TB_RULE_KEY_START_TIME_RELATION,startTimeRelation);
@@ -367,12 +369,18 @@ public class DatabaseModified extends SQLiteOpenHelper {
         Log.i("hooshmand.Database","add rule finish. id = "+id);
         return id;
     }
-
     public long addRule(ModelRule rule){
-        return addRule(rule.getDay(),rule.getStartTime(),rule.getStartTimeRelation(),
+        return addRule(rule.getName(),rule.getDay(),rule.getStartTime(),rule.getStartTimeRelation(),
                 rule.getFinishTime(),rule.getFinishTimeRelation(),rule.getCourse(),rule.getTeacher(),rule.getScore());
     }
-
+    public int deleteRule(String name){
+        Log.i("hooshmand.Database","start delete a course. courseId = "+name);
+        SQLiteDatabase db = getWritableDatabase();
+        int count = db.delete(TB_RULE_NAME,TB_RULE_KEY_NAME+ " = "+ name,null);
+        Log.i("hooshmand.Database","rule deleted. count = " + count + " objects");
+        if(db.isOpen()) db.close();
+        return count;
+    }
     public ArrayList<ModelRule> readRule(){
         Log.i("hooshmand.Database","start read rules.");
         ArrayList<ModelRule> rules = new ArrayList<>();
@@ -389,6 +397,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
                 model.setCourse(cursor.getString(cursor.getColumnIndex(TB_RULE_KEY_COURSE)));
                 model.setTeacher(cursor.getString(cursor.getColumnIndex(TB_RULE_KEY_TEACHER)));
                 model.setScore(cursor.getInt(cursor.getColumnIndex(TB_RULE_KEY_SCORE)));
+                model.setName(cursor.getString(cursor.getColumnIndex(TB_RULE_KEY_NAME)));
                 rules.add(model);
             }while (cursor.moveToNext());
         }

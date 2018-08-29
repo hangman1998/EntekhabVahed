@@ -7,7 +7,7 @@ public class ModelRule {
      * created by : Heidari
      * edited by : yousef
      */
-
+    //private static int i=0;
     public static final int LESS_THAN = 0;
     public static final int MORE_THAN = 1;
 
@@ -60,6 +60,7 @@ public class ModelRule {
         this.course = course;
         this.teacher = teacher;
         this.score = score;
+       // i++;
     }
 
     public ModelRule() {
@@ -145,4 +146,5 @@ public class ModelRule {
     public void setScore(int score) {
         this.score = score;
     }
+
 }
