@@ -15,7 +15,7 @@ import java.util.List;
 import javaherian.yousef.entekhabvahed.ModelRule;
 import javaherian.yousef.entekhabvahed.R;
 
-import static javaherian.yousef.entekhabvahed.ActivityViewCourses.CREATE_COURSE;
+//import static javaherian.yousef.entekhabvahed.ActivityViewCourses.CREATE_COURSE;
 
 public class ActivityShowRule extends AppCompatActivity {
     private ListView listR;
@@ -44,7 +44,7 @@ public class ActivityShowRule extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ActivityShowRule.this,ActivityEditRule.class);
                 intent.setAction("CREATE_RULE");
-                startActivityForResult(intent,CREATE_COURSE);
+                startActivityForResult(intent,CREATE_RULE);
                 /**
                  * i edited just the below line to see if the database works
                  */
@@ -74,7 +74,7 @@ public class ActivityShowRule extends AppCompatActivity {
             /**
              * do absolutely nothing
              */
-        } else if (requestCode == CREATE_COURSE && resultCode == ActivityEditRule.RESULTED_IN_OK) {
+        } else if (requestCode == CREATE_RULE && resultCode == ActivityEditRule.RESULTED_IN_OK) {
             //initListView();
             adaptor.notifyItemAdded();
         } else if (requestCode == EDIT_RULE && resultCode == ActivityEditRule.RESULTED_IN_CANCEL) {
