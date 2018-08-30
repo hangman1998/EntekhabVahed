@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import hoosmand.DatabaseModified;
 import javaherian.yousef.entekhabvahed.ActivityFillCourses;
 import javaherian.yousef.entekhabvahed.ActivityViewCourses;
 import javaherian.yousef.entekhabvahed.ModelCourse;
@@ -31,9 +32,10 @@ public class EditRuleAdaptar extends RecyclerView.Adapter<EditRuleAdaptar.ViewHo
     private String ruleNameOfItemToBeEdited;
     public EditRuleAdaptar(Context mContext) {
         this.mContext = mContext;
+        if(db == null){
+            db =new DatabaseModified(mContext);
+        }
         rules = db.readRule();
-       // names = new ArrayList<>();
-      //  for (int i = 0; i < courses.size(); i++) names.add(courses.get(i).getName());
     }
 
     @Override
@@ -133,20 +135,18 @@ public class EditRuleAdaptar extends RecyclerView.Adapter<EditRuleAdaptar.ViewHo
 
     public void notifyItemAdded() {
         rules=db.readRule();
-       // names.add(courses.get(courses.size()-1).getName());
         notifyItemInserted(rules.size() - 1);
     }
     public void deleteItem(int position) {
         db.deleteRule(rules.get(position).getName());
-        //names.remove(position);
         rules.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, rules.size());
     }
     public void notifyItemEdited() {
-        //rules=db.readRule();
+        rules=db.readRule();
         //names.clear();
-        //for (int i = 0; i < courses.size(); i++) names.add(courses.get(i).getName());
+        //for (int i = 0; i < courses.size(); i++) rules.add(courses.get(i).getName());
         notifyDataSetChanged();
     }
 }

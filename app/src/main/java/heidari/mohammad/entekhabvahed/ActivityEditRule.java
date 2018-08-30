@@ -280,7 +280,6 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
             newday=day1.getSelectedItemPosition();
             if(checkBox.isChecked()&& dialogTimePickerStart.getTimePickerH() != -1) {
                 starttime = dialogTimePickerStart.getTimePickerH() * 60 + dialogTimePickerStart.getTimePickerM();
-                Toast.makeText(this, ""+starttime, Toast.LENGTH_SHORT).show();
                 if(relation_start_time.getSelectedItemPosition()==0){
                     sTR=0;
                 }
@@ -405,13 +404,24 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
             start_time.setText("please click here");
         }
         else {
-            start_time.setText(rule.getStartTime() / 60 + ":" + rule.getStartTime() % 60);
+            if((rule.getStartTime()%60)<10){
+                start_time.setText(rule.getStartTime() / 60 + ":0" + rule.getStartTime() % 60);
+            }
+            else {
+                start_time.setText(rule.getStartTime() / 60 + ":" + rule.getStartTime() % 60);
+            }
+
         }
         if(rule.getFinishTime()==0){
             finish_time.setText("please click here");
         }
         else {
-            finish_time.setText(rule.getFinishTime() / 60 + ":" + rule.getFinishTime() % 60);
+            if((rule.getFinishTime()%60)<10){
+                start_time.setText(rule.getFinishTime() / 60 + ":0" + rule.getFinishTime() % 60);
+            }
+            else {
+                start_time.setText(rule.getFinishTime() / 60 + ":" + rule.getFinishTime() % 60);
+            }
         }
        // dialogTimePickerFinish = new DialogTimePickerFinish(ActivityEditRule.this);
        // dialogTimePickerStart = new DialogTimePickerStart(ActivityEditRule.this);
