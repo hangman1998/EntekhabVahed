@@ -19,11 +19,12 @@
         <activity android:name=".ActivityFillCourses" />
         <activity android:name=".ActivityEditGroups" />
         <activity android:name=".ActivityViewCourses" />
-        <activity android:name="heidari.mohammad.entekhabvahed.ActivityShowRule"/>
-        <activity android:name="heidari.mohammad.entekhabvahed.ActivityEditRule"/>
-        <service android:name="heidari.mohammad.entekhabvahed.MusicManager"/>
+        <activity android:name="heidari.mohammad.entekhabvahed.ActivityShowRule" />
+        <activity android:name="heidari.mohammad.entekhabvahed.ActivityEditRule" />
 
+        <service android:name="heidari.mohammad.entekhabvahed.MusicManager" />
 
+        <activity android:name="heidari.mohammad.entekhabvahed.ActivityShowSchedule"></activity>
     </application>
 
 </manifest>

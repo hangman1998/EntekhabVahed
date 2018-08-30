@@ -10,6 +10,7 @@ import android.widget.Button;
 
 
 import heidari.mohammad.entekhabvahed.ActivityShowRule;
+import heidari.mohammad.entekhabvahed.ActivityShowSchedule;
 import heidari.mohammad.entekhabvahed.MusicManager;
 import hoosmand.DatabaseModified;
 
@@ -61,6 +62,10 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         }
         else if (view.getId()==R.id.btn_input_rule){
             Intent intent=new Intent(this, ActivityShowRule.class);
+            startActivity(intent);
+        }
+        else if(view.getId()==R.id.btn_schedule_viewer){
+            Intent intent=new Intent(this, ActivityShowSchedule.class);
             startActivity(intent);
         }
 

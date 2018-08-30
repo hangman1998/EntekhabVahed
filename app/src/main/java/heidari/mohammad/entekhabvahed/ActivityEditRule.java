@@ -278,6 +278,10 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
             int sTR;
             int fTR;
             newday=day1.getSelectedItemPosition();
+            if(!checkBox.isChecked()&& dialogTimePickerStart.getTimePickerH()!= -1){
+                Toast.makeText(this, "your Start time is not changed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "if you want to change Start time you should check checkbox;", Toast.LENGTH_SHORT).show();
+            }
             if(checkBox.isChecked()&& dialogTimePickerStart.getTimePickerH() != -1) {
                 starttime = dialogTimePickerStart.getTimePickerH() * 60 + dialogTimePickerStart.getTimePickerM();
                 if(relation_start_time.getSelectedItemPosition()==0){
@@ -294,6 +298,10 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
             else{
                 starttime=0;
                 sTR=0;
+            }
+            if(!checkBox.isChecked()&& dialogTimePickerFinish.getTimePickerH()!= -1){
+                Toast.makeText(this, "your Finish time is not changed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "if you want to change Finish time you should check checkbox;", Toast.LENGTH_SHORT).show();
             }
             if(checkBox1.isChecked() && dialogTimePickerFinish.getTimePickerH()!= -1) {
                 finishtime = dialogTimePickerFinish.getTimePickerH() * 60 + dialogTimePickerFinish.getTimePickerM();
@@ -417,10 +425,10 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
         }
         else {
             if((rule.getFinishTime()%60)<10){
-                start_time.setText(rule.getFinishTime() / 60 + ":0" + rule.getFinishTime() % 60);
+                finish_time.setText(rule.getFinishTime() / 60 + ":0" + rule.getFinishTime() % 60);
             }
             else {
-                start_time.setText(rule.getFinishTime() / 60 + ":" + rule.getFinishTime() % 60);
+                finish_time.setText(rule.getFinishTime() / 60 + ":" + rule.getFinishTime() % 60);
             }
         }
        // dialogTimePickerFinish = new DialogTimePickerFinish(ActivityEditRule.this);
