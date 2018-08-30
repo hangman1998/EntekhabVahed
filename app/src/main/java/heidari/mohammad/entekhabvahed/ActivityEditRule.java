@@ -156,6 +156,8 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
         score.setText(""+0);
         //seting seekbar
         score1.setMax(10);
+        dialogTimePickerStart=new DialogTimePickerStart(this);
+        dialogTimePickerFinish= new DialogTimePickerFinish(this);
     };
     private void initListener(){
         start_time.setOnClickListener(this);
