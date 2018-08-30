@@ -7,11 +7,10 @@ import android.view.View;
 import android.widget.Button;
 
 
-import java.util.ArrayList;
+
 
 import heidari.mohammad.entekhabvahed.ActivityShowRule;
 import heidari.mohammad.entekhabvahed.MusicManager;
-import hoosmand.Database;
 import hoosmand.DatabaseModified;
 
 public class ActivityMenu extends AppCompatActivity implements View.OnClickListener {
