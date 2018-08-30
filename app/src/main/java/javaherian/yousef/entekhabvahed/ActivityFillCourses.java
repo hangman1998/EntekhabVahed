@@ -132,7 +132,7 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
                  * need to add extra checks for the correct operation of db
                  */
                 for (int i=0;i<courses.size();i++){
-                    if (courses.get(i).getName() == newName){
+                    if (courses.get(i).getName().equalsIgnoreCase(newName)){
                         Toast.makeText(this, "Error:Duplicate name", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -150,7 +150,7 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
                  * need to add extra checks for the correct operation of db
                  */
                 for (int i=0;i<courses.size();i++){
-                    if (courses.get(i).getName() == newName && mCourse.getName() != newName) {
+                    if (courses.get(i).getName().equalsIgnoreCase(newName) && !mCourse.getName().equalsIgnoreCase(newName)) {
                         Toast.makeText(this, "Error:Duplicate name", Toast.LENGTH_SHORT).show();
                         return;
                     }

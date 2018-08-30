@@ -376,7 +376,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
     public int deleteRule(String name){
         Log.i("hooshmand.Database","start delete a course. courseId = "+name);
         SQLiteDatabase db = getWritableDatabase();
-        int count = db.delete(TB_RULE_NAME,TB_RULE_KEY_NAME+ " = "+ "'"+name+"'",null);
+        int count = db.delete(TB_RULE_NAME,TB_RULE_KEY_NAME+ " = "+ name,null);
         Log.i("hooshmand.Database","rule deleted. count = " + count + " objects");
         if(db.isOpen()) db.close();
         return count;
