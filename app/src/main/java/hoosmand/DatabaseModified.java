@@ -63,14 +63,14 @@ public class DatabaseModified extends SQLiteOpenHelper {
                 ", '" + TB_COURSE_KEY_ID + "' NUMERIC PRIMARY KEY NOT NULL" +
                 ")");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS '" + TB_RULE_NAME + "' " +
-                "('" + TB_RULE_KEY_DAY + "' NUMERIC" +
+                "( '" + TB_RULE_KEY_NAME + "' TEXT"+
+                ", '" + TB_RULE_KEY_DAY + "' NUMERIC" +
                 ", '" + TB_RULE_KEY_START_TIME + "' NUMERIC" +
                 ", '" + TB_RULE_KEY_START_TIME_RELATION + "' NUMERIC" +
                 ", '" + TB_RULE_KEY_FINISH_TIME + "' NUMERIC" +
                 ", '" + TB_RULE_KEY_FINISH_TIME_RELATION + "' NUMERIC" +
                 ", '" + TB_RULE_KEY_COURSE + "' TEXT" +
                 ", '" + TB_RULE_KEY_TEACHER + "' TEXT" +
-                ", '" + TB_RULE_KEY_NAME + "' TEXT"+
                 ", '" + TB_RULE_KEY_SCORE + "' NUMERIC" +
                 ")");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS '" + TB_SCHEDULE_NAME+"main" + "' " +

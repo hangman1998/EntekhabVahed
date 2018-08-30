@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import javaherian.yousef.entekhabvahed.R;
 
@@ -20,18 +21,28 @@ public class DialogTimePickerStart extends Dialog implements View.OnClickListene
         super(a);
         // TODO Auto-generated constructor stub
         this.c = a;
+        //timePicker = (TimePicker) findViewById(R.id.custom_time_picker);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.time_picker);
+        findview();
+
+
+    }
+    private void findview(){
         yes = (Button) findViewById(R.id.time_picker_ok);
         no = (Button) findViewById(R.id.time_picker_cansel);
         timePicker = (TimePicker)findViewById(R.id.custom_time_picker);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
-
+    }
+    private void findTimePicker(){
+        Toast.makeText(c, "Error:Duplicate name", Toast.LENGTH_SHORT).show();
+        timePicker = (TimePicker)findViewById(R.id.custom_time_picker);
+        return;
 
     }
     @Override
@@ -49,6 +60,7 @@ public class DialogTimePickerStart extends Dialog implements View.OnClickListene
                 dismiss();
                 break;
             case R.id.time_picker_cansel:
+                timePicker=null;
                 dismiss();
                 break;
             default:
@@ -57,41 +69,55 @@ public class DialogTimePickerStart extends Dialog implements View.OnClickListene
 
     }
 
-    public void setTimePicker(int h) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            this.timePicker.setHour(h/60);
-            this.timePicker.setMinute(h%60);
+    public boolean setTimePicker(int h) {
+        if(timePicker!=null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
+                timePicker.setHour(h / 60);
+                timePicker.setMinute(h % 60);
+
+            } else {
+
+                timePicker = (TimePicker) findViewById(R.id.custom_time_picker);
+                timePicker.setCurrentHour(h / 60);
+                timePicker.setCurrentHour(h % 60);
+
+            }
+            return true;
         }
-        else {
-
-            this.timePicker.setCurrentHour(h/60);
-            this.timePicker.setCurrentHour(h%60);
-
+        else{
+            return false;
         }
     }
     public int getTimePickerH(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-           return this.timePicker.getHour();
+        if(timePicker!=null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                return this.timePicker.getHour();
 
+            } else {
+
+                return this.timePicker.getCurrentHour();
+
+            }
         }
-        else {
-
-           return this.timePicker.getCurrentHour();
-
+        else{
+            return -1;
         }
 
     }
     public int getTimePickerM(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-           return this.timePicker.getMinute();
+        if(timePicker!=null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                return this.timePicker.getMinute();
 
+            } else {
+
+                return this.timePicker.getCurrentMinute();
+
+            }
         }
-        else {
-
-          return  this.timePicker.getCurrentMinute();
-
+        else{
+            return -1;
         }
-
     }
 }

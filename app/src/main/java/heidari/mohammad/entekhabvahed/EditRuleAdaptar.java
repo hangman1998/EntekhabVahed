@@ -49,8 +49,8 @@ public class EditRuleAdaptar extends RecyclerView.Adapter<EditRuleAdaptar.ViewHo
         /**
          * below code may change in future
          */
-        holder.layout.setOnClickListener(new EditRuleAdaptar.onClickListener(position));
-        holder.layout.setOnLongClickListener(new EditRuleAdaptar.onLongClickListener(position));
+        holder.name.setOnClickListener(new EditRuleAdaptar.onClickListener(position));
+        holder.name.setOnLongClickListener(new EditRuleAdaptar.onLongClickListener(position));
     }
 
     @Override
@@ -60,7 +60,7 @@ public class EditRuleAdaptar extends RecyclerView.Adapter<EditRuleAdaptar.ViewHo
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView name;
+        private Button name;
         private LinearLayout layout;
 
         public ViewHolder(View itemView) {

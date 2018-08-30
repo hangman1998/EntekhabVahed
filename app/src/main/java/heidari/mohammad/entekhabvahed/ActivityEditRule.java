@@ -155,7 +155,7 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
         finish_time.setText("please click here");
         score.setText(""+0);
         //seting seekbar
-        score1.setMax(100);
+        score1.setMax(10);
     };
     private void initListener(){
         start_time.setOnClickListener(this);
@@ -189,6 +189,9 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
                     start_time.setInputType(InputType.TYPE_CLASS_TEXT);
                     relation_start_time.setEnabled(true);
                     relation_start_time.setFocusableInTouchMode(true);
+                    dialogTimePickerStart = new DialogTimePickerStart(ActivityEditRule.this);
+
+
                 }
                 else {
                     start_time.setEnabled(false);
@@ -196,6 +199,7 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
                     start_time.setInputType(InputType.TYPE_NULL);
                     relation_start_time.setEnabled(false);
                     relation_start_time.setFocusableInTouchMode(false);
+
                 }
             }
         });
@@ -208,6 +212,8 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
                     finish_time.setInputType(InputType.TYPE_NULL);
                     relation_finish_time.setEnabled(true);
                     relation_finish_time.setFocusableInTouchMode(true);
+                    dialogTimePickerFinish = new DialogTimePickerFinish(ActivityEditRule.this);
+
                 }
                 else {
                     finish_time.setEnabled(false);
@@ -229,7 +235,7 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
              name=extras.getString("Activity_id");
              List<ModelRule> listRule=db.readRule();
             for (int i=0 ;i <listRule.size();i++){
-                if(listRule.get(i).getName()==name){
+                if(listRule.get(i).getName().equals(name)){
                     assigneView(listRule.get(i));
                     modelRule=listRule.get(i);
                     break;
@@ -245,22 +251,16 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
         if (view.getId()==R.id.start_time){
             //Dialog dialog= new TimePickerDialog(this,time_set,hour,minute,false);
            // dialog.show();
-            dialogTimePickerStart = new DialogTimePickerStart(ActivityEditRule.this);
             dialogTimePickerStart.show();
         }
         else if(view.getId()==R.id.finish_time){
            // Dialog dialog= new TimePickerDialog(this,time_set_1,hour,minute,false);
            // dialog.show();
-            dialogTimePickerFinish = new DialogTimePickerFinish(ActivityEditRule.this);
             dialogTimePickerFinish.show();
         }
         else if(view.getId()==R.id.ok){
             if (name1.getText().toString().isEmpty()){
                 Toast.makeText(this, "name field can't be empty!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if(teacher1.getText().toString().isEmpty()){
-                Toast.makeText(this, "teacher name field can't be empty!", Toast.LENGTH_SHORT).show();
                 return;
             }
             if(course1.getText().toString().isEmpty()){
@@ -272,105 +272,95 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
             String newteacher= teacher1.getText().toString();
             String newcourse = course1.getText().toString();
             String newname = name1.getText().toString();
-            int start_time;
-            int finish_time;
+            int starttime;
+            int finishtime;
             int newday ;
             int sTR;
             int fTR;
-            switch (day1.getSelectedItem().toString()){
-                case "همه روز ها":
-                    newday=0;
-                    break;
-                case "شنبه"  :
-                    newday=1;
-
-                case "یک شنبه":
-                    newday=2;
-                    break;
-                case "دو شنبه":
-                    newday=3;
-                    break;
-                case "سه شنبه":
-                    newday=4;
-                    break;
-                case "چهار شنبه":
-                    newday=5;
-                    break;
-                default:
-                    newday=0;
-
-            }
-            if(checkBox.isChecked()==true) {
-                start_time = dialogTimePickerStart.getTimePickerH() * 60 + dialogTimePickerStart.getTimePickerM();
-                if(relation_start_time.getSelectedItem()=="قبل از"){
+            newday=day1.getSelectedItemPosition();
+            if(checkBox.isChecked()&& dialogTimePickerStart.getTimePickerH() != -1) {
+                starttime = dialogTimePickerStart.getTimePickerH() * 60 + dialogTimePickerStart.getTimePickerM();
+                Toast.makeText(this, ""+starttime, Toast.LENGTH_SHORT).show();
+                if(relation_start_time.getSelectedItemPosition()==0){
                     sTR=0;
                 }
                 else{
                     sTR=1;
                 }
             }
-            else{
-                start_time=-1;
-                sTR=-1;
+            else if(Action.equals("EDIT_RULE")){
+                starttime=modelRule.getStartTime();
+                sTR=modelRule.getStartTimeRelation();
             }
-            if(checkBox1.isChecked()==true) {
-                finish_time = dialogTimePickerFinish.getTimePickerH() * 60 + dialogTimePickerFinish.getTimePickerM();
-                if(relation_finish_time.getSelectedItem()=="قبل از"){
+            else{
+                starttime=0;
+                sTR=0;
+            }
+            if(checkBox1.isChecked() && dialogTimePickerFinish.getTimePickerH()!= -1) {
+                finishtime = dialogTimePickerFinish.getTimePickerH() * 60 + dialogTimePickerFinish.getTimePickerM();
+                if(relation_finish_time.getSelectedItemPosition()==0){
                     fTR=0;
                 }
                 else {
                     fTR = 1;
                 }
             }
+            else if(Action.equals("EDIT_RULE")){
+                finishtime=modelRule.getFinishTime();
+                fTR=modelRule.getFinishTimeRelation();
+            }
             else{
-                finish_time=-1;
-                fTR=-1;
+                finishtime=0;
+                fTR=0;
             }
 
             int score = score1.getProgress();
 
             int k=0;
-            if (Action == "CREATE_RULE"){
-                for (int i=0;i<rules.size();i++){
-                    if (rules.get(i).getName() == newname){
-                        Toast.makeText(this, "Error:Duplicate name", Toast.LENGTH_SHORT).show();
-                        return;
+            if (Action.equals("CREATE_RULE")){
+                for (int i=0;i<rules.size();i++) {
+                    if (rules.get(i).getName().equals(newname)) {
+                                Toast.makeText(this, "Error:Duplicate name", Toast.LENGTH_SHORT).show();
+                                return;
                     }
-
                 }
+
                 for (int i=0;i<courses.size();i++){
-                    if (courses.get(i).getName() == newcourse){
+                    if (courses.get(i).getName().equals(newcourse)){
                         k=1;
                     }
 
                 }
 
-                if(k==1){
+                if(k==0){
                     Toast.makeText(this, "Error:Coursename dont exsist in your course", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 modelRule.setDay(newday);
                 modelRule.setName(newname);
-                modelRule.setFinishTime(finish_time);
-                modelRule.setStartTime(start_time);
+                modelRule.setFinishTime(finishtime);
+                modelRule.setStartTime(starttime);
                 modelRule.setCourse(newcourse);
                 modelRule.setTeacher(newteacher);
                 modelRule.setStartTimeRelation(sTR);
                 modelRule.setFinishTimeRelation(fTR);
                 modelRule.setScore(score);
                 db.addRule(modelRule);
-                Toast.makeText(this, "Error:add EDited", Toast.LENGTH_SHORT).show();
             }
-            else if (Action == "EDIT_RULE"){
-                for (int i=0;i<rules.size();i++){
-                    if (rules.get(i).getName() == newname){
-                        Toast.makeText(this, "Error:Duplicate name", Toast.LENGTH_SHORT).show();
-                        return;
+            else if (Action.equals("EDIT_RULE")){
+                if(!newname.equals(name)){
+                    for (int i=0;i<rules.size();i++) {
+                        if (rules.get(i).getName().equals(newname)) {
+                            Toast.makeText(this, "Error:Duplicate name", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                     }
-                    if(courses.get(i).getName() == newcourse){
+                }
+                for (int i=0;i<courses.size();i++){
+                    if (courses.get(i).getName().equals(newcourse)){
                         k=1;
-
                     }
+
                 }
                 if(k==0){
                     Toast.makeText(this, "Error:Coursename dont exsist in your course", Toast.LENGTH_SHORT).show();
@@ -378,8 +368,8 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
                 }
                 modelRule.setDay(newday);
                 modelRule.setName(newname);
-                modelRule.setFinishTime(finish_time);
-                modelRule.setStartTime(start_time);
+                modelRule.setFinishTime(finishtime);
+                modelRule.setStartTime(starttime);
                 modelRule.setCourse(newcourse);
                 modelRule.setTeacher(newteacher);
                 modelRule.setStartTimeRelation(sTR);
@@ -387,7 +377,6 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
                 modelRule.setScore(score);
                 db.deleteRule(name);
                 db.addRule(modelRule);
-                Toast.makeText(this, "Error:rule EDited", Toast.LENGTH_SHORT).show();
             }
             intent = new Intent(this,ActivityShowRule.class);
             setResult(RESULTED_IN_OK,intent);
@@ -410,12 +399,23 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
         teacher1.setText(rule.getTeacher());
         course1.setText(rule.getCourse());
         //i will assigne starttime and
-        score.setText(rule.getScore());
+        score.setText(""+rule.getScore());
         score1.setProgress(rule.getScore());
-        start_time.setText(rule.getStartTime()/60+":"+rule.getStartTime()%60);
-        finish_time.setText(rule.getFinishTime()/60+":"+rule.getFinishTime()%60);
-        dialogTimePickerStart.setTimePicker(rule.getStartTime());
-        dialogTimePickerFinish.setTimePicker(rule.getFinishTime());
+        if(rule.getStartTime()==0){
+            start_time.setText("please click here");
+        }
+        else {
+            start_time.setText(rule.getStartTime() / 60 + ":" + rule.getStartTime() % 60);
+        }
+        if(rule.getFinishTime()==0){
+            finish_time.setText("please click here");
+        }
+        else {
+            finish_time.setText(rule.getFinishTime() / 60 + ":" + rule.getFinishTime() % 60);
+        }
+       // dialogTimePickerFinish = new DialogTimePickerFinish(ActivityEditRule.this);
+       // dialogTimePickerStart = new DialogTimePickerStart(ActivityEditRule.this);
+
     }
     public void setEditextFinish(int h, int m){
         if(m<10) {

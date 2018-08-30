@@ -20,19 +20,27 @@ public class DialogTimePickerFinish extends Dialog implements View.OnClickListen
         super(a);
         // TODO Auto-generated constructor stub
         this.c = a;
+       // timePicker  = findViewById(R.id.custom_time_picker);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.time_picker);
+        findView();
+
+
+    }
+    void findView(){
         yes = (Button) findViewById(R.id.time_picker_ok);
         no = (Button) findViewById(R.id.time_picker_cansel);
         timePicker = (TimePicker)findViewById(R.id.custom_time_picker);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
 
-
+    }
+     private void findTimePicker(){
+        timePicker = (TimePicker)findViewById(R.id.custom_time_picker);
     }
     @Override
     public void onClick (View v){
@@ -57,40 +65,55 @@ public class DialogTimePickerFinish extends Dialog implements View.OnClickListen
 
     }
 
-    public void setTimePicker(int h) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            this.timePicker.setHour(h/60);
-            this.timePicker.setMinute(h%60);
+    public boolean setTimePicker(int h) {
+        if(timePicker!=null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                findTimePicker();
+                this.timePicker.setHour(h / 60);
+                this.timePicker.setMinute(h % 60);
 
+            } else {
+                findTimePicker();
+                this.timePicker.setCurrentHour(h / 60);
+                this.timePicker.setCurrentHour(h % 60);
+
+            }
+            return true;
         }
-        else {
-
-            this.timePicker.setCurrentHour(h/60);
-            this.timePicker.setCurrentHour(h%60);
+        else{
+            return false;
 
         }
     }
     public int getTimePickerH(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return this.timePicker.getHour();
+        if(timePicker!=null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                return this.timePicker.getHour();
 
+            } else {
+
+                return this.timePicker.getCurrentHour();
+
+            }
         }
-        else {
-
-            return this.timePicker.getCurrentHour();
-
+        else{
+            return -1;
         }
 
     }
     public int getTimePickerM(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return this.timePicker.getMinute();
+        if(timePicker!=null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                return this.timePicker.getMinute();
 
+            } else {
+
+                return this.timePicker.getCurrentMinute();
+
+            }
         }
-        else {
-
-            return  this.timePicker.getCurrentMinute();
-
+        else{
+            return -1;
         }
 
     }
