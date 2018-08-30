@@ -63,7 +63,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
                 ", '" + TB_COURSE_KEY_ID + "' NUMERIC PRIMARY KEY NOT NULL" +
                 ")");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS '" + TB_RULE_NAME + "' " +
-                "( '" + TB_RULE_KEY_NAME + "' TEXT"+
+                "( '" + TB_RULE_KEY_NAME + "' TEXT PRIMARY KEY NOT NULL"+
                 ", '" + TB_RULE_KEY_DAY + "' NUMERIC" +
                 ", '" + TB_RULE_KEY_START_TIME + "' NUMERIC" +
                 ", '" + TB_RULE_KEY_START_TIME_RELATION + "' NUMERIC" +
@@ -374,9 +374,10 @@ public class DatabaseModified extends SQLiteOpenHelper {
                 rule.getFinishTime(),rule.getFinishTimeRelation(),rule.getCourse(),rule.getTeacher(),rule.getScore());
     }
     public int deleteRule(String name){
-        Log.i("hooshmand.Database","start delete a course. courseId = "+name);
+        Log.i("hooshmand.Database","start delete a rule. ruleName = "+name);
         SQLiteDatabase db = getWritableDatabase();
-        int count = db.delete(TB_RULE_NAME,TB_RULE_KEY_NAME+ " = "+ name,null);
+     //   int count = db.delete(TB_RULE_NAME,TB_RULE_KEY_NAME + " = " + name,null);
+        int count = db.delete(TB_RULE_NAME, TB_RULE_KEY_NAME + " = '"+name+"'",null);
         Log.i("hooshmand.Database","rule deleted. count = " + count + " objects");
         if(db.isOpen()) db.close();
         return count;
