@@ -16,6 +16,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/fill_courses_name_edit_text"
+                android:textColor="@color/DarkSlateBlue"
                 android:id="@+id/edit_text_course_name"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -27,6 +28,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/fill_courses_id_edit_text"
                 android:inputType="number"
+                android:textColor="@color/DarkSlateBlue"
                 android:id="@+id/edit_text_course_id"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -41,24 +43,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <Button
+            <android.support.design.widget.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fill_courses_add_groups_btn_text"
-                android:textSize="18sp"
-                android:id="@+id/btn_add_groups"/>
-            <Button
+                android:id="@+id/btn_add_groups"
+                android:layout_margin="16dp"
+                android:backgroundTint="@color/MediumSeaGreen"
+                android:src="@drawable/ic_add_group_24dp"/>
+
+            <android.support.design.widget.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fill_courses_ok_btn_text"
-                android:textSize="18sp"
-                android:id="@+id/btn_fill_courses_ok"/>
-            <Button
+                android:id="@+id/btn_fill_courses_ok"
+                android:layout_margin="16dp"
+                android:backgroundTint="#FF07CE28"
+                android:src="@drawable/ic_check_24dp"/>
+            <android.support.design.widget.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fill_courses_cancel_btn_text"
                 android:textSize="18sp"
-                android:id="@+id/btn_fill_courses_cancel"/>
+                android:id="@+id/btn_fill_courses_cancel"
+                android:layout_margin="16dp"
+                android:backgroundTint="@color/Tomato"
+                android:src="@drawable/ic_close_black_24dp"/>
         </LinearLayout>
 
     </LinearLayout>
