@@ -4,15 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ActivityMenu">
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TableRow>
+            <fragment
+                android:name="heidari.mohammad.entekhabvahed.FragmentHomeTable"
+                android:layout_width= "0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <fragment
+                android:name="heidari.mohammad.entekhabvahed.FragmentHomeTable"
+                android:layout_width= "0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+
+        </TableRow>
 
 
 
 
 
-        
+
+
     </TableLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/before"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/before" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/next" />
+
+    </LinearLayout>
 </LinearLayout>
