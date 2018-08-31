@@ -84,8 +84,8 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
         }
     }
     public void makeTable(){
-        for(int i=0;i<5;i++) {
-            tableRowa = new TableRow();
+        for(int i=0;i<6;i++) {
+            tableRowa = new TableRow(this);
             tableLayout.addView(tableRowa);
         }
 
