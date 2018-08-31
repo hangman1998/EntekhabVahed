@@ -1,14 +1,5 @@
 package javaherian.yousef.entekhabvahed;
 import android.support.v4.util.ArrayMap;
-import android.support.v4.util.Pair;
-import android.support.v4.util.SimpleArrayMap;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedMap;
-
 /**
  * this class is for modeling courses
  * created by hasan
