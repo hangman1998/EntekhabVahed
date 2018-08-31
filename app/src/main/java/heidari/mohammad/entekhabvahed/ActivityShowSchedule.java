@@ -51,7 +51,11 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
     public void onClick(View view) {
         if(view.getId()==R.id.before){
             if(i==0){
-                Toast.makeText(ActivityShowSchedule.this,"you cant go to left",Toast.LENGTH_SHORT).show();
+                i=mainProcess.scheduleSize()-1;
+                Intent intent = new Intent(this, ActivityShowSchedule.class);
+                intent.putExtra("activity_id",i);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                startActivity(intent);
             }
             else {
                 i--;
@@ -63,8 +67,10 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
         }
         else if(view.getId()==R.id.next){
             if(i==mainProcess.scheduleSize()-1){
-
-                Toast.makeText(ActivityShowSchedule.this,"you cant go to Right",Toast.LENGTH_SHORT).show();
+                i=0;
+                Intent intent = new Intent(this, ActivityShowSchedule.class);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                startActivity(intent);
             }
             else{
                 i++;

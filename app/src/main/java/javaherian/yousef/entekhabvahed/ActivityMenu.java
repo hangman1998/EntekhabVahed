@@ -68,9 +68,15 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         else if(view.getId()==R.id.btn_schedule_viewer){
-            Intent intent=new Intent(this, ActivityShowSchedule.class);
             Global.mainProcess.setNeedToUpdate();
-            startActivity(intent);
+            if (Global.mainProcess.scheduleSize()!=0) {
+                Intent intent=new Intent(this, ActivityShowSchedule.class);
+                startActivity(intent);
+            }
+            else {
+                Intent intent=new Intent(this, ActivityNoSchedule.class);
+                startActivity(intent);
+            }
         }
 
     }
