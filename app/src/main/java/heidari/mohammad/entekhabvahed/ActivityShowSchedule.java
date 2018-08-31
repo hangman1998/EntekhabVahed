@@ -11,11 +11,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
+import javaherian.yousef.entekhabvahed.ModelSchedule;
 import javaherian.yousef.entekhabvahed.R;
 
-public class ActivityShowSchedule extends Activity {
+import static javaherian.yousef.entekhabvahed.Global.db;
+import static javaherian.yousef.entekhabvahed.Global.i;
+
+public class ActivityShowSchedule extends Activity implements View.OnClickListener {
     LinearLayout activity_sh;
     TextView textView;
+    List<ModelSchedule> modelSchedules;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +32,10 @@ public class ActivityShowSchedule extends Activity {
 //        //Intent intent=new Intent(this, ActivityShowSchedule.class);
 //        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 //        startActivity(intent);
+        //modelSchedule = db.read
+        i=getIntent().getExtras().getInt("activity_id");
         findView();
+        initView(modelSchedules.get(i));
 
 
 
@@ -33,6 +43,38 @@ public class ActivityShowSchedule extends Activity {
     private void findView(){
 
 
+
+    }
+    @Override
+    public void onClick(View view) {
+        if(view.getId()==R.id.before){
+            if(i==0){
+                Toast.makeText(ActivityShowSchedule.this,"you cant go to left",Toast.LENGTH_SHORT).show();
+            }
+            else {
+                i--;
+                Intent intent = new Intent(this, ActivityShowSchedule.class);
+                intent.putExtra("activity_id",i);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                startActivity(intent);
+            }
+        }
+        else if(view.getId()==R.id.next){
+            if(i==modelSchedules.size()-1){
+                Toast.makeText(ActivityShowSchedule.this,"you cant go to Right",Toast.LENGTH_SHORT).show();
+
+            }
+            else{
+                i++;
+                Intent intent = new Intent(this, ActivityShowSchedule.class);
+                intent.putExtra("activity_id",i);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                startActivity(intent);
+
+            }
+        }
+    }
+    private void initView(ModelSchedule modelSchedule){
 
     }
 }
