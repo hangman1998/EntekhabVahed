@@ -414,6 +414,9 @@ public class DatabaseModified extends SQLiteOpenHelper {
         if(db.isOpen()) db.close();
         return count;
     }
+    public ArrayList<ModelSchedule> readSchedules(){
+        return new ArrayList<>();
+    }
 /**
     private void addScheduleMap(int uniqueId, ArrayList<ModelSchedule.MapCourseGroup> mapsCourseGroup){
         Log.i("hooshmand.Database","start add a schedule. uniqueId = " + uniqueId + " , mapsCourseGroup.size() = " + mapsCourseGroup.size());
