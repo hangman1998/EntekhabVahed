@@ -141,7 +141,56 @@ public class ModelGroup implements Serializable {
     public void setFinishTime3(int finishTime3) {
         this.finishTime3 = finishTime3;
     }
-    public String timingsToString(){
-        return "test";
+    public String timingsToString()
+    {
+        if (day1 != NULL){
+            switch (day1){
+                case SATURDAY:
+                    return "SAT :" +startTime1/60+":"+startTime1%60+" ~ " + finishTime1/60+":"+finishTime1%60;
+                case SUNDAY:
+                    return "SUN :" +startTime1/60+":"+startTime1%60+" ~ " + finishTime1/60+":"+finishTime1%60;
+                case MONDAY:
+                    return "MON :" +startTime1/60+":"+startTime1%60+" ~ " + finishTime1/60+":"+finishTime1%60;
+                case TUESDAY:
+                    return "TUE :" +startTime1/60+":"+startTime1%60+" ~ " + finishTime1/60+":"+finishTime1%60;
+                case WEDNESDAY:
+                    return "WED :" +startTime1/60+":"+startTime1%60+" ~ " + finishTime1/60+":"+finishTime1%60;
+                case THURSDAY:
+                    return "THU :" +startTime1/60+":"+startTime1%60+" ~ " + finishTime1/60+":"+finishTime1%60;
+            }
+        }
+        if (day2 != NULL){
+            switch (day1){
+                case SATURDAY:
+                    return "SAT :" +startTime2/60+":"+startTime2%60+" ~ " + finishTime2/60+":"+finishTime2%60;
+                case SUNDAY:
+                    return "SUN :" +startTime2/60+":"+startTime2%60+" ~ " + finishTime2/60+":"+finishTime2%60;
+                case MONDAY:
+                    return "MON :" +startTime2/60+":"+startTime2%60+" ~ " + finishTime2/60+":"+finishTime2%60;
+                case TUESDAY:
+                    return "TUE :" +startTime2/60+":"+startTime2%60+" ~ " + finishTime2/60+":"+finishTime2%60;
+                case WEDNESDAY:
+                    return "WED :" +startTime2/60+":"+startTime2%60+" ~ " + finishTime2/60+":"+finishTime2%60;
+                case THURSDAY:
+                    return "THU :" +startTime2/60+":"+startTime2%60+" ~ " + finishTime2/60+":"+finishTime2%60;
+            }
+        }
+        if (day3 != NULL){
+            switch (day1){
+                case SATURDAY:
+                    return "SAT :" +startTime3/60+":"+startTime3%60+" ~ " + finishTime3/60+":"+finishTime3%60;
+                case SUNDAY:
+                    return "SUN :" +startTime3/60+":"+startTime3%60+" ~ " + finishTime3/60+":"+finishTime3%60;
+                case MONDAY:
+                    return "MON :" +startTime3/60+":"+startTime3%60+" ~ " + finishTime3/60+":"+finishTime3%60;
+                case TUESDAY:
+                    return "TUE :" +startTime3/60+":"+startTime3%60+" ~ " + finishTime3/60+":"+finishTime3%60;
+                case WEDNESDAY:
+                    return "WED :" +startTime3/60+":"+startTime3%60+" ~ " + finishTime3/60+":"+finishTime3%60;
+                case THURSDAY:
+                    return "THU :" +startTime3/60+":"+startTime3%60+" ~ " + finishTime3/60+":"+finishTime3%60;
+            }
+        }
+        return "";
     }
 }

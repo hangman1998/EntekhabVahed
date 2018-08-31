@@ -42,9 +42,7 @@ public class GroupsRecyclerViewAdaptor extends  RecyclerView.Adapter<GroupsRecyc
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.idTextView.setText(mIds.get(position));
-        holder.teacherTextView.setText(mTeacherNames.get(position));
-        holder.timingsTextView.setText(mTimings.get(position));
+        holder.textView.setText("id:"+mIds.get(position) + " ,teacher: " +mTeacherNames.get(position)+","+mTimings.get(position) );
         /**
          * below code may change in future
          */
@@ -71,7 +69,7 @@ public class GroupsRecyclerViewAdaptor extends  RecyclerView.Adapter<GroupsRecyc
         notifyItemRangeChanged(position,mIds.size());
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView idTextView,teacherTextView,timingsTextView;
+        private TextView textView;
         private LinearLayout layout;
         /**
          * defining an inner class for holding a group item
@@ -79,9 +77,7 @@ public class GroupsRecyclerViewAdaptor extends  RecyclerView.Adapter<GroupsRecyc
          */
         public ViewHolder(View itemView) {
             super(itemView);
-            idTextView=itemView.findViewById(R.id.groups_view_id_text_view);
-            teacherTextView=itemView.findViewById(R.id.groups_view_teacher_name_text_view);
-            timingsTextView=itemView.findViewById(R.id.groups_view_timings_text_view);
+            textView=itemView.findViewById(R.id.groups_view_text);
             layout=itemView.findViewById(R.id.groups_view_layout);
         }
     }
