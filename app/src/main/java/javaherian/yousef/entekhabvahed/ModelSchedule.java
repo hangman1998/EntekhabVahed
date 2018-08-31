@@ -1,5 +1,7 @@
 package javaherian.yousef.entekhabvahed;
 import android.support.v4.util.ArrayMap;
+import android.view.Display;
+
 /**
  * this class is for modeling courses
  * created by hasan
@@ -12,7 +14,7 @@ public class ModelSchedule {
     private int totalScore;
 
     public ModelSchedule(ArrayMap<ModelCourse, ModelGroup> map, int uniqueId, int totalScore) {
-        this.map = map;
+        this.map = new ArrayMap<ModelCourse, ModelGroup>(map);
         this.uniqueId = uniqueId;
         this.totalScore = totalScore;
     }
@@ -52,4 +54,8 @@ public class ModelSchedule {
         this.totalScore = totalScore;
     }
 
+    public ModelSchedule clone(){
+        ModelSchedule temp = new ModelSchedule(map,uniqueId,totalScore);
+        return  temp;
+    }
 }

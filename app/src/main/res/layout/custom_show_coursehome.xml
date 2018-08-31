@@ -3,27 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/fragment_course">
+    android:id="@+id/fragment_course"
+    android:background="@drawable/show_schedule_black_box"
+    android:paddingHorizontal="5dp">
     <android.support.v7.widget.AppCompatCheckedTextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/course_name"
-        android:text="hello"
-        android:textSize="10sp"/>
+        android:textSize="10sp" />
     <android.support.v7.widget.AppCompatCheckedTextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/teacher_name"
-        android:text="hello"
-        android:textSize="10sp"/>
+        android:textSize="10sp" />
     <android.support.v7.widget.AppCompatCheckedTextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/course_time"
-        android:text="hello"
-        android:textSize="10sp"/>
+        android:textSize="10sp" />
 
 </LinearLayout>

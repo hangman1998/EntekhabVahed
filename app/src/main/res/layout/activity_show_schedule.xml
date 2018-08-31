@@ -16,9 +16,8 @@
         android:layout_margin="1dp">
         <fragment
             android:name="heidari.mohammad.entekhabvahed.FragmentHomeTable"
-            android:layout_width= "0dp"
+            android:layout_width= "wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:id="@+id/fragment11"/>
         <fragment
             android:name="heidari.mohammad.entekhabvahed.FragmentHomeCourse"
@@ -57,9 +56,8 @@
             android:layout_margin="1dp">
             <fragment
                 android:name="heidari.mohammad.entekhabvahed.FragmentHomeTable"
-                android:layout_width= "0dp"
+                android:layout_width= "wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:id="@+id/fragment21"/>
             <fragment
                 android:name="heidari.mohammad.entekhabvahed.FragmentHomeCourse"
@@ -98,9 +96,8 @@
         android:layout_margin="1dp">
         <fragment
             android:name="heidari.mohammad.entekhabvahed.FragmentHomeTable"
-            android:layout_width= "0dp"
+            android:layout_width= "wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:id="@+id/fragment31"/>
         <fragment
             android:name="heidari.mohammad.entekhabvahed.FragmentHomeCourse"
@@ -139,9 +136,8 @@
             android:layout_margin="1dp">
             <fragment
                 android:name="heidari.mohammad.entekhabvahed.FragmentHomeTable"
-                android:layout_width= "0dp"
+                android:layout_width= "wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:id="@+id/fragment41"/>
             <fragment
                 android:name="heidari.mohammad.entekhabvahed.FragmentHomeCourse"
@@ -180,9 +176,8 @@
             android:layout_margin="1dp">
             <fragment
                 android:name="heidari.mohammad.entekhabvahed.FragmentHomeTable"
-                android:layout_width= "0dp"
+                android:layout_width= "wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:id="@+id/fragment51"/>
             <fragment
                 android:name="heidari.mohammad.entekhabvahed.FragmentHomeCourse"
@@ -221,9 +216,8 @@
             android:layout_margin="1dp">
             <fragment
                 android:name="heidari.mohammad.entekhabvahed.FragmentHomeTable"
-                android:layout_width= "0dp"
+                android:layout_width= "wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:id="@+id/fragment61"/>
             <fragment
                 android:name="heidari.mohammad.entekhabvahed.FragmentHomeCourse"
@@ -274,6 +268,14 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@drawable/next" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="@color/LimeGreen"
+            android:layout_margin="16dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:paddingTop="10dp"
+            android:id="@+id/schedule_score_text_view"/>
     </LinearLayout>
 </LinearLayout>

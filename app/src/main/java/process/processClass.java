@@ -15,7 +15,6 @@ public class processClass {
     private ArrayList<ModelRule> mRules;
     private ArrayList<ModelCourse> mCourses;
     private int numberOfCourses=0;
-    private int numberOfRules = 0;
     private ArrayList<ModelSchedule> mSchedules;
     private ModelSchedule sampleSchedule;
     private boolean needToUpdate;
@@ -25,8 +24,6 @@ public class processClass {
         mRules=new ArrayList<>();
         mSchedules  =new ArrayList<>();
         sampleSchedule = new ModelSchedule();
-        numberOfCourses=0;
-        numberOfRules=0;
         needToUpdate = true;
     }
     private class comp implements Comparator<ModelSchedule> {
@@ -34,11 +31,11 @@ public class processClass {
         @Override
         public int compare(ModelSchedule schedule, ModelSchedule t1) {
             if (schedule.getTotalScore() > t1.getTotalScore())
-                return 1;
+                return -1;
             else if (schedule.getTotalScore() == t1.getTotalScore())
              return 0;
             else
-                return -1;
+                return +1;
         }
     }
     private int scheduleScoreCalculator(ModelSchedule schedule)
@@ -53,10 +50,10 @@ public class processClass {
          for (Map.Entry<ModelCourse, ModelGroup> itr : schedule.getMap().entrySet())
          {
          //checking teacher name
-         if (!rule.getTeacher().isEmpty() && rule.getTeacher() != itr.getValue().getTeacherName())
+         if (!rule.getTeacher().isEmpty() && !rule.getTeacher().equals(itr.getValue().getTeacherName())  )
            continue;
          //checking course name
-         if (!rule.getCourse().isEmpty() && rule.getCourse() != itr.getKey().getName())
+         if (!rule.getCourse().isEmpty() && !rule.getCourse().equals(itr.getKey().getName()))
          continue;
          //checking the day
          if (rule.getDay() != ModelRule.ALL  && itr.getValue().getDay1() != rule.getDay()
@@ -153,7 +150,7 @@ public class processClass {
          break;
          }
 
-         if (flag0 == true && flag1 == true)
+         if (flag0&& flag1)
          score += rule.getScore();
          }
          return score;
@@ -166,7 +163,7 @@ public class processClass {
     }
     private boolean isScheduleValid(ModelSchedule schedule)
     {
-         ModelGroup[] array = (ModelGroup[]) schedule.getMap().values().toArray();
+         ModelGroup[] array = schedule.getMap().values().toArray(new ModelGroup[0]);
          int day,st1,st2,ft1,ft2;
         for (int i=0;i<array.length;i++)
             {
@@ -251,7 +248,7 @@ public class processClass {
         if (itr == numberOfCourses)
         {
             sampleSchedule.setUniqueId(mSchedules.size());
-            mSchedules.add(sampleSchedule);
+            mSchedules.add(sampleSchedule.clone());
         }
         else
         {
@@ -276,13 +273,12 @@ public class processClass {
         mCourses=db.readCourses();
         mRules=db.readRule();
         numberOfCourses=mCourses.size();
-        numberOfRules=mRules.size();
         mSchedules.clear();
         scheduleCreator(0);
         sorter();
     }
     public int scheduleSize(){
-        if (needToUpdate==false)
+        if (!needToUpdate)
             return mSchedules.size();
         doProcess();
         needToUpdate=false;
@@ -291,7 +287,7 @@ public class processClass {
     public void setNeedToUpdate(){needToUpdate=true;}
 
     public ModelScheduleVersion1 getSchedule(int index){
-        if (needToUpdate== false)
+        if (!needToUpdate)
             return new ModelScheduleVersion1(mSchedules.get(index));
         doProcess();
         needToUpdate=false;

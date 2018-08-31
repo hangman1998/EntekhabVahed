@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         android:id="@+id/a"
         android:gravity="center_horizontal"
-        android:text="hello"
-        android:textSize="10sp"/>
+        android:textSize="10sp"
+        android:paddingHorizontal="5dp"
+        android:background="@drawable/show_schedule_black_box"/>
 </LinearLayout>

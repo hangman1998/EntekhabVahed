@@ -6,5 +6,5 @@ import process.processClass;
 public class Global {
     public static DatabaseModified db;
     public static processClass mainProcess;
-    public static int i=1;
+    public static int i=0;
 }

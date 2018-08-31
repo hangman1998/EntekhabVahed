@@ -12,10 +12,21 @@ import javaherian.yousef.entekhabvahed.ModelSchedule;
 
 public class ModelScheduleVersion1 {
     public ArrayMap<Integer,ArrayList<ModelCourseVersion1>> schedule;
-
+    public int id;
+    public int score;
     public ModelScheduleVersion1(ModelSchedule modelSchedule) {
-        //schedule  = new ArrayMap<>();
+        id=modelSchedule.getUniqueId();
+        score=modelSchedule.getTotalScore();
         schedule = new ArrayMap<>();
+
+
+        schedule.put(ModelGroup.SATURDAY,new ArrayList<ModelCourseVersion1>());
+        schedule.put(ModelGroup.SUNDAY,new ArrayList<ModelCourseVersion1>());
+        schedule.put(ModelGroup.MONDAY,new ArrayList<ModelCourseVersion1>());
+        schedule.put(ModelGroup.TUESDAY,new ArrayList<ModelCourseVersion1>());
+        schedule.put(ModelGroup.WEDNESDAY,new ArrayList<ModelCourseVersion1>());
+        schedule.put(ModelGroup.THURSDAY,new ArrayList<ModelCourseVersion1>());
+
         for ( Map.Entry<ModelCourse, ModelGroup> itr : modelSchedule.getMap().entrySet()){
             ModelGroup group=itr.getValue();
             String teacherName = group.getTeacherName();
