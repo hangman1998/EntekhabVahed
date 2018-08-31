@@ -5,6 +5,7 @@ package javaherian.yousef.entekhabvahed;
  */
 
         import android.content.Intent;
+        import android.support.design.widget.FloatingActionButton;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
         import android.support.v7.widget.LinearLayoutManager;
@@ -30,7 +31,7 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
     public static final int CREATE_GROUP = 0;
     public static final int EDIT_GROUP = 1;
     private EditText editTextCourseName,editTextCourseId;
-    private Button okBtn,cancelBtn,addGroupsBtn;
+    private FloatingActionButton okBtn,cancelBtn,addGroupsBtn;
     private RecyclerView recyclerView;
     private GroupsRecyclerViewAdaptor adaptor;
 

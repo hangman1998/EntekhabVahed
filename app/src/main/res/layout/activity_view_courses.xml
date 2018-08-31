@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/Chartreuse"
+        app:backgroundTint="@color/Chartreuse"
         android:src="@drawable/ic_add_24dp" />
 
     <android.support.v7.widget.RecyclerView
