@@ -11,5 +11,6 @@
         android:gravity="center_horizontal"
         android:textSize="10sp"
         android:paddingHorizontal="5dp"
-        android:background="@drawable/show_schedule_black_box"/>
+        android:background="@drawable/show_schedule_black_box"
+        android:textAlignment="center"/>
 </LinearLayout>
