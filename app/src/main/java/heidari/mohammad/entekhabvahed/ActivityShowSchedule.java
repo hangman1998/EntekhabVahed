@@ -8,6 +8,8 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,9 +22,14 @@ import static javaherian.yousef.entekhabvahed.Global.db;
 import static javaherian.yousef.entekhabvahed.Global.i;
 
 public class ActivityShowSchedule extends Activity implements View.OnClickListener {
-    LinearLayout activity_sh;
-    TextView textView;
     List<ModelSchedule> modelSchedules;
+    TableLayout tableLayout;
+    TableRow tableRowa;
+    TableRow tableRowb;
+    TableRow tableRowc;
+    TableRow tableRowd;
+    TableRow tableRowe;
+    TableRow tableRowf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +42,14 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
         //modelSchedule = db.read
         i=getIntent().getExtras().getInt("activity_id");
         findView();
+        makeTable();
         initView(modelSchedules.get(i));
 
 
 
     }
     private void findView(){
+        tableLayout = findViewById(R.id.table);
 
 
 
@@ -73,6 +82,17 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
 
             }
         }
+    }
+    public void makeTable(){
+        for(int i=0;i<5;i++) {
+            tableRowa = new TableRow();
+            tableLayout.addView(tableRowa);
+        }
+
+
+
+
+
     }
     private void initView(ModelSchedule modelSchedule){
 
