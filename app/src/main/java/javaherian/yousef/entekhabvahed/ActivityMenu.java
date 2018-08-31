@@ -30,10 +30,10 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         initListeners();
         svc=new Intent(this, MusicManager.class);
         startService(svc);
-        /**
-         * creating the global database
-         * and the main class for handling processes
-         * these lines may change in future
+        /*
+          creating the global database
+          and the main class for handling processes
+          these lines may change in future
          */
         Global.db = new DatabaseModified(this);
         Global.mainProcess = new processClass();
