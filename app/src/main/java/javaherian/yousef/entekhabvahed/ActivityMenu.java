@@ -13,6 +13,7 @@ import heidari.mohammad.entekhabvahed.ActivityShowRule;
 import heidari.mohammad.entekhabvahed.ActivityShowSchedule;
 import heidari.mohammad.entekhabvahed.MusicManager;
 import hoosmand.DatabaseModified;
+import process.processClass;
 
 public class ActivityMenu extends AppCompatActivity implements View.OnClickListener {
     private Button btnInputCourse;
@@ -31,9 +32,11 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         startService(svc);
         /**
          * creating the global database
+         * and the main class for handling processes
          * these lines may change in future
          */
         Global.db = new DatabaseModified(this);
+        Global.mainProcess = new processClass();
     }
     private void findViews(){
         btnInputCourse=findViewById(R.id.btn_input_course);
@@ -66,6 +69,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         }
         else if(view.getId()==R.id.btn_schedule_viewer){
             Intent intent=new Intent(this, ActivityShowSchedule.class);
+            Global.mainProcess.setNeedToUpdate();
             startActivity(intent);
         }
 

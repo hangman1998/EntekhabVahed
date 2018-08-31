@@ -3,27 +3,31 @@ package process;
         import java.util.Collections;
         import java.util.Comparator;
         import java.util.Map;
+
+        import heidari.mohammad.entekhabvahed.ModelScheduleVersion1;
         import javaherian.yousef.entekhabvahed.ModelCourse;
         import javaherian.yousef.entekhabvahed.ModelGroup;
         import javaherian.yousef.entekhabvahed.ModelRule;
         import javaherian.yousef.entekhabvahed.ModelSchedule;
         import static javaherian.yousef.entekhabvahed.Global.db;
 
-public class main {
+public class processClass {
     private ArrayList<ModelRule> mRules;
     private ArrayList<ModelCourse> mCourses;
     private int numberOfCourses=0;
     private int numberOfRules = 0;
     private ArrayList<ModelSchedule> mSchedules;
     private ModelSchedule sampleSchedule;
+    private boolean needToUpdate;
 
-    public main() {
+    public processClass() {
         mCourses=new ArrayList<>();
         mRules=new ArrayList<>();
         mSchedules  =new ArrayList<>();
         sampleSchedule = new ModelSchedule();
         numberOfCourses=0;
         numberOfRules=0;
+        needToUpdate = true;
     }
     private class comp implements Comparator<ModelSchedule> {
 
@@ -260,7 +264,13 @@ public class main {
             sampleSchedule.deleteFromMap(mCourses.get(itr));
         }
     }
-    public void start(){
+
+
+
+
+
+
+    private void doProcess(){
         mCourses.clear();
         mRules.clear();
         mCourses=db.readCourses();
@@ -270,5 +280,20 @@ public class main {
         mSchedules.clear();
         scheduleCreator(0);
         sorter();
+    }
+    public int scheduleSize(){
+        if (needToUpdate==false)
+            return mSchedules.size();
+        doProcess();
+        needToUpdate=false;
+        return  mSchedules.size();
+    }
+    public void setNeedToUpdate(){needToUpdate=true;}
+    public ModelScheduleVersion1 getSchedule(int index){
+        if (needToUpdate== false)
+            return new ModelScheduleVersion1(mSchedules.get(index));
+        doProcess();
+        needToUpdate=false;
+        return new ModelScheduleVersion1(mSchedules.get(index));
     }
 }
