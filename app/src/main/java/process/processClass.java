@@ -289,6 +289,7 @@ public class processClass {
         return  mSchedules.size();
     }
     public void setNeedToUpdate(){needToUpdate=true;}
+
     public ModelScheduleVersion1 getSchedule(int index){
         if (needToUpdate== false)
             return new ModelScheduleVersion1(mSchedules.get(index));
