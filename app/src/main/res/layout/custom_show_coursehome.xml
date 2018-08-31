@@ -8,16 +8,22 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/course_name"/>
+        android:id="@+id/course_name"
+        android:text="hello"
+        android:textSize="10sp"/>
     <android.support.v7.widget.AppCompatCheckedTextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/teacher_name"/>
+        android:id="@+id/teacher_name"
+        android:text="hello"
+        android:textSize="10sp"/>
     <android.support.v7.widget.AppCompatCheckedTextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/course_time"/>
+        android:id="@+id/course_time"
+        android:text="hello"
+        android:textSize="10sp"/>
 
 </LinearLayout>

@@ -25,11 +25,8 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
     List<ModelSchedule> modelSchedules;
     TableLayout tableLayout;
     TableRow tableRowa;
-    TableRow tableRowb;
-    TableRow tableRowc;
-    TableRow tableRowd;
-    TableRow tableRowe;
-    TableRow tableRowf;
+    FragmentHomeCourse fragmentHomeCourse;
+    FragmentHomeTable fragmentHomeTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +37,9 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
 //        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 //        startActivity(intent);
         //modelSchedule = db.read
-        i=getIntent().getExtras().getInt("activity_id");
         findView();
-        makeTable();
-        initView(modelSchedules.get(i));
+       // makeTable();
+        //initView(modelSchedules.get(i));
 
 
 
@@ -76,24 +72,22 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
             else{
                 i++;
                 Intent intent = new Intent(this, ActivityShowSchedule.class);
-                intent.putExtra("activity_id",i);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 startActivity(intent);
 
             }
         }
     }
-    public void makeTable(){
-        for(int i=0;i<6;i++) {
-            tableRowa = new TableRow(this);
-            tableLayout.addView(tableRowa);
-        }
+//    public void makeTable(){
+//        for(int i=0;i<6;i++) {
+//            tableRowa = new TableRow(this);
+//            for(int j=0;j<5;j++) {
+//                tableRowa.addView(fragmentHomeTable);
+//            }
+//            tableLayout.addView(tableRowa);
+//        }
 
 
-
-
-
-    }
     private void initView(ModelSchedule modelSchedule){
 
     }
