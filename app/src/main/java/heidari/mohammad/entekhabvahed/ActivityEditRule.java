@@ -1,6 +1,5 @@
 package heidari.mohammad.entekhabvahed;
 
-import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -64,7 +63,7 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activityeditrule);
+        setContentView(R.layout.activity_edit_rule);
         findView();
         initView();
         initListener();
