@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javaherian.yousef.entekhabvahed.ModelCourse;
+import javaherian.yousef.entekhabvahed.ModelGroup;
 import javaherian.yousef.entekhabvahed.ModelRule;
 import javaherian.yousef.entekhabvahed.R;
 
@@ -323,7 +324,27 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
             }
 
             int score = score1.getProgress();
-
+            if(!newteacher.isEmpty()) {
+                int l=0;
+                for (int i = 0; i < courses.size(); i++) {
+                    for (ModelGroup itr : courses.get(i).getGroups()) {
+                        if (itr.getTeacherName().equals(newteacher)) {
+                            l = 1;
+                            break;
+                        }
+                    }
+                    if(l==1){
+                        break;
+                    }
+                }
+                if(l==0){
+                    Toast.makeText(this, "your teacher name dont exist", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+            if(starttime-finishtime>0){
+                Toast.makeText(this,"start time and finish time isnt correct",Toast.LENGTH_SHORT).show();
+            }
             int k=0;
             if (Action.equals("CREATE_RULE")){
                 for (int i=0;i<rules.size();i++) {
@@ -339,7 +360,6 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
                     }
 
                 }
-
                 if(k==0){
                     Toast.makeText(this, "Error:Coursename dont exsist in your course", Toast.LENGTH_SHORT).show();
                     return;
@@ -374,6 +394,7 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(this, "Error:Coursename dont exsist in your course", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 modelRule.setDay(newday);
                 modelRule.setName(newname);
                 modelRule.setFinishTime(finishtime);

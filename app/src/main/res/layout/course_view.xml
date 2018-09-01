@@ -8,5 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/course_view_text"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:background="@android:color/transparent"
+        android:textColor="@color/Red"/>
 </LinearLayout>

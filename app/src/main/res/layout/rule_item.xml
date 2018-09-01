@@ -14,7 +14,9 @@
             android:layout_gravity="end"
             android:textAlignment="center"
             android:backgroundTint="@color/colorPrimary"
-            android:textStyle="normal">
+            android:textStyle="normal"
+             android:background="@android:color/transparent"
+            android:textColor="@color/Blue">
     </Button>
 
 

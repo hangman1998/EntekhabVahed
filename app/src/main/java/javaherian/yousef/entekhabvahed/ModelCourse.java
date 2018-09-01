@@ -57,4 +57,5 @@ public class ModelCourse {
         return null;
     }
     public void deleteGroup(int position){this.groups.remove(position);}
+
 }

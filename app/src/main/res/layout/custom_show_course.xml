@@ -12,5 +12,5 @@
         android:textSize="10sp"
         android:paddingHorizontal="5dp"
         android:background="@drawable/show_schedule_black_box"
-        android:textAlignment="center"/>
+        android:textAlignment="center" />
 </LinearLayout>
