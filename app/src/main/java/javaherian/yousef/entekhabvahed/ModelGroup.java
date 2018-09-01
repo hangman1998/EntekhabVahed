@@ -160,7 +160,7 @@ public class ModelGroup implements Serializable {
             }
         }
         if (day2 != NULL){
-            switch (day1){
+            switch (day2){
                 case SATURDAY:
                     return "SAT :" +startTime2/60+":"+startTime2%60+" ~ " + finishTime2/60+":"+finishTime2%60;
                 case SUNDAY:
@@ -176,7 +176,7 @@ public class ModelGroup implements Serializable {
             }
         }
         if (day3 != NULL){
-            switch (day1){
+            switch (day3){
                 case SATURDAY:
                     return "SAT :" +startTime3/60+":"+startTime3%60+" ~ " + finishTime3/60+":"+finishTime3%60;
                 case SUNDAY:
