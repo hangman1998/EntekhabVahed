@@ -70,6 +70,15 @@ public class ActivityFillCourses extends AppCompatActivity implements View.OnCli
              * we are assuming here that we a have course id to work with
              */
             courseId=extras.getInt("course id");
+            if(db==null){
+
+                return;
+            }
+            if(db==null){
+                Toast.makeText(this, "id field can't be empty!", Toast.LENGTH_SHORT).show();
+                return;
+
+            }
             ArrayList<ModelCourse> courses= db.readCourses();
             /**
              * here we obtain the mCourse

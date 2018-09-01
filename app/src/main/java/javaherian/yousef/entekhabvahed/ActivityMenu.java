@@ -14,6 +14,9 @@ import heidari.mohammad.entekhabvahed.ActivityShowSchedule;
 import heidari.mohammad.entekhabvahed.MusicManager;
 import hoosmand.DatabaseModified;
 import process.processClass;
+import heidari.mohammad.entekhabvahed.HomeWatcher;
+
+import static javaherian.yousef.entekhabvahed.Global.counter;
 
 public class ActivityMenu extends AppCompatActivity implements View.OnClickListener {
     private Button btnInputCourse;
@@ -28,8 +31,8 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_menu);
         findViews();
         initListeners();
-        svc=new Intent(this, MusicManager.class);
-        startService(svc);
+        //svc=new Intent(this, MusicManager.class);
+        //startService(svc);
         /*
           creating the global database
           and the main class for handling processes
@@ -45,6 +48,20 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         btnAboutUs=findViewById(R.id.btn_about_us);
     }
     private void initListeners(){
+        HomeWatcher mHomeWatcher = new HomeWatcher(this);
+        mHomeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
+            @Override
+            public void onHomePressed() {
+
+                //stopService(svc);
+                // do something here...
+            }
+            @Override
+            public void onHomeLongPressed() {
+            }
+        });
+        mHomeWatcher.startWatch();
+
         initClickOnListeners();
     }
 
@@ -90,15 +107,11 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onPause(){
         if (this.isFinishing()){ //basically BACK was pressed from this activity
-            stopService(svc);
+            //stopService(svc);
 
         }
         super.onPause();
     }
-    @Override
-    protected void onStop(){
-        stopService(svc);
-        super.onStop();
 
-    }
+
 }

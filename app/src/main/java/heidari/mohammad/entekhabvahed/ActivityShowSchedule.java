@@ -208,7 +208,7 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
             return false;
         }
     }
-    public void  onSwipeLeft(){
+    private void  onSwipeLeft(){
         if(i==mainProcess.scheduleSize()-1){
             i=0;
             Intent intent = new Intent(this, ActivityShowSchedule.class);
@@ -225,7 +225,7 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
         }
 
     }
-    public void onSwipeRight(){
+    private void onSwipeRight(){
         if(i==0){
             i=mainProcess.scheduleSize()-1;
             Intent intent = new Intent(this, ActivityShowSchedule.class);

@@ -17,8 +17,8 @@ public class ActivityEditGroups extends AppCompatActivity implements View.OnClic
     /**
      * result codes to send for preceding activity
      */
-    public static final int RESULTED_IN_OK = 0;
-    public static final int RESULTED_IN_CANCEL = 1;
+    public static final int RESULTED_IN_OK = 1;
+    public static final int RESULTED_IN_CANCEL = 0;
     /**
      * actions which are coming from previous activity(fill courses) are
      * 1.CREATE_GROUP(sends nothing receives a model group)
@@ -235,4 +235,5 @@ public class ActivityEditGroups extends AppCompatActivity implements View.OnClic
         }
         return true;
     }
+
 }
