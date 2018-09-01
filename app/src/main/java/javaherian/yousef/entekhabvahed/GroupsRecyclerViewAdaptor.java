@@ -42,7 +42,7 @@ public class GroupsRecyclerViewAdaptor extends  RecyclerView.Adapter<GroupsRecyc
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textView.setText("id:"+mIds.get(position) + " ,teacher: " +mTeacherNames.get(position)+","+mTimings.get(position) );
+        holder.textView.setText("id:"+mIds.get(position) + " , teacher: " +mTeacherNames.get(position)+" , "+mTimings.get(position) );
         /**
          * below code may change in future
          */
