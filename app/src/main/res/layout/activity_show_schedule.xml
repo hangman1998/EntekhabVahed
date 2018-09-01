@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="heidari.mohammad.entekhabvahed.ActivityShowSchedule">
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -254,21 +255,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/before"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:src="@drawable/before" />
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:src="@drawable/next" />
-        <TextView
+         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
@@ -276,6 +263,7 @@
             android:layout_margin="16dp"
             android:layout_gravity="bottom|center_horizontal"
             android:paddingTop="10dp"
+             android:textAlignment="center"
             android:id="@+id/schedule_score_text_view"/>
     </LinearLayout>
 </LinearLayout>

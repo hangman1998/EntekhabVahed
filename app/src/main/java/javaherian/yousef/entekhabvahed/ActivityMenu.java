@@ -95,4 +95,10 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         }
         super.onPause();
     }
+    @Override
+    protected void onStop(){
+        stopService(svc);
+        super.onStop();
+
+    }
 }

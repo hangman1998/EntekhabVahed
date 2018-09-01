@@ -1,29 +1,40 @@
 package heidari.mohammad.entekhabvahed;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import javaherian.yousef.entekhabvahed.ActivityMenu;
 import javaherian.yousef.entekhabvahed.R;
 
 import static javaherian.yousef.entekhabvahed.Global.i;
 import static javaherian.yousef.entekhabvahed.Global.mainProcess;
 
-public class ActivityShowSchedule extends Activity implements View.OnClickListener {
-    FloatingActionButton before;
-    FloatingActionButton next;
+public class ActivityShowSchedule extends Activity implements View.OnClickListener,View.OnTouchListener{
     TextView scoreTextView;
 
     ArrayList<FragmentHomeCourse> a = new ArrayList<>();
     ArrayList<ArrayList<FragmentHomeCourse>> schedule = new ArrayList<>();
     ArrayList<FragmentHomeTable> day = new ArrayList<>();;
     ArrayList<String> day1 = new ArrayList<>();
+
+    private static final int SWIPE_MIN_DISTANCE = 120;
+    private static final int SWIPE_MAX_OFF_PATH = 250;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+
+    GestureDetector gestureDetector;
+    TableLayout tableLayout;
 
 
     ModelScheduleVersion1 sch;
@@ -40,45 +51,16 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
         initFragmentCourseHome();
         initTableCourse();
         initListener();
+        initGestureListener();
     }
     private void findView(){
-        next = findViewById(R.id.next);
-        before = findViewById(R.id.before);
         scoreTextView=findViewById(R.id.schedule_score_text_view);
         scoreTextView.setText("sch Number : "+sch.id+"  sch Total Score : "+sch.score);
+        tableLayout = findViewById(R.id.table);
     }
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.before){
-            if(i==0){
-                i=mainProcess.scheduleSize()-1;
-                Intent intent = new Intent(this, ActivityShowSchedule.class);
-                intent.putExtra("activity_id",i);
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                startActivity(intent);
-            }
-            else {
-                i--;
-                Intent intent = new Intent(this, ActivityShowSchedule.class);
-                intent.putExtra("activity_id",i);
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                startActivity(intent);
-            }
-        }
-        else if(view.getId()==R.id.next){
-            if(i==mainProcess.scheduleSize()-1){
-                i=0;
-                Intent intent = new Intent(this, ActivityShowSchedule.class);
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                startActivity(intent);
-            }
-            else{
-                i++;
-                Intent intent = new Intent(this, ActivityShowSchedule.class);
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                startActivity(intent);
-            }
-        }
+
     }
 
     void initArrayDay(){
@@ -168,8 +150,97 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
             }
         }
     }
+    private  void initGestureListener(){
+        gestureDetector=new GestureDetector(this,new MyGestureDetector(this));
+        tableLayout.setOnTouchListener(this);
+
+
+    }
+
+
     void initListener(){
-        next.setOnClickListener(this);
-        before.setOnClickListener(this);
+
+    }
+    protected void onPause(){
+        if (this.isFinishing()){ //basically BACK was pressed from this activity
+            Intent intent = new Intent(ActivityShowSchedule.this,ActivityMenu.class);
+            startActivity(intent);
+
+        }
+        super.onPause();
+    }
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        gestureDetector.onTouchEvent(event);
+        return true;
+    }
+    class MyGestureDetector extends SimpleOnGestureListener {
+        ActivityShowSchedule a;
+
+        public MyGestureDetector(ActivityShowSchedule a) {
+            this.a = a;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+                               float velocityY) {
+            try {
+                if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH){
+                    return false;
+                }
+                // right to left swipe
+                if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                    a.onSwipeLeft();
+
+
+                }
+                // left to right swipe
+                else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                    a.onSwipeRight();
+
+
+                }
+            } catch (Exception e) {
+
+            }
+            return false;
+        }
+    }
+    public void  onSwipeLeft(){
+        if(i==mainProcess.scheduleSize()-1){
+            i=0;
+            Intent intent = new Intent(this, ActivityShowSchedule.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+
+        }
+        else{
+            i++;
+            Intent intent = new Intent(this, ActivityShowSchedule.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+
+        }
+
+    }
+    public void onSwipeRight(){
+        if(i==0){
+            i=mainProcess.scheduleSize()-1;
+            Intent intent = new Intent(this, ActivityShowSchedule.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_from_right);
+
+        }
+        else {
+            i--;
+            Intent intent = new Intent(this, ActivityShowSchedule.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_from_right);
+
+        }
+
+
     }
 }
