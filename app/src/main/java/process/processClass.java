@@ -279,7 +279,7 @@ public class processClass {
         sorter();
     }
     public int scheduleSize(){
-        if (!db.getNeedToUpdate())
+        if (db.getNeedToUpdate() == 0)
             return mSchedules.size();
         doProcess();
         db.deleteAllSchedule();
@@ -288,10 +288,8 @@ public class processClass {
         db.setNeedToUpdate(0);
         return  mSchedules.size();
     }
-    public void setNeedToUpdate(){db.setNeedToUpdate(1);}
-
     public ModelScheduleVersion1 getSchedule(int index){
-        if (!db.getNeedToUpdate())
+        if (db.getNeedToUpdate() ==0)
             return new ModelScheduleVersion1(mSchedules.get(index));
         doProcess();
         db.deleteAllSchedule();

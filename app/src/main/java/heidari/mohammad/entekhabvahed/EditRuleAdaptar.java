@@ -11,14 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import hoosmand.DatabaseModified;
-import javaherian.yousef.entekhabvahed.ActivityFillCourses;
-import javaherian.yousef.entekhabvahed.ActivityViewCourses;
-import javaherian.yousef.entekhabvahed.ModelCourse;
+import hoosmand.Database;
 import javaherian.yousef.entekhabvahed.ModelRule;
 import javaherian.yousef.entekhabvahed.R;
 
@@ -33,7 +29,7 @@ public class EditRuleAdaptar extends RecyclerView.Adapter<EditRuleAdaptar.ViewHo
     public EditRuleAdaptar(Context mContext) {
         this.mContext = mContext;
         if(db == null){
-            db =new DatabaseModified(mContext);
+            db =new Database(mContext);
         }
         rules = db.readRule();
     }

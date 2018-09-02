@@ -1,11 +1,10 @@
 package javaherian.yousef.entekhabvahed;
 
-import hoosmand.DatabaseModified;
+import hoosmand.Database;
 import process.processClass;
 
 public class Global {
-    public static DatabaseModified db;
+    public static Database db;
     public static processClass mainProcess;
     public static int i=0;
-    public static int counter=1;
 }

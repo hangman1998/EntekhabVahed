@@ -21,7 +21,7 @@ import javaherian.yousef.entekhabvahed.R;
 import static javaherian.yousef.entekhabvahed.Global.i;
 import static javaherian.yousef.entekhabvahed.Global.mainProcess;
 
-public class ActivityShowSchedule extends Activity implements View.OnClickListener,View.OnTouchListener{
+public class ActivityShowSchedule extends Activity implements View.OnTouchListener{
     TextView scoreTextView;
 
     ArrayList<FragmentHomeCourse> a = new ArrayList<>();
@@ -50,17 +50,12 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
         initTableDay();
         initFragmentCourseHome();
         initTableCourse();
-        initListener();
         initGestureListener();
     }
     private void findView(){
         scoreTextView=findViewById(R.id.schedule_score_text_view);
-        scoreTextView.setText("sch Number : "+sch.id+"  sch Total Score : "+sch.score);
+        scoreTextView.setText("sch Number : "+i+"  sch Total Score : "+sch.score);
         tableLayout = findViewById(R.id.table);
-    }
-    @Override
-    public void onClick(View view) {
-
     }
 
     void initArrayDay(){
@@ -129,12 +124,6 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
         a.add((FragmentHomeCourse) getFragmentManager().findFragmentById(R.id.fragment66));
         schedule.add((ArrayList<FragmentHomeCourse>) a.clone());
         a.clear();
-
-
-
-
-
-
     }
     private void initTableCourse(){
         //for every day
@@ -157,18 +146,17 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
 
     }
 
+    /**
+     *  protected void onPause(){
+     if (this.isFinishing()){ //basically BACK was pressed from this activity
+     Intent intent = new Intent(ActivityShowSchedule.this,ActivityMenu.class);
+     startActivity(intent);
 
-    void initListener(){
+     }
+     super.onPause();
+     }
+      */
 
-    }
-    protected void onPause(){
-        if (this.isFinishing()){ //basically BACK was pressed from this activity
-            Intent intent = new Intent(ActivityShowSchedule.this,ActivityMenu.class);
-            startActivity(intent);
-
-        }
-        super.onPause();
-    }
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         gestureDetector.onTouchEvent(event);
@@ -209,38 +197,20 @@ public class ActivityShowSchedule extends Activity implements View.OnClickListen
         }
     }
     private void  onSwipeLeft(){
-        if(i==mainProcess.scheduleSize()-1){
-            i=0;
-            Intent intent = new Intent(this, ActivityShowSchedule.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-
-        }
-        else{
-            i++;
-            Intent intent = new Intent(this, ActivityShowSchedule.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-
-        }
-
+        if(i==mainProcess.scheduleSize()-1) i=0;
+        else i++;
+        Intent intent = new Intent(this, ActivityShowSchedule.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+        finish();
     }
     private void onSwipeRight(){
-        if(i==0){
-            i=mainProcess.scheduleSize()-1;
-            Intent intent = new Intent(this, ActivityShowSchedule.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_from_right);
-
-        }
-        else {
-            i--;
-            Intent intent = new Intent(this, ActivityShowSchedule.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_from_right);
-
-        }
-
+        if(i==0) i=mainProcess.scheduleSize()-1;
+        else i--;
+        Intent intent = new Intent(this, ActivityShowSchedule.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+        finish();
 
     }
 }

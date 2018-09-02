@@ -11,12 +11,9 @@ import android.widget.Button;
 
 import heidari.mohammad.entekhabvahed.ActivityShowRule;
 import heidari.mohammad.entekhabvahed.ActivityShowSchedule;
-import heidari.mohammad.entekhabvahed.MusicManager;
-import hoosmand.DatabaseModified;
+import hoosmand.Database;
 import process.processClass;
 import heidari.mohammad.entekhabvahed.HomeWatcher;
-
-import static javaherian.yousef.entekhabvahed.Global.counter;
 
 public class ActivityMenu extends AppCompatActivity implements View.OnClickListener {
     private Button btnInputCourse;
@@ -38,7 +35,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
           and the main class for handling processes
           these lines may change in future
          */
-        Global.db = new DatabaseModified(this);
+        Global.db = new Database(this);
         Global.mainProcess = new processClass(this);
     }
     private void findViews(){
