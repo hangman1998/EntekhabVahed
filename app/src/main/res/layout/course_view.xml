@@ -2,13 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="10dp"
+    android:paddingVertical="5dp"
     android:id="@+id/course_view_layout">
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/course_view_text"
         android:textAlignment="center"
-        android:background="@android:color/transparent"
-        android:textColor="@color/Red"/>
+        android:background="@color/Wheat"
+        android:textColor="@color/Peru"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:paddingVertical="5dp"
+        />
 </LinearLayout>
