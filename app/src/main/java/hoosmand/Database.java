@@ -502,49 +502,27 @@ public class Database extends SQLiteOpenHelper {
         for (Map.Entry<ModelCourse, ModelGroup> itr : map.entrySet())
             addMap(uniqueId,itr.getKey().getId(),itr.getValue().getGroupId());
     }
-    public int deleteAllMaps(int scheduleId){
-        SQLiteDatabase db = getWritableDatabase();
-
-        int count = db.delete("tb_maps","schedule_id = " + scheduleId,null);
-
-        if(db.isOpen()) db.close();
-
-        return count;
-    }
 
     public ArrayMap<ModelCourse,ModelGroup> readMaps(int scheduleId){
 
         ArrayMap<ModelCourse,ModelGroup> maps = new ArrayMap<>();
-
         SQLiteDatabase db = getReadableDatabase();
-
-
-        Cursor cursor = db.rawQuery("SELECT * FROM 'tb_maps' WHERE 'schedule_id' = " + scheduleId,null);
-
+        Cursor cursor = db.rawQuery("SELECT * FROM '"+TB_MAP_NAME+"' WHERE "+TB_MAP_KEY_SCHEDULE_ID+" = " +scheduleId,null);
         if(cursor.moveToFirst()){
 
             do{
-                int groupId;
-                int courseId;
-                ModelCourse course;
-                ModelGroup group;
+               int  groupId = cursor.getInt(cursor.getColumnIndex(TB_MAP_KEY_GROUP_ID));
+               int  courseId = cursor.getInt(cursor.getColumnIndex(TB_MAP_KEY_COURSE_ID));
 
-                groupId = cursor.getInt(cursor.getColumnIndex("group_id"));
-                courseId = cursor.getInt(cursor.getColumnIndex("course_id"));
-
-                group = readGroup(courseId,groupId);
-                course = readCourse(courseId);
-
-                maps.put(course,group);
+               ModelGroup group = readGroup(courseId,groupId);
+               ModelCourse course = readCourse(courseId);
+               maps.put(course,group);
 
             }while (cursor.moveToNext());
 
         }
-
         if(db.isOpen()) db.close();
-
         return maps;
-
     }
 
     public ModelCourse readCourse(int courseId){
@@ -577,24 +555,16 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public ArrayList<ModelSchedule> readAllSchedule(){
-
         ArrayList<ModelSchedule> schedules = new ArrayList<>();
-
         SQLiteDatabase db = getReadableDatabase();
-
-
         Cursor cursor = db.rawQuery("SELECT * FROM 'tb_schedule'",null);
-
         if(cursor.moveToFirst()){
 
             do{
                 ModelSchedule model = new ModelSchedule();
                 model.setUniqueId(cursor.getInt(cursor.getColumnIndex("unique_id")));
-
                 model.setTotalScore(cursor.getInt(cursor.getColumnIndex("total_score")));
-
-                        model.setMap(readMaps(model.getUniqueId()));
-
+                model.setMap(readMaps(model.getUniqueId()));
                 schedules.add(model);
 
             }while (cursor.moveToNext());
