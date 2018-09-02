@@ -1,4 +1,7 @@
 package process;
+        import android.content.Context;
+        import android.widget.Toast;
+
         import java.util.ArrayList;
         import java.util.Collections;
         import java.util.Comparator;
@@ -17,14 +20,16 @@ public class processClass {
     private int numberOfCourses=0;
     private ArrayList<ModelSchedule> mSchedules;
     private ModelSchedule sampleSchedule;
-    private boolean needToUpdate;
 
-    public processClass() {
-        mCourses=new ArrayList<>();
-        mRules=new ArrayList<>();
-        mSchedules  =new ArrayList<>();
+
+    private Context mContext;
+    public processClass(Context context) {
+        mContext=context;
+        mCourses=db.readCourses();
+        mRules=db.readRule();
+        numberOfCourses=mCourses.size();
+        mSchedules  =db.readAllSchedule();
         sampleSchedule = new ModelSchedule();
-        needToUpdate = true;
     }
     private class comp implements Comparator<ModelSchedule> {
 
@@ -262,12 +267,8 @@ public class processClass {
         }
     }
 
-
-
-
-
-
     private void doProcess(){
+        Toast.makeText(mContext, "Processing!", Toast.LENGTH_SHORT).show();
         mCourses.clear();
         mRules.clear();
         mCourses=db.readCourses();
@@ -278,19 +279,25 @@ public class processClass {
         sorter();
     }
     public int scheduleSize(){
-        if (!needToUpdate)
+        if (!db.getNeedToUpdate())
             return mSchedules.size();
         doProcess();
-        needToUpdate=false;
+        db.deleteAllSchedule();
+        for (ModelSchedule schedule : mSchedules)
+            db.addSchedule(schedule.getUniqueId(),schedule.getTotalScore(),schedule.getMap());
+        db.setNeedToUpdate(0);
         return  mSchedules.size();
     }
-    public void setNeedToUpdate(){needToUpdate=true;}
+    public void setNeedToUpdate(){db.setNeedToUpdate(1);}
 
     public ModelScheduleVersion1 getSchedule(int index){
-        if (!needToUpdate)
+        if (!db.getNeedToUpdate())
             return new ModelScheduleVersion1(mSchedules.get(index));
         doProcess();
-        needToUpdate=false;
+        db.deleteAllSchedule();
+        for (ModelSchedule schedule : mSchedules)
+            db.addSchedule(schedule.getUniqueId(),schedule.getTotalScore(),schedule.getMap());
+        db.setNeedToUpdate(0);
         return new ModelScheduleVersion1(mSchedules.get(index));
     }
 }

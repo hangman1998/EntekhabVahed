@@ -1,6 +1,5 @@
 package javaherian.yousef.entekhabvahed;
 import android.support.v4.util.ArrayMap;
-import android.view.Display;
 
 /**
  * this class is for modeling courses

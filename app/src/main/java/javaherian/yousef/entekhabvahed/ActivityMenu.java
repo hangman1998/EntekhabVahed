@@ -39,7 +39,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
           these lines may change in future
          */
         Global.db = new DatabaseModified(this);
-        Global.mainProcess = new processClass();
+        Global.mainProcess = new processClass(this);
     }
     private void findViews(){
         btnInputCourse=findViewById(R.id.btn_input_course);
@@ -85,7 +85,6 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         else if(view.getId()==R.id.btn_schedule_viewer){
-            Global.mainProcess.setNeedToUpdate();
             if (Global.mainProcess.scheduleSize()!=0) {
                 Intent intent=new Intent(this, ActivityShowSchedule.class);
                 startActivity(intent);

@@ -6,9 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
+import android.support.v4.util.ArrayMap;
 import java.util.ArrayList;
+import java.util.Map;
 
+import javaherian.yousef.entekhabvahed.Global;
 import javaherian.yousef.entekhabvahed.ModelCourse;
 import javaherian.yousef.entekhabvahed.ModelGroup;
 import javaherian.yousef.entekhabvahed.ModelRule;
@@ -47,10 +49,17 @@ public class DatabaseModified extends SQLiteOpenHelper {
     private final static String TB_GROUP_KEY_FINISH_TIME_2 ="finish_time_2";
     private final static String TB_GROUP_KEY_FINISH_TIME_3 = "finish_time_3";
 
-    private final static String TB_SCHEDULE_NAME = "tb_schedule_";
-    private final static String TB_SCHEDULE_KEY_UNIQUE_ID = "unique_id_";
-    private final static String TB_SCHEDULE_KEY_NO_COURSES = "NO.courses";
-    private final static String TB_SCHEDULE_KEY_NO_UNIT = "NO.unit";
+    private final static String TB_SCHEDULE_NAME = "tb_schedule";
+    private final static String TB_SCHEDULE_KEY_UNIQUE_ID = "unique_id";
+    private final static String TB_SCHEDULE_KEY_TOTAL_SCORE = "total_score";
+
+    private final static String TB_MAP_NAME = "tb_maps";
+    private final static String TB_MAP_KEY_SCHEDULE_ID = "schedule_id";
+    private final static String TB_MAP_KEY_COURSE_ID = "course_id";
+    private final static String TB_MAP_KEY_GROUP_ID = "group_id";
+
+    private final static String TB_FLAGS_NAME = "tb_flags";
+    private final static String TB_FLAGS_KEY_NEED_TO_UPDATE = "need_to_update";
 
     public DatabaseModified(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -73,9 +82,19 @@ public class DatabaseModified extends SQLiteOpenHelper {
                 ", '" + TB_RULE_KEY_TEACHER + "' TEXT" +
                 ", '" + TB_RULE_KEY_SCORE + "' NUMERIC" +
                 ")");
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS '" + TB_SCHEDULE_NAME+"main" + "' " +
-                "('" + TB_SCHEDULE_KEY_UNIQUE_ID + "' NUMERIC PRIMARY KEY NOT NULL" +
+
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS '" + TB_SCHEDULE_NAME + "' " +
+                "( '" + TB_SCHEDULE_KEY_UNIQUE_ID + "' NUMERIC PRIMARY KEY NOT NULL"+
+                ", '" + TB_SCHEDULE_KEY_TOTAL_SCORE + "' NUMERIC" +
                 ")");
+
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS '" + TB_MAP_NAME + "' " +
+                "( '" + TB_MAP_KEY_SCHEDULE_ID + "' NUMERIC"+
+                ", '" + TB_MAP_KEY_COURSE_ID + "' NUMERIC"+
+                ", '" + TB_MAP_KEY_GROUP_ID + "' NUMERIC" +
+                ")");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS '" + TB_FLAGS_NAME + "' " +
+                "( '" + TB_FLAGS_KEY_NEED_TO_UPDATE + "' NUMERIC"+ ")");
     }
 
     @Override
@@ -84,9 +103,38 @@ public class DatabaseModified extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS '" + TB_COURSE_NAME + "'");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS '" + TB_RULE_NAME + "'");
         onCreate(sqLiteDatabase);
+
+
     }
 
-    public long addGroup(ModelGroup group, int courseId){
+    public void setNeedToUpdate(int newValue){
+        Log.i("hooshmand.Database","set need to update to"+newValue);
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TB_FLAGS_NAME,newValue);
+        db.delete(TB_FLAGS_NAME,null,null);
+        db.insert(TB_FLAGS_NAME,null,values);
+        if(db.isOpen()) db.close();
+    }
+    public boolean getNeedToUpdate(){
+
+        int value;
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM '"+TB_FLAGS_NAME+"'",null);
+        if(cursor.moveToFirst()){
+            value=cursor.getInt(cursor.getColumnIndex(TB_FLAGS_KEY_NEED_TO_UPDATE));
+        }
+        else{
+            setNeedToUpdate(0);
+            value=0;
+        }
+        if(db.isOpen()) db.close();
+        Log.i("hooshmand.Database","get need to update ,returned "+value);
+        if (value==1)
+            return true;
+        return false;
+    }
+    private long addGroup(ModelGroup group, int courseId){
         return addGroup(courseId,group.getTeacherName(),group.getGroupId()
                 ,group.getDay1(),group.getDay2(),group.getDay3(),group.getStartTime1(),
                 group.getStartTime2(),group.getStartTime3(),group.getFinishTime1(),
@@ -96,6 +144,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
     public long addGroup(int courseId,String teacherName, int groupId
             , int day1, int day2, int day3, int startTime1, int startTime2,
                          int startTime3, int finishTime1, int finishTime2, int finishTime3){
+        Global.mainProcess.setNeedToUpdate();
         Log.i("hooshmand.Database","start add a group. groupId = " + groupId + " , teacherName = " + teacherName + " , courseId = "+courseId);
         ContentValues values = new ContentValues();
         SQLiteDatabase db = this.getWritableDatabase();
@@ -222,6 +271,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
     }
 
     public int deleteAllGroups(int courseId){
+        Global.mainProcess.setNeedToUpdate();
         Log.i("hooshmand.Database","start delete all groups. courseId = "+courseId);
         SQLiteDatabase db = getWritableDatabase();
         int count = db.delete(TB_GROUP_NAME+courseId,null,null);
@@ -231,6 +281,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
     }
 
     public int deleteGroup(int courseId,int groupId){
+        Global.mainProcess.setNeedToUpdate();
         Log.i("hooshmand.Database","start delete a group. courseId = "+courseId+ " , groupId = "+groupId);
         SQLiteDatabase db = getWritableDatabase();
         int count = db.delete(TB_GROUP_NAME+courseId,TB_GROUP_KEY_GROUP_ID + " = "+ groupId,null);
@@ -242,6 +293,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
     public int editGroup(int courseId,String teacherName, int groupId
             , int day1, int day2, int day3, int startTime1, int startTime2,
                          int startTime3, int finishTime1, int finishTime2, int finishTime3){
+        Global.mainProcess.setNeedToUpdate();
         Log.i("hooshmand.Database","start edit a group. courseId = "+courseId+ " , groupId = "+groupId + " , new teacherName = "+teacherName);
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -274,6 +326,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
     }
 
     public long addCourse(int courseId,String courseName,ArrayList<ModelGroup> groups){
+        Global.mainProcess.setNeedToUpdate();
         Log.i("hooshmand.Database","start add a course. courseId = "+courseId + " , courseName = "+courseName);
         if(groups==null){
             Log.i("hooshmand.Database", "groups = null");
@@ -316,6 +369,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
     }
 
     public int deleteCourse(int courseId){
+        Global.mainProcess.setNeedToUpdate();
         Log.i("hooshmand.Database","start delete a course. courseId = "+courseId);
         deleteAllGroups(courseId);
         SQLiteDatabase db = getWritableDatabase();
@@ -325,6 +379,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
         return count;
     }
     public int editCourse(int courseId , String newCourseName,ArrayList<ModelGroup> newGroups){
+        Global.mainProcess.setNeedToUpdate();
         Log.i("hooshmand.Database","start edit a course. courseId = "+courseId+ " , new courseName = "+newCourseName);
         if(newGroups==null){
             Log.i("hooshmand.Database", "newGroups = null");
@@ -351,6 +406,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
     }
 
     public long addRule(String name,int day,int startTime,int startTimeRelation,int finishTime,int finishTimeRelation,String course,String teacher,int score){
+        Global.mainProcess.setNeedToUpdate();
         Log.i("hooshmand.Database","start add a rule. day = "+day + " , start time = "+startTime+" , start time relation = "+startTimeRelation+"," +
                 " finish time = "+finishTime+",finish time relation = "+finishTimeRelation+" , course = "+course+" , teacher = "+teacher+" , score = "+score);
         ContentValues values = new ContentValues();
@@ -374,6 +430,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
                 rule.getFinishTime(),rule.getFinishTimeRelation(),rule.getCourse(),rule.getTeacher(),rule.getScore());
     }
     public int deleteRule(String name){
+        Global.mainProcess.setNeedToUpdate();
         Log.i("hooshmand.Database","start delete a course. courseId = "+name);
         SQLiteDatabase db = getWritableDatabase();
         int count = db.delete(TB_RULE_NAME,TB_RULE_KEY_NAME+ " = "+"'" +name+"'",null);
@@ -407,6 +464,7 @@ public class DatabaseModified extends SQLiteOpenHelper {
     }
 
     public int deleteAllRules(){
+        Global.mainProcess.setNeedToUpdate();
         Log.i("hooshmand.Database","start delete all rules.");
         SQLiteDatabase db = getWritableDatabase();
         int count = db.delete(TB_RULE_NAME,null,null);
@@ -414,123 +472,208 @@ public class DatabaseModified extends SQLiteOpenHelper {
         if(db.isOpen()) db.close();
         return count;
     }
-    public ArrayList<ModelSchedule> readSchedules(){
-        return new ArrayList<>();
-    }
-/**
-    private void addScheduleMap(int uniqueId, ArrayList<ModelSchedule.MapCourseGroup> mapsCourseGroup){
-        Log.i("hooshmand.Database","start add a schedule. uniqueId = " + uniqueId + " , mapsCourseGroup.size() = " + mapsCourseGroup.size());
+    public long addMap(int scheduleId,int courseId,int groupId){
+        ContentValues values = new ContentValues();
+
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("CREATE TABLE IF NOT EXISTS '" + TB_SCHEDULE_NAME+uniqueId + "' " +
-                "('" + TB_SCHEDULE_KEY_NO_COURSES + "' NUMERIC PRIMARY KEY NOT NULL" +
-                ", '" + TB_SCHEDULE_KEY_NO_UNIT + "' NUMERIC PRIMARY KEY NOT NULL" +
-                ")");
-        for(int i = 0 ; i< mapsCourseGroup.size();i++){
-            ContentValues values = new ContentValues();
-            values.put(TB_SCHEDULE_KEY_NO_COURSES,mapsCourseGroup.get(i).getNumberOfCourses());
-            values.put(TB_SCHEDULE_KEY_NO_UNIT,mapsCourseGroup.get(i).getNumberOfUnit());
-            long id =db.insert(TB_SCHEDULE_NAME+uniqueId,null,values);
-            Log.i("hooshmand.Database","add schedule["+i+"] finish. id = "+id);
-        }
-        if(db.isOpen()) db.close();
-    }
 
-    private ArrayList<ModelSchedule.MapCourseGroup> readScheduleMap(int uniqueId){
-        Log.i("hooshmand.Database","start read scheduleMap. uniqueId = "+uniqueId);
-        ArrayList<ModelSchedule.MapCourseGroup> maps = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM '"+TB_SCHEDULE_NAME+uniqueId+"'",null);
-        if(cursor.moveToFirst()){
-            do{
-                ModelSchedule.MapCourseGroup map = new ModelSchedule.MapCourseGroup();
-                map.setNumberOfUnit(cursor.getInt(cursor.getColumnIndex(TB_SCHEDULE_KEY_NO_UNIT)));
-                map.setNumberOfCourses(cursor.getInt(cursor.getColumnIndex(TB_SCHEDULE_KEY_NO_COURSES)));
-                maps.add(map);
-            }while (cursor.moveToNext());
-        }
-        Log.i("hooshmand.Database","scheduleMap readied and return " + maps.size() + " objects");
-        if(db.isOpen()) db.close();
-        return maps;
-    }
+        values.put("schedule_id",scheduleId);
 
-    private int deleteScheduleMap(int uniqueId){
-        Log.i("hooshmand.Database","start delete a scheduleMap. uniqueId = "+uniqueId);
+        values.put("course_id",courseId);
+
+        values.put("group_id",groupId);
+
+        long id =db.insert("tb_maps",null,values);
+
+        if(db.isOpen()) db.close();
+
+        return id;
+
+    }
+    public void addSchedule(int uniqueId,int totalScore,ArrayMap<ModelCourse,ModelGroup> map){
+
+        ContentValues values = new ContentValues();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        values.put("unique_id",uniqueId);
+
+        values.put("total_score",totalScore);
+
+        db.insert("tb_schedule",null,values);
+
+        if(db.isOpen()) db.close();
+
+        for (Map.Entry<ModelCourse, ModelGroup> itr : map.entrySet())
+            addMap(uniqueId,itr.getKey().getId(),itr.getValue().getGroupId());
+    }
+    public int deleteAllMaps(int scheduleId){
         SQLiteDatabase db = getWritableDatabase();
-        int count = db.delete(TB_SCHEDULE_NAME+uniqueId,null,null);
-        Log.i("hooshmand.Database","scheduleMap deleted. count = " + count + " objects");
+
+        int count = db.delete("tb_maps","schedule_id = " + scheduleId,null);
+
         if(db.isOpen()) db.close();
+
         return count;
     }
 
-    public long addSchedule(int uniqueId,ArrayList<ModelSchedule.MapCourseGroup> mapsCourseGroup){
-        Log.i("hooshmand.Database","start add a schedule. uniqueId = "+ uniqueId + " , mapsCourseGroup.size()= "+mapsCourseGroup.size());
-        addScheduleMap(uniqueId,mapsCourseGroup);
-        ContentValues values = new ContentValues();
-        SQLiteDatabase db = this.getWritableDatabase();
-        values.put(TB_SCHEDULE_KEY_UNIQUE_ID,uniqueId);
-        long id =db.insert(TB_SCHEDULE_NAME+"main",null,values);
+    public int deleteMap(int scheduleId , int courseId , int groupId){
+        SQLiteDatabase db = getWritableDatabase();
+        int count = db.delete("tb_maps","schedule_id = " + scheduleId + " AND course_id = " + courseId + " AND group_id = " + groupId,null);
+
         if(db.isOpen()) db.close();
-        Log.i("hooshmand.Database","add schedule finish. id = "+id);
-        return id;
+
+        return count;
+
+    }
+    public int deleteSchedule(int uniqueId){
+        SQLiteDatabase db = getWritableDatabase();
+
+        int count = db.delete("tb_schedule","'unique_id' = " + uniqueId,null);
+
+        if(db.isOpen()) db.close();
+
+        deleteAllMaps(uniqueId);
+
+        return count;
     }
 
-    public long addSchedule(ModelSchedule schedule){
-        return addSchedule(schedule.getUniqueId(),schedule.getSchedule());
-    }
+    public ArrayMap<ModelCourse,ModelGroup> readMaps(int scheduleId){
 
-    public ArrayList<ModelSchedule> readSchedules(){
-        Log.i("hooshmand.Database","start read schedules.");
-        ArrayList<ModelSchedule> schedules = new ArrayList<>();
+        ArrayMap<ModelCourse,ModelGroup> maps = new ArrayMap<>();
+
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM '"+TB_SCHEDULE_NAME+"main"+"'",null);
+
+
+        Cursor cursor = db.rawQuery("SELECT * FROM 'tb_maps' WHERE 'schedule_id' = " + scheduleId,null);
+
         if(cursor.moveToFirst()){
+
             do{
-                ModelSchedule model = new ModelSchedule();
-                model.setUniqueId(cursor.getInt(cursor.getColumnIndex(TB_SCHEDULE_KEY_UNIQUE_ID)));
-                model.setSchedule(readScheduleMap(model.getUniqueId()));
-                schedules.add(model);
+                int groupId;
+                int courseId;
+                ModelCourse course;
+                ModelGroup group;
+
+                groupId = cursor.getInt(cursor.getColumnIndex("group_id"));
+                courseId = cursor.getInt(cursor.getColumnIndex("course_id"));
+
+                group = readGroup(courseId,groupId);
+                course = readCourse(courseId);
+
+                maps.put(course,group);
+
             }while (cursor.moveToNext());
+
         }
-        Log.i("hooshmand.Database","schedules readied and return " + schedules.size() + " objects");
+
         if(db.isOpen()) db.close();
-        return schedules;
+
+        return maps;
+
+    }
+
+    public ModelCourse readCourse(int courseId){
+
+        ModelCourse course = new ModelCourse();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+
+        Cursor cursor = db.rawQuery("SELECT * FROM '"+TB_COURSE_NAME+"' WHERE '" + TB_COURSE_KEY_ID +"' = " + courseId,null);
+
+        if(cursor.moveToFirst()){
+
+            do{
+
+                course.setId(cursor.getInt(cursor.getColumnIndex(TB_COURSE_KEY_ID)));
+
+                course.setName(cursor.getString(cursor.getColumnIndex(TB_COURSE_KEY_NAME)));
+
+                course.setGroups(readGroups(course.getId()));
+
+            }while (cursor.moveToNext());
+
+        }
+
+        if(db.isOpen()) db.close();
+
+        return course;
+
     }
 
     public ModelSchedule readSchedule(int uniqueId){
-        Log.i("hooshmand.Database","start read a schedule. uniqueId = " + uniqueId);
+
         ModelSchedule schedule = new ModelSchedule();
+
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM '"+TB_SCHEDULE_NAME+"main"+"' WHERE "+TB_SCHEDULE_KEY_UNIQUE_ID+" = " +uniqueId,null);
+
+
+        Cursor cursor = db.rawQuery("SELECT * FROM 'tb_schedule' WHERE 'unique_id' = " + uniqueId,null);
+
         if(cursor.moveToFirst()){
+
             do{
-                schedule.setUniqueId(cursor.getInt(cursor.getColumnIndex(TB_SCHEDULE_KEY_UNIQUE_ID)));
-                schedule.setSchedule(readScheduleMap(schedule.getUniqueId()));
+
+                schedule.setUniqueId(cursor.getInt(cursor.getColumnIndex("unique_id")));
+
+                schedule.setTotalScore(cursor.getInt(cursor.getColumnIndex("total_score")));
+
+                schedule.setMap(readMaps(schedule.getUniqueId()));
+
             }while (cursor.moveToNext());
+
         }
-        Log.i("hooshmand.Database","schedule readied and return " + schedule.toString() + " object");
+
         if(db.isOpen()) db.close();
+
         return schedule;
+
     }
 
-    public int deleteSchedule(int uniqueId){
-        Log.i("hooshmand.Database","start delete a schedule. courseId = "+uniqueId);
-        deleteScheduleMap(uniqueId);
-        SQLiteDatabase db = getWritableDatabase();
-        int count = db.delete(TB_SCHEDULE_NAME+"main",TB_SCHEDULE_KEY_UNIQUE_ID + " = "+ uniqueId,null);
-        Log.i("hooshmand.Database","schedule deleted. count = " + count + " objects");
+    public ArrayList<ModelSchedule> readAllSchedule(){
+
+        ArrayList<ModelSchedule> schedules = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+
+        Cursor cursor = db.rawQuery("SELECT * FROM 'tb_schedule'",null);
+
+        if(cursor.moveToFirst()){
+
+            do{
+                ModelSchedule model = new ModelSchedule();
+                model.setUniqueId(cursor.getInt(cursor.getColumnIndex("unique_id")));
+
+                model.setTotalScore(cursor.getInt(cursor.getColumnIndex("total_score")));
+
+                        model.setMap(readMaps(model.getUniqueId()));
+
+                schedules.add(model);
+
+            }while (cursor.moveToNext());
+
+        }
+
         if(db.isOpen()) db.close();
-        return count;
+
+        return schedules;
+
     }
 
-    public void editSchedule(int uniqueId , ArrayList<ModelSchedule.MapCourseGroup> newMapsCourseGroup){
-        Log.i("hooshmand.Database","start edit a schedule. uniqueId = "+uniqueId+ " , newMapsCourseGroup.size() = "+newMapsCourseGroup.size());
-        deleteScheduleMap(uniqueId);
-        addScheduleMap(uniqueId,newMapsCourseGroup);
-        Log.i("hooshmand.Database","schedule edited.");
-    }
+    public void deleteAllSchedule(){
+        ArrayList<ModelSchedule> schedules = readAllSchedule();
+        SQLiteDatabase db = getWritableDatabase();
+        for (int i=0;i<schedules.size();i++){
 
-    public void editSchedule(ModelSchedule schedule){
-        editSchedule(schedule.getUniqueId(),schedule.getSchedule());
+            int uniqueId = schedules.get(i).getUniqueId();
+            db.delete("tb_schedule","'unique_id' = " + uniqueId,null);
+
+            deleteAllMaps(uniqueId);
+
+        }
+        if(db.isOpen()) db.close();
+
     }
- */
 }
