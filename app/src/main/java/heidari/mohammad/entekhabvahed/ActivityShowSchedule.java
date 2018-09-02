@@ -209,7 +209,7 @@ public class ActivityShowSchedule extends Activity implements View.OnTouchListen
         else i--;
         Intent intent = new Intent(this, ActivityShowSchedule.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         finish();
 
     }

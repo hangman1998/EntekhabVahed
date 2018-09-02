@@ -22,6 +22,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
     private Button btnAboutUs;
     public ActivityMenu activity;
     private Intent svc;
+    DialogContactUs dialogContactUs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
          */
         Global.db = new Database(this);
         Global.mainProcess = new processClass(this);
+        dialogContactUs =new DialogContactUs(this) ;
     }
     private void findViews(){
         btnInputCourse=findViewById(R.id.btn_input_course);
@@ -90,6 +92,9 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
                 Intent intent=new Intent(this, ActivityNoSchedule.class);
                 startActivity(intent);
             }
+        }
+        else if(view.getId()==R.id.btn_about_us){
+            dialogContactUs.show();
         }
 
     }

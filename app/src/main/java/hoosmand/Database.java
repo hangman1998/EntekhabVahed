@@ -583,7 +583,7 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
 
-        Cursor cursor = db.rawQuery("SELECT * FROM 'tb_schedule'",null);
+        Cursor cursor = db.rawQuery("SELECT * FROM'"+TB_SCHEDULE_NAME+"'",null);
 
         if(cursor.moveToFirst()){
 
