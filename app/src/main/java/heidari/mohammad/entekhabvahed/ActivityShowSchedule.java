@@ -42,7 +42,6 @@ public class ActivityShowSchedule extends Activity implements View.OnTouchListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_show_schedule);
         sch = mainProcess.getSchedule(i);
         findView();

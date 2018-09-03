@@ -253,7 +253,7 @@
         </TableRow>
     </TableLayout>
          <TextView
-             android:paddingVertical="20dp"
+             android:paddingTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
