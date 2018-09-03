@@ -51,7 +51,7 @@ public class ActivityShowSchedule extends Activity implements View.OnTouchListen
         initFragmentCourseHome();
         initTableCourse();
         initGestureListener();
-        Toast.makeText(this, ""+i+1+"/"+mainProcess.scheduleSize(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ""+(i+1)+"/"+mainProcess.scheduleSize(), Toast.LENGTH_SHORT).show();
     }
     private void findView(){
         scoreTextView=findViewById(R.id.schedule_score_text_view);
