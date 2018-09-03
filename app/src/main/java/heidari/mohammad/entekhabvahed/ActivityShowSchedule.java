@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -50,10 +51,11 @@ public class ActivityShowSchedule extends Activity implements View.OnTouchListen
         initFragmentCourseHome();
         initTableCourse();
         initGestureListener();
+        Toast.makeText(this, ""+i+1+"/"+mainProcess.scheduleSize(), Toast.LENGTH_SHORT).show();
     }
     private void findView(){
         scoreTextView=findViewById(R.id.schedule_score_text_view);
-        scoreTextView.setText("sch Number : "+i+"  sch Total Score : "+sch.score);
+        scoreTextView.setText("sch Number : "+i+1+"  sch Total Score : "+sch.score);
         tableLayout = findViewById(R.id.table);
     }
 
@@ -144,17 +146,6 @@ public class ActivityShowSchedule extends Activity implements View.OnTouchListen
 
 
     }
-
-    /**
-     *  protected void onPause(){
-     if (this.isFinishing()){ //basically BACK was pressed from this activity
-     Intent intent = new Intent(ActivityShowSchedule.this,ActivityMenu.class);
-     startActivity(intent);
-
-     }
-     super.onPause();
-     }
-      */
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {

@@ -52,6 +52,6 @@
     <string name="id_telegram">hhhhhhhhhhhhh</string>
     <string name="phone_call">hhhhhhhhhh</string>
     <string name="email">hhhhhhhhhhhhhh</string>
-
+    <string name="no_schedule_warning">برنامه هفتگی جهت نمایش وجود ندارد!</string>
 
 </resources>
