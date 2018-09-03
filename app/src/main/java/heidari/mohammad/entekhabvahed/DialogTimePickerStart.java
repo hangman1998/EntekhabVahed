@@ -36,6 +36,7 @@ public class DialogTimePickerStart extends Dialog implements View.OnClickListene
         yes = (Button) findViewById(R.id.time_picker_ok);
         no = (Button) findViewById(R.id.time_picker_cansel);
         timePicker = (TimePicker)findViewById(R.id.custom_time_picker);
+        timePicker.setIs24HourView(true);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
     }
