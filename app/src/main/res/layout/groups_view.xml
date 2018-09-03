@@ -5,12 +5,19 @@
         android:layout_width= "match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="15dp"
+        android:padding="5dp"
         android:id="@+id/groups_view_layout"
         android:layout_gravity="center">
        <android.support.v7.widget.AppCompatTextView
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:id="@+id/groups_view_text"/>
+           android:id="@+id/groups_view_text"
+           android:textAlignment="center"
+           android:background="@color/Wheat"
+           android:textColor="@color/Peru"
+           android:layout_marginLeft="10dp"
+           android:layout_marginRight="10dp"
+           android:paddingVertical="5dp"
+           />
     </LinearLayout>
 </LinearLayout>

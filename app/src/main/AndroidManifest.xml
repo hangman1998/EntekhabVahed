@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityMenu">
+        <activity android:name=".ActivityMenu"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +25,8 @@
 
         <service android:name="heidari.mohammad.entekhabvahed.MusicManager" />
 
-        <activity android:name="heidari.mohammad.entekhabvahed.ActivityShowSchedule" />
+        <activity android:name="heidari.mohammad.entekhabvahed.ActivityShowSchedule"
+            android:screenOrientation="landscape"/>
         <activity android:name=".ActivityNoSchedule"></activity>
     </application>
 

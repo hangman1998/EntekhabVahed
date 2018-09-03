@@ -4,16 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/FireBrick"
     tools:context=".ActivityNoSchedule"
-    android:background="@drawable/ooops"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatTextView
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:text="No schedules to show!"
-        android:textColor="@color/Crimson"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:background="@color/FireBrick"
+        app:srcCompat="@drawable/ic_warning"
+        tools:scaleX="1"
+        tools:scaleY="1" />
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_schedule_warning"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/Beige"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:shadowColor="@color/IndianRed"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="2"
+        android:textAlignment="center"/>
+        />
 </LinearLayout>

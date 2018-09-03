@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -58,12 +59,12 @@ public class EditRuleAdaptar extends RecyclerView.Adapter<EditRuleAdaptar.ViewHo
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private Button name;
+        private TextView name;
         private LinearLayout layout;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.btn);
+            name = itemView.findViewById(R.id.rule_view_text);
             layout = itemView.findViewById(R.id.rule_item_layout);
         }
     }

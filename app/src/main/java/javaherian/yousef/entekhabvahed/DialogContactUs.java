@@ -2,7 +2,6 @@ package javaherian.yousef.entekhabvahed;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -27,12 +26,12 @@ public class DialogContactUs extends Dialog implements View.OnClickListener {
         if(v==null){
             return;
         }
-        else if(v.getId()==R.id.okbuttom) {
+        else if(v.getId()==R.id.info_ok_button) {
             dismiss();
         }
     }
     private void findView(){
-        ok=findViewById(R.id.okbuttom);
+        ok=findViewById(R.id.info_ok_button);
         ok.setOnClickListener(this);
     }
 }

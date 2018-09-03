@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityEditGroups">
+    tools:context=".ActivityEditGroups"
+    android:background="@color/Cornsilk">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -101,14 +102,25 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="@string/groups_edit_cancel_btn"
-                android:id="@+id/groups_edit_cancel_button" />
+                android:id="@+id/groups_edit_cancel_button"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:textColor="@color/SlateGray"
+                android:textSize="15sp"
+                android:background="@drawable/activity_edit_groups_button_style"
+                />
             <Button
+                android:layout_marginHorizontal="10dp"
+                android:text="@string/groups_edit_ok_btn"
+                android:id="@+id/groups_edit_ok_button"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="@string/groups_edit_ok_btn"
-                android:id="@+id/groups_edit_ok_button" />
-
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/SlateGray"
+                android:textSize="15sp"
+                android:background="@drawable/activity_edit_groups_button_style"
+                />
         </LinearLayout>
 
     </LinearLayout>

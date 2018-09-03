@@ -4,20 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:id="@+id/rule_item_layout">
-    <Button
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/btn"
-            android:textDirection="ltr"
-            android:layout_gravity="end"
-            android:textAlignment="center"
-            android:backgroundTint="@color/colorPrimary"
-            android:textStyle="normal"
-             android:background="@android:color/transparent"
-            android:textColor="@color/Blue">
-    </Button>
+    android:id="@+id/rule_item_layout"
+    android:paddingVertical="5dp">
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rule_view_text"
+        android:textAlignment="center"
+        android:background="@color/Wheat"
+        android:textColor="@color/Peru"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:paddingVertical="5dp"
+        />
 
 
 </LinearLayout>

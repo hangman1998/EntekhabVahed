@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="heidari.mohammad.entekhabvahed.ActivityShowSchedule">
+    tools:context="heidari.mohammad.entekhabvahed.ActivityShowSchedule"
+    android:background="@color/SandyBrown">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -252,18 +253,12 @@
                 android:id="@+id/fragment66"/>
         </TableRow>
     </TableLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
          <TextView
-            android:layout_width="wrap_content"
+             android:paddingTop="20dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/LimeGreen"
-            android:layout_margin="16dp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:paddingTop="10dp"
+            android:textSize="18sp"
+            android:textColor="@color/SlateGray"
              android:textAlignment="center"
             android:id="@+id/schedule_score_text_view"/>
-    </LinearLayout>
 </LinearLayout>
