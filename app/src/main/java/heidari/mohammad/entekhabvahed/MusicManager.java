@@ -14,9 +14,7 @@ public class MusicManager extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-          player = MediaPlayer.create(this,R.raw.background_music_interlude_for_piano) ;
-          player.setLooping(true); // Set looping
-          player.setVolume(100,100);
+
     }
 
     @Override

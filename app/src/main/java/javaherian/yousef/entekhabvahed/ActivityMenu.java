@@ -29,9 +29,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         findViews();
-        initListeners();
-        svc=new Intent(this, MusicManager.class);
-        startService(svc);
+        //initListeners();
         /*
           creating the global database
           and the main class for handling processes
@@ -47,22 +45,21 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         btnScheduleViewer=findViewById(R.id.btn_schedule_viewer);
         btnAboutUs=findViewById(R.id.btn_about_us);
     }
-    private void initListeners(){
-        HomeWatcher mHomeWatcher = new HomeWatcher(this);
-        mHomeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
-            @Override
-            public void onHomePressed() {
-                stopService(svc);
-            }
-            @Override
-            public void onHomeLongPressed() {
-                stopService(svc);
-            }
-        });
-        mHomeWatcher.startWatch();
-
-        initClickOnListeners();
-    }
+//    private void initListeners(){
+//        HomeWatcher mHomeWatcher = new HomeWatcher(this);
+//        mHomeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
+//            @Override
+//            public void onHomePressed() {
+//
+//            }
+//            @Override
+//            public void onHomeLongPressed() {
+//            }
+//        });
+//        mHomeWatcher.startWatch();
+//
+//        initClickOnListeners();
+//    }
 
     private void initClickOnListeners() {
         btnInputCourse.setOnClickListener(this);
@@ -97,18 +94,5 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
             dialogContactUs.show();
         }
 
-    }
-    @Override
-    protected void onPause(){
-        if (this.isFinishing()){
-            stopService(svc);
-        }
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        startService(svc);
-        super.onResume();
     }
 }
