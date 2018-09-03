@@ -119,6 +119,7 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
         teacher1=(EditText)findViewById(R.id.tET);
         score1=(SeekBar)findViewById(R.id.score_seekbar);
         score=(TextView)findViewById(R.id.score_textview);
+
         ok=(Button)findViewById(R.id.ok);
         cansel=(Button)findViewById(R.id.cansel);
 
@@ -153,9 +154,9 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
         //seting Text Edit
         start_time.setText("please click here");
         finish_time.setText("please click here");
-        score.setText(""+0);
+        score.setText(""+-10);
         //seting seekbar
-        score1.setMax(10);
+        score1.setMax(20);
         dialogTimePickerStart=new DialogTimePickerStart(this);
         dialogTimePickerFinish= new DialogTimePickerFinish(this);
     };
@@ -179,7 +180,8 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
                 // TODO Auto-generated method stub      {
-                score.setText("" + progress);
+                 int i=progress-10;
+                score.setText("" +i);
             }
         });
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -319,7 +321,7 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
                 fTR=0;
             }
 
-            int score = score1.getProgress();
+            int score = score1.getProgress()-10;
             if(!newteacher.isEmpty()) {
                 int l=0;
                 for (int i = 0; i < courses.size(); i++) {
