@@ -30,11 +30,14 @@ public class DialogTimePickerFinish extends Dialog implements View.OnClickListen
         findView();
 
 
+
+
     }
     void findView(){
         yes = (Button) findViewById(R.id.time_picker_ok);
         no = (Button) findViewById(R.id.time_picker_cansel);
         timePicker = (TimePicker)findViewById(R.id.custom_time_picker);
+        timePicker.setIs24HourView(false);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
 

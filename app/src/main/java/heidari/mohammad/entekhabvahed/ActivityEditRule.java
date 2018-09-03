@@ -375,23 +375,26 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
                 db.addRule(modelRule);
             }
             else if (Action.equals("EDIT_RULE")){
-                if(!newname.equals(name)){
-                    for (int i=0;i<rules.size();i++) {
-                        if (rules.get(i).getName().equals(newname)) {
-                            Toast.makeText(this, "Error:Duplicate name", Toast.LENGTH_SHORT).show();
-                            return;
+                if(!course1.getText().toString().isEmpty()) {
+                    if (!newname.equals(name)) {
+                        for (int i = 0; i < rules.size(); i++) {
+                            if (rules.get(i).getName().equals(newname)) {
+                                Toast.makeText(this, "Error:Duplicate name", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
                         }
                     }
-                }
-                for (int i=0;i<courses.size();i++){
-                    if (courses.get(i).getName().equals(newcourse)){
-                        k=1;
-                    }
 
-                }
-                if(k==0){
-                    Toast.makeText(this, "Error:Coursename dont exsist in your course", Toast.LENGTH_SHORT).show();
-                    return;
+                    for (int i = 0; i < courses.size(); i++) {
+                        if (courses.get(i).getName().equals(newcourse)) {
+                            k = 1;
+                        }
+
+                    }
+                    if (k == 0) {
+                        Toast.makeText(this, "Error:Coursename dont exsist in your course", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
 
                 modelRule.setDay(newday);
