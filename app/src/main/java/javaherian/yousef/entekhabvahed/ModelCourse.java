@@ -1,7 +1,5 @@
 package javaherian.yousef.entekhabvahed;
 
-import android.view.Display;
-
 import java.util.ArrayList;
 
 /**

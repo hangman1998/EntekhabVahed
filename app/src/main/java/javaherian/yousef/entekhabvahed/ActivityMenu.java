@@ -5,16 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-
-
-
 import heidari.mohammad.entekhabvahed.ActivityShowRule;
 import heidari.mohammad.entekhabvahed.ActivityShowSchedule;
-import heidari.mohammad.entekhabvahed.MusicManager;
 import hoosmand.Database;
 import process.processClass;
-import heidari.mohammad.entekhabvahed.HomeWatcher;
 
 public class ActivityMenu extends AppCompatActivity implements View.OnClickListener {
     private Button btnInputCourse;
@@ -29,7 +23,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         findViews();
-        //initListeners();
+        initListeners();
         /*
           creating the global database
           and the main class for handling processes
@@ -45,7 +39,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         btnScheduleViewer=findViewById(R.id.btn_schedule_viewer);
         btnAboutUs=findViewById(R.id.btn_about_us);
     }
-//    private void initListeners(){
+    private void initListeners(){
 //        HomeWatcher mHomeWatcher = new HomeWatcher(this);
 //        mHomeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
 //            @Override
@@ -57,9 +51,8 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
 //            }
 //        });
 //        mHomeWatcher.startWatch();
-//
-//        initClickOnListeners();
-//    }
+        initClickOnListeners();
+    }
 
     private void initClickOnListeners() {
         btnInputCourse.setOnClickListener(this);

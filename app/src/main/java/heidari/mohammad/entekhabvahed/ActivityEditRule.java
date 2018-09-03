@@ -154,8 +154,8 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
         //seting Text Edit
         start_time.setText("please click here");
         finish_time.setText("please click here");
-        score.setText(""+-10);
-        //seting seekbar
+        score.setText(""+0);
+        score1.setProgress(10);
         score1.setMax(20);
         dialogTimePickerStart=new DialogTimePickerStart(this);
         dialogTimePickerFinish= new DialogTimePickerFinish(this);
@@ -459,8 +459,6 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
                 finish_time.setText(rule.getFinishTime() / 60 + ":" + rule.getFinishTime() % 60);
             }
         }
-       // dialogTimePickerFinish = new DialogTimePickerFinish(ActivityEditRule.this);
-       // dialogTimePickerStart = new DialogTimePickerStart(ActivityEditRule.this);
 
     }
     public void setEditextFinish(int h, int m){
