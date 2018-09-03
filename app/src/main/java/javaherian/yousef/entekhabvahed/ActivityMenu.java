@@ -30,8 +30,8 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_menu);
         findViews();
         initListeners();
-        //svc=new Intent(this, MusicManager.class);
-       // startService(svc);
+        svc=new Intent(this, MusicManager.class);
+        startService(svc);
         /*
           creating the global database
           and the main class for handling processes
@@ -52,13 +52,11 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         mHomeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
             @Override
             public void onHomePressed() {
-
-                //stopService(svc);
-                // do something here...
+                stopService(svc);
             }
             @Override
             public void onHomeLongPressed() {
-                //stopService(svc);
+                stopService(svc);
             }
         });
         mHomeWatcher.startWatch();
@@ -101,24 +99,16 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
 
     }
     @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        //we should save the information in onDestroy function
-
-
-    }
-    @Override
     protected void onPause(){
-        if (this.isFinishing()){ //basically BACK was pressed from this activity
-            //stopService(svc);
-
+        if (this.isFinishing()){
+            stopService(svc);
         }
         super.onPause();
     }
 
     @Override
     protected void onResume() {
-       // startService(svc);
+        startService(svc);
         super.onResume();
     }
 }
