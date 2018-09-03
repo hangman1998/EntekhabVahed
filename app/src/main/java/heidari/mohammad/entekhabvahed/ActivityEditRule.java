@@ -265,10 +265,6 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(this, "name field can't be empty!", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if(course1.getText().toString().isEmpty()){
-                Toast.makeText(this, "course name field can't be empty!", Toast.LENGTH_SHORT).show();
-                return;
-            }
             ArrayList<ModelRule> rules = db.readRule();
             ArrayList<ModelCourse> courses = db.readCourses();
             String newteacher= teacher1.getText().toString();
