@@ -342,8 +342,11 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
                     return;
                 }
             }
-            if(starttime-finishtime>0){
-                Toast.makeText(this,"start time and finish time isnt correct",Toast.LENGTH_SHORT).show();
+            if(starttime!=0) {
+                if (starttime - finishtime > 0) {
+                    Toast.makeText(this, "start time and finish time isnt correct", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
             int k=0;
             if (Action.equals("CREATE_RULE")){
