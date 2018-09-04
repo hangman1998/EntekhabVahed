@@ -281,6 +281,7 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
             if(!checkBox.isChecked()&& dialogTimePickerStart.getTimePickerH()!= -1){
                 Toast.makeText(this, "your Start time is not changed", Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, "if you want to change Start time you should check checkbox;", Toast.LENGTH_SHORT).show();
+                return;
             }
             if(checkBox.isChecked()&& dialogTimePickerStart.getTimePickerH() != -1) {
                 starttime = dialogTimePickerStart.getTimePickerH() * 60 + dialogTimePickerStart.getTimePickerM();
@@ -299,9 +300,10 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
                 starttime=0;
                 sTR=0;
             }
-            if(!checkBox.isChecked()&& dialogTimePickerFinish.getTimePickerH()!= -1){
+            if(!checkBox1.isChecked()&& dialogTimePickerFinish.getTimePickerH()!= -1){
                 Toast.makeText(this, "your Finish time is not changed", Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, "if you want to change Finish time you should check checkbox;", Toast.LENGTH_SHORT).show();
+                return;
             }
             if(checkBox1.isChecked() && dialogTimePickerFinish.getTimePickerH()!= -1) {
                 finishtime = dialogTimePickerFinish.getTimePickerH() * 60 + dialogTimePickerFinish.getTimePickerM();
@@ -340,7 +342,7 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
                     return;
                 }
             }
-            if(starttime!=0) {
+            if(starttime!=0&&finishtime!=0) {
                 if (starttime - finishtime > 0) {
                     Toast.makeText(this, "start time and finish time isnt correct", Toast.LENGTH_SHORT).show();
                     return;

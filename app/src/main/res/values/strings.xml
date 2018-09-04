@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">EntekhabVahed</string>
     <string name="btn_input_course_text">لیست دروس</string>
-    <string name="btn_input_rule_text">لیست قوانین</string>
+    <string name="btn_input_rule_text">معیار ها</string>
     <string name="btn_about_us_text">ارتباط با ما</string>
     <string name="btn_schedule_viewer_text">برنامه هفتگی</string>
     <string name="fill_courses_name_edit_text">نام درس</string>
