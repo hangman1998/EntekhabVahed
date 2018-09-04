@@ -250,7 +250,7 @@ public class processClass {
     private void scheduleCreator(int itr)
     {
 
-        if (itr == numberOfCourses)
+        if (itr == numberOfCourses && itr != 0 )
         {
             sampleSchedule.setUniqueId(mSchedules.size());
             mSchedules.add(sampleSchedule.clone());
