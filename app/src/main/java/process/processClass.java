@@ -249,8 +249,9 @@ public class processClass {
 
     private void scheduleCreator(int itr)
     {
-
-        if (itr == numberOfCourses && itr != 0 )
+        if (numberOfCourses == 0)
+            return;
+        if (itr == numberOfCourses )
         {
             sampleSchedule.setUniqueId(mSchedules.size());
             mSchedules.add(sampleSchedule.clone());
