@@ -15,8 +15,6 @@ import java.util.List;
 import javaherian.yousef.entekhabvahed.ModelRule;
 import javaherian.yousef.entekhabvahed.R;
 
-//import static javaherian.yousef.entekhabvahed.ActivityViewCourses.CREATE_COURSE;
-
 public class ActivityShowRule extends AppCompatActivity {
     private ListView listR;
     private List<ModelRule> listRule = new ArrayList<ModelRule>();
@@ -30,14 +28,9 @@ public class ActivityShowRule extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_rule);
-       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
         findView();
         initListView();
         initListView();
-        //loadfunction for load information of rule and make them as button view in this activity and we should save y\the infprmation in onDestroy function
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,16 +38,6 @@ public class ActivityShowRule extends AppCompatActivity {
                 Intent intent = new Intent(ActivityShowRule.this,ActivityEditRule.class);
                 intent.setAction("CREATE_RULE");
                 startActivityForResult(intent,CREATE_RULE);
-                /**
-                 * i edited just the below line to see if the database works
-                 */
-//                listRule.add(new ModelRule());
-//                //    listRule.add(new ModelRule("سلام"+i,1,3,1,"ali","ffg",1));
-//                i=i+1;
-//                ruleAdapter ruleAdapter = new ruleAdapter(ActivityShowRule.this,listRule);
-//                listR.setAdapter(ruleAdapter);
-
-
             }
         });
     }
@@ -86,28 +69,4 @@ public class ActivityShowRule extends AppCompatActivity {
             adaptor.notifyItemEdited();
         }
     }
-//    @Override
-//    public void onClick(View v) {
-//        if(v==null){
-//            return;
-//        }
-//        if(v.getId()==R.id.btn){
-//            Intent intent = new Intent(Main2Activity.this,Main3Activity.class);
-//            intent.putExtra("activity_id",2);
-//            startActivity(intent);
-//
-//        }
-//        else{
-//           // Toast.makeText(MainActivity.this, "salaam2", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        //we should save the information in onDestroy function
-
-    }
-
-
 }
