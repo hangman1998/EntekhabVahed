@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 
-
+import com.magnetadservices.sdk.MagnetMobileBannerAd;
+import com.magnetadservices.sdk.MagnetSDK;
 
 import heidari.mohammad.entekhabvahed.ActivityShowRule;
 import heidari.mohammad.entekhabvahed.ActivityShowSchedule;
@@ -21,6 +23,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
     private Button btnInputRule;
     private Button btnScheduleViewer;
     private Button btnAboutUs;
+    private FrameLayout adLayout;
     public ActivityMenu activity;
     private Intent svc;
     DialogContactUs dialogContactUs;
@@ -30,7 +33,6 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_menu);
         findViews();
         initClickOnListeners();
-        //initListeners();
         /*
           creating the global database
           and the main class for handling processes
@@ -39,29 +41,21 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         Global.db = new Database(this);
         Global.mainProcess = new processClass(this);
         dialogContactUs =new DialogContactUs(this) ;
+        MagnetSDK.initialize(getApplicationContext());
+        /**
+         * deactivate this before release
+         */
+      //  MagnetSDK.getSettings().setTestMode(true);
+        MagnetMobileBannerAd bannerAd = MagnetMobileBannerAd.create(getApplicationContext());
+        bannerAd.load("53c55294125a08d6a9a43c1a243c0313", adLayout);
     }
     private void findViews(){
         btnInputCourse=findViewById(R.id.btn_input_course);
         btnInputRule=findViewById(R.id.btn_input_rule);
         btnScheduleViewer=findViewById(R.id.btn_schedule_viewer);
         btnAboutUs=findViewById(R.id.btn_about_us);
+        adLayout = findViewById(R.id.mobileBanner);
     }
-//    private void initListeners(){
-//        HomeWatcher mHomeWatcher = new HomeWatcher(this);
-//        mHomeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
-//            @Override
-//            public void onHomePressed() {
-//
-//            }
-//            @Override
-//            public void onHomeLongPressed() {
-//            }
-//        });
-//        mHomeWatcher.startWatch();
-//
-//        initClickOnListeners();
-//    }
-
     private void initClickOnListeners() {
         btnInputCourse.setOnClickListener(this);
         btnInputRule.setOnClickListener(this);
