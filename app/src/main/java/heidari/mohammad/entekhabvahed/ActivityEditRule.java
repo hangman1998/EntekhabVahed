@@ -434,8 +434,9 @@ public class ActivityEditRule extends AppCompatActivity implements View.OnClickL
         teacher1.setText(rule.getTeacher());
         course1.setText(rule.getCourse());
         //i will assigne starttime and
-        score.setText(""+rule.getScore());
-        score1.setProgress(rule.getScore());
+        int i=rule.getScore();
+        score.setText(""+i);
+        score1.setProgress(rule.getScore()+10);
         if(rule.getStartTime()==0){
             start_time.setText("please click here");
         }

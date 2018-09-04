@@ -11,10 +11,10 @@ import android.widget.Button;
 
 import heidari.mohammad.entekhabvahed.ActivityShowRule;
 import heidari.mohammad.entekhabvahed.ActivityShowSchedule;
-import heidari.mohammad.entekhabvahed.MusicManager;
+//import heidari.mohammad.entekhabvahed.MusicManager;
 import hoosmand.Database;
 import process.processClass;
-import heidari.mohammad.entekhabvahed.HomeWatcher;
+//import heidari.mohammad.entekhabvahed.HomeWatcher;
 
 public class ActivityMenu extends AppCompatActivity implements View.OnClickListener {
     private Button btnInputCourse;
@@ -29,6 +29,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         findViews();
+        initClickOnListeners();
         //initListeners();
         /*
           creating the global database
