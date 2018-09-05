@@ -123,9 +123,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
+            android:paddingTop="10dp"
             >
-
             <SeekBar
                 android:id="@+id/score_seekbar"
                 android:layout_width="match_parent"
@@ -136,7 +135,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingHorizontal="20dp"
+            android:paddingHorizontal="30dp"
             android:paddingVertical="30dp">
             <Button
                 android:layout_width="0dp"
